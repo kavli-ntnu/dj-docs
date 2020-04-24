@@ -6,11 +6,12 @@ This repository contains the documentation on the two core pipelines in use in t
 ## Contents
 
 * Usage
-  * Getting started
-    * [Getting Started in Python](Getting Started (Python).md)
-    * [Getting Started in Matlab](Getting Started (Matlab).md)
+  * Getting started with Datajoint
+    * [Getting Started in Python](getting_started_python.md)
+    * [Getting Started in Matlab](getting_started_matlab.md)
+
 
 * Technical details
   * [Pipeline architecture](technical/architecture.md)
-  * [Database server](technical/dtabase.md)
+  * [Database server](technical/database.md)
 
