@@ -10,7 +10,7 @@ This repository contains the documentation on the two core pipelines in use in t
     * [Getting Started in Python](doc_common/getting_started_python.md)
     * [Getting Started in Matlab](doc_common/getting_started_matlab.md)
     * [Where to find help](doc_common/troubleshooting.md)
-    * [Notation: terms used in ephys and imaging pipelines](nomenclature.md)
+    * [Nomenclature: terms used in ephys and imaging pipelines](doc_common/nomenclature.md)
   * Ephys
     * [Connecting to the pipeline](doc_ephys/connecting.md)
     * [Ingesting new data via the web GUI](doc_ephys/ingestion_webgui.md)
