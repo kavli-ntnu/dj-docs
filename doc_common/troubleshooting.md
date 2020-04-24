@@ -20,6 +20,7 @@ You may have saved your password in Python using `dj.config.save_global()`. In t
 ```python
 import datajoint as dj
 print(dj.config["database.password"])
+```
 
 If you cannot find your password, contact Simon Ball to request a new password. There is no automated "password recovery" system at this time. 
 
