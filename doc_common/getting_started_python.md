@@ -148,9 +148,9 @@ dj.config['custom'] = {
         'drive_config': {
           'local': 'C:/',
           'network': 'N:/'}}
-dj.config["dj_imaging.database"] = "group_imaging_1b",
-dj.config["dj_suite2p.database"] = "group_suite2p_1",
-dj.config["mlims.database"] = "prod_mlims_data",
+dj.config["dj_imaging.database"] = "group_imaging_1b"
+dj.config["dj_suite2p.database"] = "group_suite2p_1"
+dj.config["mlims.database"] = "prod_mlims_data"
 dj.config["flask.database"] = "group_shared_flask"
 
 dj.config.save_global()
