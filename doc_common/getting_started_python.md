@@ -136,7 +136,11 @@ dj.config["stores"] = {
         'secure': True,
         'location': '',
         'protocol': 's3',
-        'secret_key': SECRET_KEY}}
+        'secret_key': SECRET_KEY},
+    'imgstore': {'location': 'N:/datajoint/imgstore',
+                 'protocol': 'file'},
+    'timelapsestore': {'location': 'N:/datajoint/timelapsestore',
+                       'protocol': 'file'}}
 dj.config['custom'] = {
 		'database.prefix': 'group_shared_',
 		'mlims.database': 'prod_mlims_data',
@@ -144,37 +148,25 @@ dj.config['custom'] = {
         'drive_config': {
           'local': 'C:/',
           'network': 'N:/'}}
+dj.config["dj_imaging.database"] = "group_imaging_1b"
+dj.config["dj_suite2p.database"] = "group_suite2p_1"
+dj.config["mlims.database"] = "prod_mlims_data"
+dj.config["flask.database"] = "group_shared_flask"
+
 dj.config.save_global()
 ```
 
 
 
-##### Each script configuration
 
-The following code block will produce the interface classes you need to interrogate the pipeline. This code block needs to be repeated in each script or notebook you use
 
-```python
-animal = dj.create_virtual_module('animal', 'prod_mlims_data')
-reference = dj.create_virtual_module('reference', 'group_shared_reference')
-acquisition = dj.create_virtual_module('acquisition', 'group_shared_acquisition')
-tracking = dj.create_virtual_module('tracking', 'group_shared_tracking')
-behavior = dj.create_virtual_module('behavior', 'group_shared_behavior')
-ephys = dj.create_virtual_module('ephys', 'group_shared_ephys')
-analysis = dj.create_virtual_module('analysis', 'group_shared_analysis')
-ingestion = dj.create_virtual_module('ingestion', 'group_shared_ingestion')
-analysis_param = dj.create_virtual_module('analysis_param', 'group_shared_analysis_param')
-```
+#### Connecting to the pipelines
 
-Tables can then be accessed as object descendents of the above 9 Classes. For example:
+Interacting with either pipeline requires Python classes representing the tables in the database. These can be generated in two ways:
+* Datajoint's `create_virtual_module` method : this creates an object representing the schema
+* Importing the Python code that describes the schema(s) (stored in Github repositories for [Ephys](https://github.com/kavli-ntnu/dj-elphys) and [Imaging](https://github.com/kavli-ntnu/dj-moser-imaging)
 
-```python
-analysis.RateMap()
-```
+In general, the first method is preferred: this avoids the need to install a web of libraries on which the pipeline logic depends. You cannot run auto-population commands with virtual modules. This should not be a problem, as the core pipelines are not generally populated by individual users. 
 
 
 
-
-
-#### Connecting to the Imaging Pipeline
-
-* TODO

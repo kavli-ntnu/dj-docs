@@ -14,7 +14,7 @@ This repository contains the documentation on the two core pipelines in use in t
   * Ephys
     * [Connecting to the pipeline](doc_ephys/connecting.md)
     * [Ingesting new data via the web GUI](doc_ephys/ingestion_webgui.md)
-    * [Fetching data from the pipeline](doc_ephys/fetching.md]
+    * [Fetching data from the pipeline](doc_ephys/fetching.md)
   * Imaging
     * [Connecting to the pipeline](doc_imaging/connecting.md)
     * [Ingesting new data via the web GUI](doc_imgaing/ingestion_webgui.md)

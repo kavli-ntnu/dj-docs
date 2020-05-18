@@ -86,6 +86,8 @@ Other fields are optional.
 
 Your data must be in a directory that the database worker can access and read. In general, this means that the data must be on the Moser network share (`\\forskning.it.ntnu.no\ntnu\mh-kin\moser`). The database worker recognises this as "N-drive", and accepts input paths given in either Windows format (`N:\...`) or Unix format (`/mnt/N/...`)
 
+Even if you have that drive mounted differently on your own computer(s), the worker server expects files on the Moser network drive to be given as `N:/...` or `/mnt/N/...`.
+
 ##### Project
 
 Project is an **optional** field allowing you to group multiple sessions together under one title. A session may be a member of one, many, or no, projects. This was introduced to allow, e.g., grouping together all sessions that are included in a single publication. 
