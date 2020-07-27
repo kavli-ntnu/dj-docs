@@ -2,7 +2,7 @@
 
 - [Overview](Overview.md)
 - [Installation instructions](Installation.md)
-- [Folder logic and naming conventions](Folder-Logic.md)
+- [Folder logic and naming conventions](Folder-logic.md)
 - [How to add sessions to datajoint and session logic](How-to-add-sessions.md)
 - [Helper notebooks](Helper-notebooks.md)
 
