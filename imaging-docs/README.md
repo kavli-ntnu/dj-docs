@@ -1,12 +1,12 @@
 # Welcome to the **Datajoint Moser Imaging** wiki!
 
-- [Overview](Overview)
-- [Installation instructions](Installation)
-- [Folder logic and naming conventions](Folder%20Logic)
-- [How to add sessions to datajoint and session logic](How-to-add-sessions)
-- [Helper notebooks](Helper-notebooks)
+- [Overview](Overview.md)
+- [Installation instructions](Installation.md)
+- [Folder logic and naming conventions](Folder-Logic.md)
+- [How to add sessions to datajoint and session logic](How-to-add-sessions.md)
+- [Helper notebooks](Helper-notebooks.md)
 
 
-- [Synchronisation](Sync)
-- [FOV unwarping](FOV-unwarping)
-- [Session viewer GUI](Session%20viewer%20GUI)
+- [Synchronisation](Sync.md)
+- [FOV unwarping](FOV-unwarping.md)
+- [Session viewer GUI](Session-viewer-GUI.md)
