@@ -11,20 +11,9 @@ clc, close all, clear all
 
 setenv DJ_HOST datajoint.it.ntnu.no
 setenv DJ_USER thinh
-% setenv DJ_PASS 'haha not my real password'
+setenv DJ_PASS 'haha not my real password'
 
 dj.conn();
-
-%% =================== Import the schemas ===============================
-
-import animal.*
-import reference.*
-import acquisition.*
-import tracking.*
-import behavior.*
-import ephys.*
-import analysis.*
-import analysis_params.*
 
 %% ================== Query & fetch syntax ================================
 
@@ -35,19 +24,23 @@ acquisition.Session & 'session_time = "2019-07-04 20:35:12"'
 this_sess = (acquisition.Session & 'session_time > "2019-07-04 20:35:12"')
 this_sess.fetch()
 
+
 % however, this wont' work
-% (acquisition.Session & 'session_time > "2019-07-04 20:35:12"').fetch()
+(acquisition.Session & 'session_time > "2019-07-04 20:35:12"').fetch()
+
+% but this would work
+fetch(acquisition.Session & 'session_time > "2019-07-04 20:35:12"')
 
 % basically, build the query into a variable first, then fetch from the query
 
 %% =================== fetch in MATLAB ===================
 
-ratemap_q = analysis.RateMap & 'session_time = "2017-10-02 15:54:25"'
+ratemap_q = analysis.RateMap & "session_time = '2017-10-02 15:54:25'"
 
 % 1. fetch() will always return a structure array 
-ratemap_q.fetch()
+ratemap_q.fetch() % python .fetch('KEY')
 % 2. fetch() will always return the structure array of primary attributes
-ratemap_q.fetch()
+ratemap_q.fetch() % python .fetch('KEY')
 % 3. if we wish to get all attributes, do .fetch('*')
 ratemap_q.fetch('*')
 % 4. if we just want to get subset of attributes
@@ -69,12 +62,10 @@ end
 % with fetchn, we can specify with attribute(s) to get back
 % without having to get the struture array with primary attributes
 
+ratemap_q.fetch('selectivity')
 ratemap_q.fetchn('selectivity')
 
-ratemap_q.fetchn('ratemap')
-
-[selectivities, ratemaps] = ratemap_q.fetchn('selectivity', 'ratemap')
-
+ratemaps = ratemap_q.fetchn('ratemap')
 
 figure;
 for r = 1:numel(ratemaps)
@@ -82,4 +73,14 @@ for r = 1:numel(ratemaps)
     subplot(3, 2, r)
     imagesc(ratemap)
 end
+
+
+[selectivities, ratemaps] = ratemap_q.fetchn('selectivity', 'ratemap')
+
+
+cluster_types = reference.ClusterType
+
+
+
+
 
