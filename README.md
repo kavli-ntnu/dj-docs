@@ -1,6 +1,6 @@
 # Datajoint @ Kavli Documentation
 
-[![Documentation Status](https://readthedocs.org/projects/dj-docs/badge/?version=latest)](https://dj-docs.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/moser-pipelines/badge/?version=latest)](https://moser-pipelines.readthedocs.io/en/latest/?badge=latest)
 
 This repository contains the documentation on the two core pipelines in use in the Moser Group at the Kavli Institute. 
 
