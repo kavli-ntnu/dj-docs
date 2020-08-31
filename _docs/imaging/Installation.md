@@ -1,4 +1,4 @@
-# Installation
+#Imaging:  Installation
 Step by step installation (some optional and windows only):
 
 - Download [github desktop](https://desktop.github.com/) and 

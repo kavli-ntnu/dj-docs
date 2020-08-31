@@ -1,4 +1,4 @@
-# Tables and processes for synchronization
+#Imaging: Synchronisation
 
 For the 2P miniscope setup, [Wavesurfer](http://wavesurfer.janelia.org/) is used for synchronisation of imaging and other (tracking, running wheel, ...) acquisition streams. Wavesurfer records the stream of (digital) input signals on different ports of a NI card. The frame clock is recorded (exported from [ScanImage](http://scanimage.vidriotechnologies.com/display/SIH/ScanImage+Home)) and serves as the master event stream to which other events are aligned. A wavesurfer reader class that extracts the digital streams from wavesurfer's hdf5 container format can be found under [/helpers/mini2p_wavesurfer.py](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/helpers/mini2p_wavesurfer.py). 
 

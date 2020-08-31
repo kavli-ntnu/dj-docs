@@ -4,7 +4,7 @@
 
 User-facing angles are typically in degrees
 
-For ease of computation, angles in tables mostly used for intermediate calculation are in degrees. 
+For ease of computation, angles in tables mostly used for intermediate calculation are in Radians. 
 
 If you are in any doubt which is which, check the table description, or check the maximum value stored in that column. Any values exceeding 6.283 indicates that the angles are stored in degrees.
 
@@ -15,9 +15,9 @@ Angles  are referenced to the X-axis, i.e:
 
 ### Coordinates
 
-The calculation library `opexebo` uses the convention that co-ordinates should be given as `(x, y)` pairs.
+The calculation library [opexebo](https://github.com/kavli-ntnu/opexebo) uses the convention that co-ordinates should be given as `(x, y)` pairs, and all published functions have been tested as such. 
 
-NumPy typically uses the convention `(y, x)` - be very sure of which you are using! There are good reasons for the difference, tied to the history of the language C, and its role as a general purpose programming language rather than a mathematical tool (as Matlab and its predecessor Fortran)
+NumPy typically uses the convention `(y, x)` - be very sure of which you are using! There are good reasons for the difference, tied to the history of the language C, and its role as a general purpose programming language rather than a mathematical tool (as Matlab and its predecessor Fortran were). 
 
 
 ### Coordinates, images, and `imshow`
@@ -56,6 +56,6 @@ ax2.set_title("Reversed Image Plot")
 
 plt.show()
 ```
-![](..\images\common\implot_y_axis.png)
+![](\..\_static\common\implot_y_axis.png)
 
 All three axes plot exactly the same `(3, 3)` vector. The first and final axes show exactly the same matrix (the identity matrix). The only distinction is the default way `matplotlib` chooses to display the `y` axis, and whether the user chooses to exert control over that choice of visualisation.

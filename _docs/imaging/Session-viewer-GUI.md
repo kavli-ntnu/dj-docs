@@ -1,3 +1,5 @@
+# Imaging: Session Viewer
+
 The [session viewer GUI](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/viewer) allows experimenters to display results saved in datajoint. For this, the user needs to be able to connect to the database and the external drive that datajoint imaging results are saved under. The best way to test this is via the helper notebooks, e.g. [here](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Starting%20notebook.ipynb).
 
 ## Installation

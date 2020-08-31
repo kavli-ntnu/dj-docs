@@ -1,4 +1,4 @@
-# Steps for adding a session to datajoint
+#Imaging:  Steps for adding a session to datajoint
 1. Copy files to a file server
 2. Open the imaging web GUI under http://2p.neuroballs.net:5000/ and log in 
     - Go to _BaseFolder_ -> _Add BaseFolder_

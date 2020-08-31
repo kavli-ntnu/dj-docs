@@ -1,3 +1,5 @@
+# Imaging: field-of-view unwarping
+
 Miniscope images have to be unwarped since scanner irregularities cause distortions in the imaged field of view (FOV). 
 
 ![ERD for FOV corrections](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/ERDs/FOVcorrections.svg)

@@ -2,6 +2,9 @@
 mlims-pipeline/
 dj-animal/
 
+# Sphinx documentation
+_docs/_build/
+
 # macOS
 .DS_Store
 

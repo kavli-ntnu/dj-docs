@@ -8,7 +8,7 @@ Datajoint is available as a library in both Python and Matlab, and the database 
 
 #### Installing Python
 
-The pipelines require at least Python 3.6. We recommend using one of the *conda distributions of Python, and this guide will focus on installing Miniconda. These distributions include the Conda tool, which allows you to set up and manage separate Python environments for different projects to help avoid dependency conflicts. 
+Both pipelines are written for Python 3.6. Using the two-photon calcium imaging package `suite2p` requires Python 3.7. We recommend using one of the *conda* distributions of Python, and this guide will focus on installing Miniconda. These distributions include the Conda tool, which allows you to set up and manage separate Python environments for different projects to help avoid dependency conflicts. 
 
 More information on working with Conda environments is available in the [Conda official documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
@@ -36,7 +36,7 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * Confirm creation by pressing `Y`
     * This creates an environment with the name `ephys` 
   * Activate the newly created environment to begin using it
-    * `activate ephys
+    * `activate ephys`
   * Install the necessary packages
     * `conda install datajoint graphviz python-graphviz pydotplus ipykernel`
 
@@ -44,28 +44,28 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
 
 * Create a new Conda environment for the **Imaging** pipeline
   * Create an environment with the following:
-    * `conda create --name imaging pythong=3.6`
+    * `conda create --name imaging python=3.6`
   * Activate the environment
-    * `activate imaging`
+    * `conda activate imaging`
   * Install the necessary packages
     * `conda install graphviz python-graphviz pydotplus ipykernel`
-    * `pip install datajoint==0.12.dev4`
+    * `pip install datajoint>=0.12.4`
 
 ##### Working with Conda environments in Jupyter
 
 Jupyter is a popular interactive tool for working with Python. You can install Jupyter in your base Conda environment and use it with other environments that you have created on your computer given these steps:
 
 * In the environment _you wish to make available_ (e.g. `ephys`):
-  * `activate ephys`
+  * `conda activate ephys`
   * `conda install ipykernel`
 * In the environment *from which you run Jupyter* (e.g. `base`):
-  * `activate base`
+  * `conda deactivate`
   * `conda install juypter nb_conda_kernels`
 * When you run Jupyter, you can select the Python Kernel matching the `conda env` name you wish to operate on
 
 ##### Working with Conda Environments in Spyder
 
-`Spyder` is a popular Python development environment. It is natively installed with any *conda Python distribution. If you do not have it installed, you can install it with either `conda` or `pip` (it is a Python package like any other)
+`Spyder` is a popular Python development environment. It is natively installed with any *conda* Python distribution. If you do not have it installed, you can install it with either `conda` or `pip` (it is a Python package like any other)
 
 ```python
 conda install spyder
@@ -86,7 +86,7 @@ python -c "import sys; print(sys.executable)"
 
 And then copying this path to the provided textbox in `Preferences >Python Interpreted > Use the following interpreter`
 
-
+Numerous other IDEs support Python. Common examples include PyCharm and Visual Studio Code
 
 
 ### Connecting to the pipeline database
@@ -129,14 +129,6 @@ dj.config["stores"] = {
         'location': '',
         'protocol': 's3',
         'secret_key': SECRET_KEY},
-    'ephys_store_manual': {   
-        'access_key': ACCESS_KEY,
-        'bucket': 'ephys-store-manual',
-        'endpoint': 's3.stack.it.ntnu.no:443',
-        'secure': True,
-        'location': '',
-        'protocol': 's3',
-        'secret_key': SECRET_KEY},
     'imgstore': {'location': 'N:/datajoint/imgstore',
                  'protocol': 'file'},
     'timelapsestore': {'location': 'N:/datajoint/timelapsestore',
@@ -145,13 +137,18 @@ dj.config['custom'] = {
 		'database.prefix': 'group_shared_',
 		'mlims.database': 'prod_mlims_data',
         'flask.database': 'group_shared_flask',
+        "dj_imaging.database":"group_imaging_1b",
+        "dj_suite2p.database":"group_suite2p_1",
         'drive_config': {
-          'local': 'C:/',
-          'network': 'N:/'}}
-dj.config["dj_imaging.database"] = "group_imaging_1b"
-dj.config["dj_suite2p.database"] = "group_suite2p_1"
-dj.config["mlims.database"] = "prod_mlims_data"
-dj.config["flask.database"] = "group_shared_flask"
+             'local': 'C:/',
+             'network': 'N:/'
+             "Local_C": "C:/",
+             "Local_D": "D:/",
+             "Lager": "N:/",
+             "2Pmini": "G:/",
+             "Moser_imaging": "F:/",
+             }
+          }
 
 dj.config.save_global()
 ```

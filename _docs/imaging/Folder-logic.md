@@ -1,3 +1,5 @@
+# Imaging: Folder logic
+
 Ingest of raw/processed data folders follows a certain logic determined by the corresponding "Experiment type".
 
 ## Femtonics

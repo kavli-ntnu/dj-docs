@@ -1,4 +1,4 @@
-# Basic schema description
+#Imaging: Overview
 The **imaging schema** is built around a table called ``Session.Data``, which is where ``Session`` information on the one hand and information from ``Dataset`` are combined. When the experimenter adds data to an existing session or when a new analysis output that is calculated in an external package (Suite2p, ...) becomes available, this output can be added to the schema.
 
 The entry point for all session data is the ``BaseFolder`` table, which takes as input 

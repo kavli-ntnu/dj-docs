@@ -1,3 +1,5 @@
+# Imaging: Helper notebooks
+
 This page documents the jupyter notebooks available under [/Helper_notebooks](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks).
 
 # Introductory notebooks
