@@ -14,9 +14,8 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Common:
 
+   common/getting_started/index.rst
    common/conventions
-   common/getting_started/matlab
-   common/getting_started/python
    common/nomenclature
    common/troubleshooting
 

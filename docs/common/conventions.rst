@@ -1,6 +1,16 @@
 ======================================
-Conventions within the two pipelines
+Pipeline Conventions
 ======================================
+
+Folders and paths
+---------------
+
+All recording workstations, and the majority of researcher office computers run Windows, and therefore examples are primarily given for Windows. 
+
+It is generally assumed that the main Moser network drive is mounted as drive N:\
+
+The Imaging file server can be mounted as any path, but is typically assumed to be mounted as F:\ and G:\
+
 
 Angles
 ---------------

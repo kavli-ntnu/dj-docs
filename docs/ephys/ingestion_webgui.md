@@ -1,4 +1,4 @@
-# Ingesting electrophysiology via the Web GUI
+# Ephys Web GUI
 
 Data can be ingested into the ephys pipeline in two different ways. All users are encouraged to use the web GUI. Advanced users may insert directly into the pipeline via Python or Matlab scripts. 
 

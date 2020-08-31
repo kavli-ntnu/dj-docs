@@ -1,4 +1,4 @@
-## Scopes and Setups: representations of the hardware in the database
+## Imaging: Scopes and Setups
 
 Part of the metadata for a recording session is the details of the hardware used to record that session. In the Imaging pipeline, that means the various micoscopes in use, and their associated controllers.
 
