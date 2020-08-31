@@ -1,4 +1,4 @@
-# Installation
+## Imaging:  Installation
 Step by step installation (some optional and windows only):
 
 - Download [github desktop](https://desktop.github.com/) and 
@@ -10,7 +10,7 @@ Step by step installation (some optional and windows only):
 - copy the auth.sample file and rename to `auth.cfg`. Edit section [dj_auth] and if you want slack interaction to work also [slack_auth]. If you do not have a any slack API token do not delete that section but fill it with something. 
 
 ### Windows specific
-- Install git (windows): https://git-scm.com/download/win
+- Install [git (windows)](https://git-scm.com/download/win)
 - Install [miniconda3](https://conda.io/miniconda.html)
 - `conda create -n analysis python=3.6` - will create a python3.6 environment called `analysis`
 - activate environment with `activate analysis` 

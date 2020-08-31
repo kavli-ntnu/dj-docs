@@ -1,6 +1,7 @@
-# Steps for adding a session to datajoint
+## Imaging:  Web GUI
+
 1. Copy files to a file server
-2. Open the imaging web GUI under http://2p.neuroballs.net:5000/ and log in 
+2. Open the [imaging web GUI](http://2p.neuroballs.net:5000/) and log in 
     - Go to _BaseFolder_ -> _Add BaseFolder_
 3. Fill out the details in the mask on that website. Make sure you get the session logic **_combined_** right. It determines how (meta)sessions are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). For femtonics recordings this function is not implemented and has to remain on "no" (not combined). **Explanation**: 
     - Scanimage creates filenames like `90218-openfield1m_00001_00001.tif`, where `90218-openfield1m` is the name that the experimenter chose within scanimage for that recording. It makes sense to create a name consisting of the mLIMS animal ID and some keyword that identifies what kind of session it was (openfield, etc.). There is no need to specify the date since this information is saved within the header of recorded tif files. Scanimage then has two counters: `_00001_00001.tif`. The first counter refers to how many times a user clicked abort or recorded a full session and _**then started again under the same name**_. This can happen, for example, if the pre-set number of acquired frames was estimated too low and the experimenter wishes to extend the current session. Or if there was a small problem with the recording (the animal twisted itself, ...) and that current recording had to be interrupted briefly. This has nothing to do with the _combined_ logic and these interrupts are considered to be insignificant and have no relevance for downstream processing. So no matter how many times the experimenter clicked stop and started again, this will all be stitched together and count as _the same_ **Session**. The second counter refers to the actual file number if tif splitting is activated within scanimage, e.g. if the experimenter specified that a maximum of 2000 frames should be saved within one file. 
@@ -23,6 +24,6 @@ Just add the BaseFolder entry again. The ingest routines will recognize what is 
 If you re-ingested the imaging analysis output once and then change something from within the suite2p GUI, you have to add the session BaseFolder again for the imaging pipeline to be notified of that change. Once re-added, the ingest routines will detect a mismatch between cell IDs saved in datajoint and the suite2p output and all datajoint results will be deleted for that session (those that derive from the imaging analysis) and re-calculated.
 
 ### If things fail: 
-- Check the imaging web GUI http://2p.neuroballs.net:5000/ (_Jobs_ -> _Jobs Imaging_)
+- Check the [imaging web GUI](http://2p.neuroballs.net:5000) (_Jobs_ -> _Jobs Imaging_)
 - If there was an error in the `MakeDatasetsSessions` (so during the basic ingest), make sure the computer that runs the `MakeDatasetsSessions` job knows about the file server that the raw data was saved under (that it is listed in `network_drives.cfg`)
 - Ask Horst or Simon on Teams or via email. 

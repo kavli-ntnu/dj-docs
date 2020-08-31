@@ -1,4 +1,4 @@
-## Installation log 
+## Imaging: Installation log 
 This is to keep track of updates / installations of packages on different machines. 
 
 ___

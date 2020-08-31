@@ -1,10 +1,10 @@
-## What to do if something goes wrong
+## Troubleshooting
 
-Both the ephys and imaging pipelines are extremely complicated software systems with many moving parts. It is possible for things to go wrong. 
+Both the ephys and imaging pipelines are complicated software systems with many moving parts. It is possible for things to go wrong.
 
 This page lists some of the common errors that researchers have experienced, and what you can do about it. If your problem doesn't fit into any of these categories, or the answer is not helpful, then contact Simon Ball for assistance.
 
-When assistance is needed, we can help you faster if you provide as much precise information up-front as possible. 
+When assistance is needed, I can help you faster if you provide as much precise information up-front as possible. 
 * What were you doing when it went wrong? Any recent GUI actions or python commands?
 * What does the error message say *exactly*? Copy/paste the text or take a screenshot
 * What, if anything, have you already tried (that didn't work) to fix the problem?
@@ -39,7 +39,7 @@ If you inserted data directly into the pipeline via Python command, then this by
 #### I ingested my session but it's not been analysed
 
 This suggests that a key piece of data is missing, and the database worker is waiting for it. Commonly missed data are:
-* Probe Association. If you have multiple probes or tetrode arrays, you need to tell the database how the data structure matches the probe insertion records, see [Ephys: Ingesting via the web gui](../doc_ephys/ingestion_webgui.md)
+* Probe Association. If you have multiple probes or tetrode arrays, you need to tell the database how the data structure matches the probe insertion records.
 * Task information. Processing the tracking data requires information about which arena the session took place in
 
 Alternatively, the ingestion may have had an error somewhere, e.g. an invalid input directory. This should show up in Session Status

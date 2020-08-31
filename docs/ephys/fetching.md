@@ -1,6 +1,6 @@
-## Fetching data from the Ephys pipeline
+## Ephys: Fetching data
 
-This guide assumes that you understand the basics of fetching data with Datajoint (covered extensively at [the Datajoint documentation](https://docs.datajoint.io/python/queries/Queries.html)). It assumes you have created database interface objects as discussed in [Connecting to the Ephys Pipeline](connecting.md).
+This guide assumes that you understand the basics of fetching data with Datajoint (covered extensively at [the Datajoint documentation](https://docs.datajoint.io/python/queries/Queries.html)). It assumes you have created database interface objects as discussed in *Ephys: Connecting*.
 
 
 
@@ -13,7 +13,7 @@ Shared between the ephys and imaging pipelines, and contains information importe
 #### Identifying Animals
 
 Animals are identified throughout the pipeline by two columns:
-* `animal_id` : this is an alphanumeric string, e.g., `e098f50d626e0650`. This is not the same as the mlims identified
+* `animal_id` : this is an alphanumeric string, e.g., `e098f50d626e0650`. This is not the same as the mlims identifier
 * `datasource_id`: this is always 0 for animals from any of the mLims management systems at Kavli. Included for future expansion to additional datasources. 
 
 These two identifiers are matched to a more human-friendly `animal_name` (shared with mLims) in the table `animal.Animal`. The human-friendly name is not used throughout as it does not guarantee uniqueness. 
@@ -67,7 +67,7 @@ Where multiple probes are inserted and recorded, Datajoint must be informed whic
 
 #### Session
 
-Groups (of 1 or more) recordings as part of a single session. See [Nomenclature](../doc_common/nomenclature.md) for discussion of the relative meanings between the two pipelines
+Groups (of 1 or more) recordings as part of a single session. See *Noemclature* for discussion of the relative meanings between the two pipelines
 
 `acquisition.Session`
 `acquisition.Recording`

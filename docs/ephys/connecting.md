@@ -1,4 +1,4 @@
-## Connecting to the Electrophysiology pipeline
+## Ephys: Connecting
 
 The Ephys pipeline is split into multiple separate schemas by theme. Each schema requires its own module, either imported from raw Python code or generated from virtual modules. The following code block will generate all the necessary virtual modules
 
