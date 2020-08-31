@@ -1,27 +1,32 @@
 # Datajoint @ Kavli Documentation
+
+[![Documentation Status](https://readthedocs.org/projects/dj-docs/badge/?version=latest)](https://dj-docs.readthedocs.io/en/latest/?badge=latest)
+
 This repository contains the documentation on the two core pipelines in use in the Moser Group at the Kavli Institute. 
-
-
 
 ## Contents
 
 * Usage
   * Getting started with Datajoint
-    * [Getting Started in Python](doc_common/getting_started_python.md)
-    * [Getting Started in Matlab](doc_common/getting_started_matlab.md)
-    * [Where to find help](doc_common/troubleshooting.md)
-    * [Nomenclature: terms used in ephys and imaging pipelines](doc_common/nomenclature.md)
+    * [Getting Started in Python](docs/common/getting_started/python.md)
+    * [Getting Started in Matlab](docs/common/getting_started/matlab.md)
+    * [Where to find help](docs/common/troubleshooting.md)
+    * [Nomenclature: terms used in ephys and imaging pipelines](docs/common/nomenclature.md)
   * Ephys
-    * [Connecting to the pipeline](doc_ephys/connecting.md)
-    * [Ingesting new data via the web GUI](doc_ephys/ingestion_webgui.md)
-    * [Fetching data from the pipeline](doc_ephys/fetching.md)
+    * [Connecting to the pipeline](docs/ephys/connecting.md)
+    * [Ingesting new data via the web GUI](docs/ephys/ingestion_webgui.md)
+    * [Fetching data from the pipeline](docs/ephys/fetching.md)
   * Imaging
-    * [Connecting to the pipeline](doc_imaging/connecting.md)
-    * [Ingesting new data via the web GUI](doc_imgaing/ingestion_webgui.md)
-    * [Fetching data from the pipeline](doc_imaging/fetching.md)
-    * [Desktop screening GUI](doc_imaging/desktop_gui.md)
+    * [Overview](docs/imaging/Overview.md)
+    * [Installation](docs/imgaing/Installation.md)
+    * [Folder logic](docs/imaging/Folder-logic.md)    
+    * [Adding sessions](docs/imaging/How-to-add-sessions.md)
+    * [Helper notebooks](docs/imaging/Helper-notebooks.md)
+    * [Synchronisation](docs/imaging/Sync.md)
+    * [FOV Unwarping](docs/imaging/FOV-unwarping.md)
+    * [Desktop screening GUI](docs/imaging/Session-viwer-GUI.md)
 
 * Technical details
-  * [Pipeline architecture](doc_technical/architecture.md)
-  * [Database server](doc_technical/database.md)
+  * [Pipeline architecture](docs/technical/architecture.md)
+  * [Database server](docs/technical/database.md)
 
