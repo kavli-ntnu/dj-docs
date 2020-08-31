@@ -20,7 +20,7 @@ The data pipelines in use in the Moser group require numerous computers to commu
 * [dj-elphys](https://github.com/kavli-ntnu/dj-elphys): the source code repository for the ephys pipeline. 
 * dj-worker: Automatic population of the core ephys pipeline. Virtual machine running on NTNU's Openstack. Currently limited to Python calculations only
 
-![](../images/datajoint_architecture.png)
+![](../_static/technical/datajoint_architecture.png)
 
 ### Imaging Pipeline
 

@@ -1,4 +1,4 @@
-#Imaging: Overview
+## Imaging: Overview
 The **imaging schema** is built around a table called ``Session.Data``, which is where ``Session`` information on the one hand and information from ``Dataset`` are combined. When the experimenter adds data to an existing session or when a new analysis output that is calculated in an external package (Suite2p, ...) becomes available, this output can be added to the schema.
 
 The entry point for all session data is the ``BaseFolder`` table, which takes as input 
@@ -26,14 +26,14 @@ Whenever a new ``BaseFolder`` entry is created, the same routine runs over the c
 Once data and session information converged on `Session.Data`, the first layer of imported tables (blue tables in ERD) will sort it according to dataset type. In these tables, basic pre-processing takes place. For example, the `ImagingAnalysis` table extracts all information pertaining to the analysis of imaging data, the `Tif` table grabs all tifs belonging to one session and extracts dimensions and a preview images from them. 
 Downstream computed tables can then make use of this data and process it further.
 
-#### Basic functions of the imaging schema: 
+### Basic functions of the imaging schema: 
 All imported / computed table `populate` commands are organised in a set of convenience "batch populate" functions (see [folder](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/batch_populate) in this repository). These can be run on multiple workers (for example your local Windows desktop or an open stack instance). 
 
-#### Suite 2P python implementation 
+### Suite 2P python implementation 
 [Suite2P python](https://github.com/MouseLand/suite2p) is implemented into the schema such that sessions that do not have matching suite2p output can be run through suite2p by calling `Suite2Py.populate()`. Suite2P python works on `ops` (Options) files that store all information to run Suite2P with. Those ops files can be uploaded/managed through the GUI (see readme for link). However, both Matlab Suite2P and Python Suite2P output converges in the schema and is then processed in parallel. Filtering for either result downstream is achieved by joining with table `ImagingAnalysis.Suite2p` for matlab or `ImagingAnalysis.Suite2py` for python output.
 
-#### Other schemas: 
+### Other schemas: 
 The **mLIMS** schema has been created by Vathes/Datajoint and syncs mouse/rat data with mLIMS on a regular basis. 
 
-#### The GUI: 
-There is a basic website running under http://2p.neuroballs.net:5000, which allows registered users to monitor the input layer (BaseFolder) and the Jobs tables of the imaging and Suite2PJobs schema. These jobs tables collect errors from any imported/computed table `make` routine. New Sessions/Data that should be analysed can be added through the GUI. 
+### The GUI: 
+There is a [basic website](http://2p.neuroballs.net:5000), which allows registered users to monitor the input layer (BaseFolder) and the Jobs tables of the imaging and Suite2PJobs schema. These jobs tables collect errors from any imported/computed table `make` routine. New Sessions/Data that should be analysed can be added through the GUI. 

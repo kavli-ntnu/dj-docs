@@ -6,25 +6,27 @@
 Welcome to dj-docs's documentation!
 ===================================
 
-Herein lies the book of Datajoint, the last and most sacred documentation of the Moser Group.
+Herein lies the book of Datajoint, the last and most sacred documentation of the Moser Group. 
+
+Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
 
 .. toctree::
    :maxdepth: 2
    :caption: Common:
 
-   common/conventions.md
-   common/getting_started/matlab.md
-   common/getting_started/python.md
-   common/nomenclature.md
-   common/troubleshooting.md
+   common/conventions
+   common/getting_started/matlab
+   common/getting_started/python
+   common/nomenclature
+   common/troubleshooting
 
 .. toctree::
    :maxdepth: 2
    :caption: Electrophysiology:
    
-   ephys/connecting.md
-   ephys/fetching.md
-   ephys/ingestion_webgui.md
+   ephys/connecting
+   ephys/fetching
+   ephys/ingestion_webgui
 
 .. toctree::
    :maxdepth: 2
@@ -32,20 +34,21 @@ Herein lies the book of Datajoint, the last and most sacred documentation of the
    
    imaging/Overview
    imaging/Installation
+   imaging/Folder-logic
    imaging/How-to-add-sessions
    imaging/Helper-notebooks
    imaging/Sync
    imaging/FOV-unwarping
-   imaging/Session-viewer-GUI.md
+   imaging/Session-viewer-GUI
 
 
 .. toctree::
     :maxdepth: 2
     :caption: Developer Documentation:
     
-    technical/architecture.md
-    technical/database.md
-    technical/working_parts.md
+    technical/architecture
+    technical/database
+    technical/working_parts
 
 
 

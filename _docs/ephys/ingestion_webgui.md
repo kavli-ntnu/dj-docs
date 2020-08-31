@@ -14,7 +14,7 @@ The Electrophysiology web GUI is available at https://datajoint.kavli.org.ntnu.n
 
 You must log in to the web GUI to interact with it. You use the same username and password as you do to access the pipeline in Python or Matlab. 
 
-![](..\_static\ephys\webgui\login.PNG)
+![](../_static/ephys/webgui/login.PNG)
 
 
 
@@ -32,8 +32,8 @@ Records of implanting a tetrode into an animal (or multiple probes). The databas
 
 Reference -> Probe -> Add Probe
 
-![](..\_static\ephys\webgui\add_probe_1.png)
-![](..\_static\ephys\webgui\add_probe_2.png)
+![](../_static/ephys/webgui/add_probe_1.png)
+![](../_static/ephys/webgui/add_probe_2.png)
 
 Select the correct kind of probe model (4-tetrode array, 8-tetrode array, Neuropixels) and give the probe a name
 
@@ -47,8 +47,8 @@ In general, we encourage using a systematic naming scheme - for neuropixels, we 
 
 Ephys -> Probe Insertion
 
-##### ![](..\_static\ephys\webgui\add_probe_3.png)
-##### ![](..\_static\ephys\webgui\add_probe_4.png)
+##### ![](../_static/ephys/webgui/add_probe_3.png)
+##### ![](../_static/ephys/webgui/add_probe_4.png)
 
 The Select Animal and Select Probe drop-down menus will search automatically as you type, so you don't have to scroll endlessly to find the entry you need. 
 
@@ -72,7 +72,7 @@ See section (TODO TODO) that discusses notation within the ephys pipeline for wh
 
 Ephys -> Add Session
 
-![](..\_static\ephys\webgui\add_session_1.png)
+![](../_static/ephys/webgui/add_session_1.png)
 
 Mandatory fields:
 

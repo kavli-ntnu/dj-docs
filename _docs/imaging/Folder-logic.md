@@ -1,8 +1,8 @@
-# Imaging: Folder logic
+## Imaging: Folder logic
 
 Ingest of raw/processed data folders follows a certain logic determined by the corresponding "Experiment type".
 
-## Femtonics
+### Femtonics
 The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
 - The base folder contains `.mesc` files
 - These .mesc files and contained image series represent individual sessions
@@ -20,15 +20,15 @@ _Example:_
 
 _Root Folder_
 
-![Femtonics root session folder screenshot](static/femtonics_root_session_folder.JPG)
+![Femtonics root session folder screenshot](../_static/imaging/femtonics_root_session_folder.JPG)
 
 _Session (Sub)Folder (MUnit_0 above)_
 
-![Femtonics session folder screenshot](static/femtonics_session_folder.JPG)
+![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
 
 ____
 
-## Miniscope
+### Miniscope
 The **2Pminiscope_A** import logic is as follows:
 - The base folder contains raw scanimage .tif files that follow a certain naming scheme:
     - `basename_session_filenumber.tif`
@@ -41,13 +41,13 @@ The **2Pminiscope_A** import logic is as follows:
 
 _Example:_
 
-![Miniscope session folder screenshot](static/miniscope_session_folder.PNG)
+![Miniscope session folder screenshot](../_static/imaging/miniscope_session_folder.PNG)
 
 **Important!** 
 
 ____
 
-## Miniscope preprocessed
+### Miniscope preprocessed
 The ingestion routine is similar to that of the ***Miniscope*** above. Some major differences include:
 1. For preprocessed tif stack, the tif files are prepended with `_preproc` - e.g. `basename_session_filenumber_preproc.tif`
 2. The raw tif files are expected to be present as well
@@ -60,15 +60,15 @@ _Examples:_
 
 _root_
 
-![preprocessed session folder screenshot_1](static/preprocessed_folder_struct_1.PNG)
+![preprocessed session folder screenshot_1](../_static/imaging/preprocessed_folder_struct_1.PNG)
  
  _root/basename_preproc.csv_
  
-![preproc_tracking_csv_screenshot_1](static/preprocessed_folder_struct_1_tracking.PNG)
+![preproc_tracking_csv_screenshot_1](../_static/imaging/preprocessed_folder_struct_1_tracking.PNG)
 
  ____
 
-## Suite2p
+### Suite2p
 
 Suite2p analysis outputs are stored in subfolder(s) of the root directory in the following naming convention:
 + `combined_<hash>`: folder storing outputs of suite2p analysis on the session-combined data in this directory
@@ -119,4 +119,4 @@ _Example:_
 
 _root/split_82951_2595624e4d44f92b/suite2p_
 
-![suite2p_folder_screenshot_1](static/preprocessed_folder_struct_1_suite2p.PNG)
+![suite2p_folder_screenshot_1](../_static/imaging/preprocessed_folder_struct_1_suite2p.PNG)
