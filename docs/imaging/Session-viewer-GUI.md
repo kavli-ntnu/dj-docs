@@ -3,9 +3,12 @@
 The [session viewer GUI](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/viewer) allows experimenters to display results saved in datajoint. For this, the user needs to be able to connect to the database and the external drive that datajoint imaging results are saved under. The best way to test this is via the helper notebooks, e.g. [here](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Starting%20notebook.ipynb).
 
 ### Installation
-Other than the main pipeline dependencies (see also [installation instructions](Installation))
-you need to: 
-- `pip install --pre "pyqtgraph>0.10"`
+The Session Viewer requires dependencies not enumerated in [Getting Started](../common/getting_started/python):
+* pyqt
+* pyqtgraph
+* scipy
+* scikit-image
+* pymysql
 
 Make sure you have the right conda environment activated before you proceed (the one you created during installation of the dj moser imaging pipeline). You can start the GUI by changing directory to `/viewer` and typing `python main.py`
 

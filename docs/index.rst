@@ -32,7 +32,6 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :caption: Imaging:
    
    imaging/Overview
-   imaging/Installation
    imaging/Folder-logic
    imaging/How-to-add-sessions
    imaging/Helper-notebooks
@@ -48,6 +47,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     technical/architecture
     technical/database
     technical/working_parts
+    technical/install_imaging
 
 
 
