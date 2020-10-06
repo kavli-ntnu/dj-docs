@@ -38,7 +38,8 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
   * Activate the newly created environment to begin using it
     * `conda activate ephys`
   * Install the minimum necessary packages
-    * `conda install datajoint graphviz python-graphviz pydotplus ipykernel`
+    * `conda install graphviz python-graphviz pydotplus ipykernel`
+    * `conda install datajoint -c conda-forge`
 
 ##### Creating an environment for Imaging 
 
@@ -48,7 +49,8 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
   * Activate the environment
     * `conda activate imaging`
   * Install the minimum necessary packages
-    * `conda install datajoint graphviz python-graphviz pydotplus ipykernel`
+    * `conda install graphviz python-graphviz pydotplus ipykernel`
+    * `conda install datajoint -c conda-forge`
 
 ##### Working with Conda environments in Jupyter
 
