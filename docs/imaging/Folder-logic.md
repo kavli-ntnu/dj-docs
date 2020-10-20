@@ -2,36 +2,10 @@
 
 Ingest of raw/processed data folders follows a certain logic determined by the corresponding "Experiment type".
 
-### Femtonics
-The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
-- The base folder contains `.mesc` files
-- These .mesc files and contained image series represent individual sessions
-- For every one of these sessions there can be additional files: 
-    - Tracking rotary encoder or optical mouse tracking files (.csv) - must contain .mesc container session identifier (`MUnit_NUMBER`). The different files are identified during pre-processing based on their header.
-    - Tracking video files (.mp4) - must contain .mesc container session identifier (`MUnit_NUMBER`)
-
-    - Sub folders called somewhat like the .mesc container session identifiers with:
-        - Raw tif(s)
-        - Suite2p python analysis output (`suite2p` folder)
-        - Relic from Suite2P Matlab: Additional subfolder called "Plane 1" (because image acquisition is single plane
-            and Suite2P automatically names it like this) with processed tifs 
-
-_Example:_
-
-_Root Folder_
-
-![Femtonics root session folder screenshot](../_static/imaging/femtonics_root_session_folder.JPG)
-
-_Session (Sub)Folder (MUnit_0 above)_
-
-![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
-
-____
-
 ### Miniscope
 The **2Pminiscope_A** import logic is as follows:
 - The base folder contains raw scanimage .tif files that follow a certain naming scheme:
-    - `basename_session_filenumber.tif`
+    - `basename_filenumber_filenumber.tif`
 
 - Wavesurfer synchronisation files (`basename_session.h5`)
 - Tracking 1D files (`basename_session_WHEEL.csv`)
@@ -44,6 +18,9 @@ _Example:_
 ![Miniscope session folder screenshot](../_static/imaging/miniscope_session_folder.PNG)
 
 **Important!** 
+Because the current ingest routine extracts a basename and timeseries name based on the assumption that the *basename* is buried in the filename like `basename_filenumber_filenumber.tif`, there should not be any underscores `_` within the basename. For example: 
+- `94557-imaging-20201013-withcookie_00002.tif` is **valid** and will lead to the basename `94557-imaging-20201013-withcookie`
+- `94557_imaging_20201013_withcookie_00002.tif` is **invalid** (or rather will confuse the basename / timeseries name extraction)
 
 ____
 
@@ -120,3 +97,33 @@ _Example:_
 _root/split_82951_2595624e4d44f92b/suite2p_
 
 ![suite2p_folder_screenshot_1](../_static/imaging/preprocessed_folder_struct_1_suite2p.PNG)
+
+
+____
+
+### Femtonics
+The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
+- The base folder contains `.mesc` files
+- These .mesc files and contained image series represent individual sessions
+- For every one of these sessions there can be additional files: 
+    - Tracking rotary encoder or optical mouse tracking files (.csv) - must contain .mesc container session identifier (`MUnit_NUMBER`). The different files are identified during pre-processing based on their header.
+    - Tracking video files (.mp4) - must contain .mesc container session identifier (`MUnit_NUMBER`)
+
+    - Sub folders called somewhat like the .mesc container session identifiers with:
+        - Raw tif(s)
+        - Suite2p python analysis output (`suite2p` folder)
+        - Relic from Suite2P Matlab: Additional subfolder called "Plane 1" (because image acquisition is single plane
+            and Suite2P automatically names it like this) with processed tifs 
+
+_Example:_
+
+_Root Folder_
+
+![Femtonics root session folder screenshot](../_static/imaging/femtonics_root_session_folder.JPG)
+
+_Session (Sub)Folder (MUnit_0 above)_
+
+![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
+
+
+
