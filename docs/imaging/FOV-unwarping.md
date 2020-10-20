@@ -1,3 +1,5 @@
+## Imaging: field-of-view unwarping
+
 Miniscope images have to be unwarped since scanner irregularities cause distortions in the imaged field of view (FOV). 
 
 ![ERD for FOV corrections](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/ERDs/FOVcorrections.svg)
@@ -13,4 +15,4 @@ The information from `ImagingFOV` is then used to unwarp all `Projection` table 
 See below for an outline of the process. First image on the top left depicts user defined point pairs defined the Matlab GUI (**red**: Original, warped image. **blue**: unwarped points (the goal), user defines only the red points, the blue points are inferred). 
 <br><br>
 
-![Outline FOV correction calculations](static/FOVtransformations.png)
+![Outline FOV correction calculations](../_static/imaging/FOVtransformations.png)
