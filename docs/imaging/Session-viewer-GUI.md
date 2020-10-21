@@ -30,6 +30,10 @@ Signal viewer
 - `S` Show/hide deconvolved spikes
 - `D` Show/hide fluorescent trace(s)
 
+Plane selection (for multiplane imaging only)
+- `Q` Plane up
+- `A` Plane down
+
 Parameter selection
 - `P` Opens parameter selection window
 

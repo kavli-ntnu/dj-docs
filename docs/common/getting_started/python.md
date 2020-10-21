@@ -52,43 +52,16 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * `conda install graphviz python-graphviz pydotplus ipykernel`
     * `conda install datajoint -c conda-forge`
 
-##### Working with Conda environments in Jupyter
+##### Working with Conda environments in Jupyter lab
 
-Jupyter is a popular interactive tool for working with Python. You can install Jupyter in your base Conda environment and use it with other environments that you have created on your computer given these steps:
+Jupyter lab is a popular interactive tool for working with Python. You can install Jupyter in your conda environment:
 
-* In the environment _you wish to make available_ (e.g. `ephys`):
-  * `conda activate ephys`
-  * `conda install ipykernel`
-* In the environment *from which you run Jupyter* (e.g. `base`):
-  * `conda deactivate`
-  * `conda install juypter nb_conda_kernels`
-* When you run Jupyter, you can select the Python Kernel matching the `conda env` name you wish to operate on
+  * `conda activate ephys` (or `conda activate imaging`)
+  * `conda install -c conda-forge jupyterlab`
 
-##### Working with Conda Environments in Spyder
-
-`Spyder` is a popular Python development environment. It is natively installed with any *conda* Python distribution. If you do not have it installed, you can install it with either `conda` or `pip` (it is a Python package like any other)
-
-```python
-conda install spyder
-```
-
-
-
-Spyder does not directly support either `conda` environments, or the older styles `venv` virtual environments. However, you can work with them anyway in one of two ways:
-
-* Install `spyder` into the environment you wish to use, and use the resulting binary to run `spyder`
-* Install `spyder-kernels` into the environment you wish to use, and use `spyder` installed from the base environment.
-
-In the latter case, you must change `spyder` Preferences to use the appropriate Python interpreter. You can find the correct path by running the following code _inside the environment you wish to use_:
-
-```python
-python -c "import sys; print(sys.executable)"
-```
-
-And then copying this path to the provided textbox in `Preferences > Python Interpreter > Use the following interpreter`
-
-Numerous other IDEs support Python. Common examples include PyCharm and Visual Studio Code
-
+Jupyter lab only has access to the folders downstream of the folder you start it from. So if you have a code folder like `C:/code/my_cool_python/` and want to start a new jupyter lab environment there, you 
+* `cd C:/code/my_cool_python/` 
+* `jupyter lab` (to start jupyter lab)
 
 ### Connecting to the pipeline database
 
@@ -103,7 +76,7 @@ Access credentials are shared between both pipelines. Configuration is data is s
 
 #### Once-off configuration
 
-You should only need to execute this code block once, and the computer on which it was executed will remember your configuration. The code defining `stores` is platform and computer specific: the example provided here is for a Windows computer that has mounted the `\\forskning.it.ntnu.no\ntnu\mh-kin\moser` shared network drive at `N:\` (the standard lab location). Users on Linux or Mac, or users on Windows with a non-standard mounting, must adjust the settings below to match their local system. 
+You should only need to execute this code block once, and the computer on which it was executed will remember your configuration. The code defining `stores` is platform and computer specific: the example provided here is for a Windows computer that has mounted the `\\forskning.it.ntnu.no\ntnu\mh-kin\moser` shared network drive at `N:/`. Users on Linux or Mac, or users on Windows with a non-standard mounting, must adjust the settings below to match their local system. 
 
 You will use your NTNU username, but the password is separate - contact Simon Ball or Haagen Wade for a password. The `ACCESS_KEY` and `SECRET_KEY` values are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Electrophysiology+Pipeline).
 
@@ -141,13 +114,10 @@ dj.config.save_global()
 ```
 
 
-
-
-
 #### Connecting to the pipelines
 
 Interacting with either pipeline requires Python classes representing the tables in the database. These can be generated in three ways:
-* Datajoint's `spawn_missing_classes` method: this creates many objects, one for each table in the schema
+* Datajoint's `spawn_missing_classes` method: this creates many objects, one for each table in the schema (preferred for `imaging`)
 * Datajoint's `create_virtual_module` method : this creates an object representing the schema
 * Importing the Python code that describes the schema(s) (stored in Github repositories for [Ephys](https://github.com/kavli-ntnu/dj-elphys) and [Imaging](https://github.com/kavli-ntnu/dj-moser-imaging) 
 
@@ -162,9 +132,10 @@ import datajoint as dj
 schema = dj.schema(dj.config["custom"]["dj_imaging.database"])
 schema.spawn_missing_classes()
 
+Session()
 Cell.Rois()
 Tifs()
-Shuffled()
+
 ```
 
 ```python
@@ -180,3 +151,28 @@ ephys.CuratedClustering()
 ephys.Unit()
 ephys.UnitSpikeTimes()
 ```
+
+
+##### Optional: Working with Conda Environments in Spyder
+
+`Spyder` is a popular Python development environment. It is natively installed with any *conda* Python distribution. If you do not have it installed, you can install it with either `conda` or `pip` (it is a Python package like any other)
+
+```python
+conda install spyder
+```
+
+Spyder does not directly support either `conda` environments, or the older styles `venv` virtual environments. However, you can work with them anyway in one of two ways:
+
+* Install `spyder` into the environment you wish to use, and use the resulting binary to run `spyder`
+* Install `spyder-kernels` into the environment you wish to use, and use `spyder` installed from the base environment.
+
+In the latter case, you must change `spyder` Preferences to use the appropriate Python interpreter. You can find the correct path by running the following code _inside the environment you wish to use_:
+
+```python
+python -c "import sys; print(sys.executable)"
+```
+
+And then copying this path to the provided textbox in `Preferences > Python Interpreter > Use the following interpreter`
+
+Numerous other IDEs support Python. Common examples include PyCharm and Visual Studio Code
+

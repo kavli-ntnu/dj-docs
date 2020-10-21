@@ -19,6 +19,9 @@ At the moment this concerns the `Session.SessionType` and `Session.ArenaObject` 
 ### More specialized notebooks
 - [FOV unwarping](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Insert%20FOV%20unwarping.ipynb): 2p miniscope raw recordings undergo distortions because of uncalibrated scanner responses to command voltages (and are therefore different for every scope vs. setup combination). In order to obtain undistorted cell maps and projections, we can unwarp these (raw) field of views by comparing with a calibration slide. The process of saving a calibration (=affine transformation) matrix into datajoint is shown in this notebook. For a more thorough explanation check [FOV unwarping](https://github.com/kavli-ntnu/dj-moser-imaging/wiki/FOV-unwarping).
 
+- [DLC add new Model/Processing method](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/DLC%20model%20insertion.ipynb): Helper notebook to insert (register) new deep lab cut (DLC) model and associated processing method. 
+
+
 ### Useful routines 
 - [Unwarp tif files](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Unwarp%20tiff%20files.ipynb): Quick and easy way to obtain undistorted tif files and view those with [Napari](https://napari.org/). See quick explanation below ('FOV unwarping').
 - [Suite2p python reader](https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/suite2py%20reader%20class.ipynb): Notebook that shows the usage of the suite2p python reader class, which is also used when loading suite2p output into datajoint. It provides convenience functions for rapidly investigating suite2p python exports and plotting results of the imaging analysis. 

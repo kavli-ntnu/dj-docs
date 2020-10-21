@@ -7,7 +7,7 @@ The **2Pminiscope_A** import logic is as follows:
 - The base folder contains raw scanimage .tif files that follow a certain naming scheme:
     - `basename_filenumber_filenumber.tif`
 
-- Wavesurfer synchronisation files (`basename_session.h5`)
+- Wavesurfer synchronisation files (`basename_session.h5`)x
 - Tracking 1D files (`basename_session_WHEEL.csv`)
 - Tracking 2D files (`basename_session.csv`)
 - Tracking videos (`basename_session.avi`)
@@ -21,6 +21,11 @@ _Example:_
 Because the current ingest routine extracts a basename and timeseries name based on the assumption that the *basename* is buried in the filename like `basename_filenumber_filenumber.tif`, there should not be any underscores `_` within the basename. For example: 
 - `94557-imaging-20201013-withcookie_00002.tif` is **valid** and will lead to the basename `94557-imaging-20201013-withcookie`
 - `94557_imaging_20201013_withcookie_00002.tif` is **invalid** (or rather will confuse the basename / timeseries name extraction)
+
+It is best to specify the `basename` in scanimage before you start an acquisition. **Please do not include any `_` in that text field.**.
+For more info check out the "Imaging Web GUI" page in this documentation. 
+
+![Miniscope session folder screenshot](../_static/imaging/scanimage_basefolder.PNG)
 
 ____
 

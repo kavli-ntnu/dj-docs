@@ -6,15 +6,14 @@ The entry point for all session data is the ``BaseFolder`` table, which takes as
 - User name
 - Path to a **base folder** with (new) data (**Careful**: Has to be a Windows folder path!)
 - Animal name (ID)
-- Experiment type
 - Label: Combined - yes/no
 - Setup / Scope info
-- Suite2P processing info
+- Suite2P processing info (suite2p python ``ops``)
 - Notes
 
 It all starts with a *base folder*, which is a file server location that contains files that belong to one or multiple session which _could_ be analysed together as if they were one long recording. It acts as the basic organising unit.
 
-From there, ``MakeDatasetSessions`` takes over and extracts what is needed from this basic input. Most importantly, the folder path gets abstracted to a ``repository`` and a relative path so it can be found across clients. What data is looked for is determined by the _Experiment type_ label. 
+From there, ``MakeDatasetSessions`` takes over and extracts what is needed from this basic input. Most importantly, the folder path gets abstracted to a ``repository`` and a relative path so it can be found across clients. What data is looked for is determined by the _Experiment type_ label (auto extracted from setup / scope information). 
 
 So, for example, if the experiment type is "femtonics" the first thing that happens is that the script looks for ".mesc" output files (the basic imaging format coming from the femtonics microscope). It then creates ``Session`` entries based on the metadata associated with these files and looks for other session relevant data like tracking data files. All files are entered as ``Datasets`` and ``PhysicalFiles`` into the database, where Datasets represent bundles of PhysicalFiles that belong together (for example: tif files that are split into multiple sub-files because of file size limitations). Data is ultimately combined under ``Session.Data``. 
 
@@ -31,9 +30,3 @@ All imported / computed table `populate` commands are organised in a set of conv
 
 ### Suite 2P python implementation 
 [Suite2P python](https://github.com/MouseLand/suite2p) is implemented into the schema such that sessions that do not have matching suite2p output can be run through suite2p by calling `Suite2Py.populate()`. Suite2P python works on `ops` (Options) files that store all information to run Suite2P with. Those ops files can be uploaded/managed through the GUI (see readme for link). However, both Matlab Suite2P and Python Suite2P output converges in the schema and is then processed in parallel. Filtering for either result downstream is achieved by joining with table `ImagingAnalysis.Suite2p` for matlab or `ImagingAnalysis.Suite2py` for python output.
-
-### Other schemas: 
-The **mLIMS** schema has been created by Vathes/Datajoint and syncs mouse/rat data with mLIMS on a regular basis. 
-
-### The GUI: 
-There is a [basic website](http://2p.neuroballs.net:5000), which allows registered users to monitor the input layer (BaseFolder) and the Jobs tables of the imaging and Suite2PJobs schema. These jobs tables collect errors from any imported/computed table `make` routine. New Sessions/Data that should be analysed can be added through the GUI. 
