@@ -7,7 +7,7 @@ The **2Pminiscope_A** import logic is as follows:
 - The base folder contains raw scanimage .tif files that follow a certain naming scheme:
     - `basename_filenumber_filenumber.tif`
 
-- Wavesurfer synchronisation files (`basename_session.h5`)x
+- Wavesurfer synchronisation files (`basename_session.h5`)
 - Tracking 1D files (`basename_session_WHEEL.csv`)
 - Tracking 2D files (`basename_session.csv`)
 - Tracking videos (`basename_session.avi`)
