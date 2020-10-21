@@ -30,6 +30,8 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
 
 ##### Creating an environment for Electrophysiology
 
+* `conda install graphviz python-graphviz pydotplus ipykernel`
+
 * Create a new Conda environment for the **Ephys** pipeline
   * Create an environment with the following:
     * `conda create --name ephys python=3.6`
@@ -38,7 +40,6 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
   * Activate the newly created environment to begin using it
     * `conda activate ephys`
   * Install the minimum necessary packages
-    * `conda install graphviz python-graphviz pydotplus ipykernel`
     * `conda install datajoint -c conda-forge`
 
 ##### Creating an environment for Imaging 
@@ -46,22 +47,28 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
 * Create a new Conda environment for the **Imaging** pipeline
   * Create an environment with the following:
     * `conda create --name imaging python=3.6`
+    * Confirm creation by pressing `Y`
+    * This creates an environment with the name `imaging` 
   * Activate the environment
     * `conda activate imaging`
   * Install the minimum necessary packages
-    * `conda install graphviz python-graphviz pydotplus ipykernel`
     * `conda install datajoint -c conda-forge`
 
-##### Working with Conda environments in Jupyter lab
+##### Working with Jupyter lab
 
-Jupyter lab is a popular interactive tool for working with Python. You can install Jupyter in your conda environment:
+Jupyter lab is a popular interactive tool for working with Python. 
+It enables you to view `.ipynb` files (like the *notebooks* in folder `Helper_notebooks` in the imaging repository).
+Datajoint interacts well with notebooks and renders fast previews of tables throughout the schema. 
 
-  * `conda activate ephys` (or `conda activate imaging`)
+  * `conda deactivate` (It's recommended to install in `(base)` environemnt)
   * `conda install -c conda-forge jupyterlab`
 
-Jupyter lab only has access to the folders downstream of the folder you start it from. So if you have a code folder like `C:/code/my_cool_python/` and want to start a new jupyter lab environment there, you 
-* `cd C:/code/my_cool_python/` 
+Jupyter lab only has access to the folders downstream of the folder you start it from. So if you have a code folder like `C:/code/my_cool_python_code/` (where you for example cloned `dj-moser-imaging`) and want to start a new jupyter lab environment there, you 
+* make sure the specific environment you want to work with (`imaging` or `ephys`, see above) is active
+  * e.g. `conda activate imaging`
+* `cd C:/code/my_cool_python/` to change directory to that folder
 * `jupyter lab` (to start jupyter lab)
+
 
 ### Connecting to the pipeline database
 
