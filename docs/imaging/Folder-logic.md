@@ -48,14 +48,14 @@ _root_
 ### Suite2p
 
 Suite2p analysis outputs are stored in subfolder(s) of the root directory in the following naming convention:
-+ `combined_<hash>`: folder storing outputs of suite2p analysis on the session-combined data in this directory
-+ `split_<basename>_<hash>`: folder storing outputs of suite2p analysis on the individual session data in this directory
++ `combined*`: folder storing outputs of suite2p analysis on the session-combined data in this directory
++ `split_<basename>*`: folder storing outputs of suite2p analysis on the individual session data in this directory
 
-Within the `combine_` or `split_` directory, the following suite2p-related subfolders can be found:
+Within the `combine` or `split_basename` directory, the following suite2p-related subfolders can be found:
 
 ```
 root_data_dir/
-└───combined_hash/
+└───combined/
 │   └───suite2p/
 │   │   │   ops1.npy
 │   │   └───plane0/
@@ -68,7 +68,7 @@ root_data_dir/
 │   │   │   │   F.npy
 │   │   │   │   iscell.npy
 │   │   │   │   ...
-└───split_basename_hash/
+└───split_basename/
 │   └───suite2p/
 │   │   │   ops1.npy
 │   │   └───combined/
@@ -95,6 +95,7 @@ If present, the DataJoint imaging pipeline will opt to ingest cell information f
 _Example:_
 
 _root/split_82951_2595624e4d44f92b/suite2p_
+
 
 ![suite2p_folder_screenshot_1](../_static/imaging/preprocessed_folder_struct_1_suite2p.PNG)
 
@@ -125,5 +126,33 @@ _Session (Sub)Folder (MUnit_0 above)_
 
 ![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
 
+ ____
 
+## DeepLabCut
+
+DLC analysis outputs stored in subfolder of the root directory in the following naming convention:
+
+    <basename>_dlc
+    
+_Example:_
+
+![DLC_root_session_folder](../_static/DLC_root_session_folder.JPG)    
+    
+Contained within the `<basename>_dlc` folder are the DLC outputs, including:
++ .yamel   : the configuration file (.yamel) used for this DLC analysis
++ .h5      : the tracked body part outputs from DLC analysis
++ .pickle  : the meta information file (.pickle) about this run
+
+_Example:_
+
+![DLC_folder](../_static/DLC_folder.JPG)
+
+
+#### Multiple DLC outputs
+If the `<basename>_dlc` folder contains multiple set of DLC outputs - e.g. multiple ***.h5*** and ***.pickle*** files, 
+the DLC output data will be concatenated in the file order.
+
+_Example:_
+
+![DLC_multi_folder](../_static/DLC_multi_folder.JPG)
 
