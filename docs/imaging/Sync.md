@@ -18,3 +18,7 @@ Below is an example of the raw recording of 3 sync streams (digital inputs) via 
 Events are extracted according to polarity (red vertical bars, rising or falling edge, tracking frames should be shown inverted to match example above). A *last_index_master* is inferred (since not actually recorded) and the other sync streams are cut accordingly. To concatenate multiple (sub-)sessions, sync streams are zeroed on master (*first_index_master*)  and every subsequent sync stream is concatenated to the previous one adding 1 to *last_index_master*.
 
 ![Wavesurfer ](../_static/imaging/wavesurfer_sync-01.jpg)
+
+### Scanimage sync
+
+Data can be `pre-synced` with scanimage. That means that either scanimage is triggering a - for example - tracking camera for every frame it acquires or timestamp information is recorded at imaging clock rate on one of 4 `AUX` inputs. The timing info for every frame and also an array of time stamps at imaging clock precision (`AUX 0 to 3`) get saved in the header of every page of the scanimage tif file. 

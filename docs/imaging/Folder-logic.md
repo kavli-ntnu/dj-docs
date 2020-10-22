@@ -22,6 +22,11 @@ Because the current ingest routine extracts a basename and timeseries name based
 - `94557-imaging-20201013-withcookie_00002.tif` is **valid** and will lead to the basename `94557-imaging-20201013-withcookie`
 - `94557_imaging_20201013_withcookie_00002.tif` is **invalid** (or rather will confuse the basename / timeseries name extraction)
 
+It is best to specify the `basename` in scanimage before you start an acquisition. **Please do not include any `_` in that text field.**.
+For more info check out the "Imaging Web GUI" page in this documentation. 
+
+![Miniscope session folder screenshot](../_static/imaging/scanimage_basefolder.PNG)
+
 ____
 
 ### Miniscope preprocessed
