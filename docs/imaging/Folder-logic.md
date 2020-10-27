@@ -141,7 +141,7 @@ DLC analysis outputs stored in subfolder of the root directory in the following 
     
 _Example:_
 
-![DLC_root_session_folder](../_static/DLC_root_session_folder.JPG)    
+![DLC_root_session_folder](../_static/imaging/DLC_root_session_folder.JPG)  
     
 Contained within the `<basename>_dlc` folder are the DLC outputs, including:
 + .yamel   : the configuration file (.yamel) used for this DLC analysis
@@ -150,7 +150,7 @@ Contained within the `<basename>_dlc` folder are the DLC outputs, including:
 
 _Example:_
 
-![DLC_folder](../_static/DLC_folder.JPG)
+![DLC_folder](../_static/imaging/DLC_folder.JPG)
 
 
 #### Multiple DLC outputs
@@ -159,5 +159,5 @@ the DLC output data will be concatenated in the file order.
 
 _Example:_
 
-![DLC_multi_folder](../_static/DLC_multi_folder.JPG)
+![DLC_multi_folder](../_static/imaging/DLC_multi_folder.JPG)
 
