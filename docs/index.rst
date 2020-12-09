@@ -15,6 +15,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :caption: Common:
 
    common/getting_started/index.rst
+   common/finding
    common/conventions
    common/nomenclature
    common/troubleshooting
@@ -26,6 +27,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    ephys/connecting
    ephys/fetching
    ephys/ingestion_webgui
+   ephys/multi_sess_units
 
 .. toctree::
    :maxdepth: 2

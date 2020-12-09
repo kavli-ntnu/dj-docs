@@ -138,7 +138,7 @@ There is ongoing work to create a method to track the same physical cell across 
 
 #### Unit tracking across multiple clusterings
 
-Work in progress, not yet implemented
+See "Following units across multiple sessions"
 
 #### Spikes
 
