@@ -87,7 +87,7 @@ def search(col_name, *args):
                 for attr in value.heading.secondary_attributes:
                     if col_name.lower() == attr:
                         tables.append(value)
-    if len(tables) > 1:
+    if len(tables) > 0:
         return tables
     else:
         raise ValueError(f"Column name {col_name} does not match precisely in any table")

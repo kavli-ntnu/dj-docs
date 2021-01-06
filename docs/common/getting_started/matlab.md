@@ -26,13 +26,63 @@ On newer versions (R2018 onwards):
 
 You can verify correct installation by calling the following in the Matlab command prompt:
 ```matlab
->> dj.version
+>> dj.version;
 ```
 
-### Connecting to the Electrophysiology Pipeline
+Full access to the pipelines in use at Kavli requires **version 3.4.1 or higher**.
 
-* TODO
+### Getting connected
 
-### Connecting to the Imaging Pipeline
+After installing the Datajoint toolbox, there are two further steps
+* Getting a local copy of the table definitions
+* Setting up your credentials to access the pipeline and the external storage location
 
-The Imaging pipeline is not currently supported in Matlab
+#### A local copy of code
+
+[Clone](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository) the ephys repository from [Github](www.github.com/kavli-ntnu/dj-elphys). 
+
+We recommend using the [Github Desktop papplication](https://desktop.github.com/) app for this, as it is much more user friendly than the command-line interface. 
+
+#### Credentials
+
+An example configuration file is provided in the repository's base directory, `dj_local_conf_ntnu.json`. You will need to edit this file to insert your credentials. You can use any text editor to modify the file, e.g. Notepad.
+
+You need to edit 4 values in total:
+* your username
+* your password
+* the external storage access key
+* and the external storare secret key
+
+Your username is the same as your NTNU username
+```json
+"database.user": "simoba",
+```
+Your password is NOT the same as your NTNU password. If you have lost your password, or have not been given one, contact Simon Ball to request a new password
+```json
+"database.password": "omg-a-secret-password",
+```
+The external storage credentials are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Electrophysiology+Pipeline)
+
+
+Note: `dj_local_conf_ntnu.json` is a file that is tracked by Git, our version control software. _It is recommended that you rename the file containing your credentials to `dj_local_conf.json`, which will always be ignored by Git._
+
+By renaming it as such, you ensure that there is no risk of accidentally committing your changes back to the master repository. If you do _not_ rename it, you will also have to modify the `init.m` script (see following section)
+
+
+#### Working with code
+
+Finally, code initialisation is taken care of by the file `/MATLAB/ephys_pipeline/init.m`. Running this script will import the credentials from the file `dj_local_conf.json` at the base of the `dj-elphys` directory, and initialise objects representing the various parts of the pipeline. These objects are prefixed with `v_`, to indicate that they are _virtual_ objects, and do not have the "business logic" code that defines how tables are populated (equivalent to the "virtual modules" created in Python)
+
+#### Fetching data
+
+The MatLab-Datajoint client is similar, but not identical to, the Python client, and some operations are processed a little differently. The main one to be aware of is how to fetch data. 
+
+In Matlab, you fetch data with the top-level commands `fetch and `fetch1`:
+```matlab
+init;
+keys = fetch(v_analysis.RateMap);
+data = fetch(v_analysis.RateMap & keys(1:10), '*', 'ORDER BY unit');
+imshow(data(2).ratemap, [0,1]);
+```
+
+The main Matlab-Datajoint documentation [can be found here](https://docs.datajoint.io/matlab/)
