@@ -2,36 +2,10 @@
 
 Ingest of raw/processed data folders follows a certain logic determined by the corresponding "Experiment type".
 
-### Femtonics
-The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
-- The base folder contains `.mesc` files
-- These .mesc files and contained image series represent individual sessions
-- For every one of these sessions there can be additional files: 
-    - Tracking rotary encoder or optical mouse tracking files (.csv) - must contain .mesc container session identifier (`MUnit_NUMBER`). The different files are identified during pre-processing based on their header.
-    - Tracking video files (.mp4) - must contain .mesc container session identifier (`MUnit_NUMBER`)
-
-    - Sub folders called somewhat like the .mesc container session identifiers with:
-        - Raw tif(s)
-        - Suite2p python analysis output (`suite2p` folder)
-        - Relic from Suite2P Matlab: Additional subfolder called "Plane 1" (because image acquisition is single plane
-            and Suite2P automatically names it like this) with processed tifs 
-
-_Example:_
-
-_Root Folder_
-
-![Femtonics root session folder screenshot](../_static/imaging/femtonics_root_session_folder.JPG)
-
-_Session (Sub)Folder (MUnit_0 above)_
-
-![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
-
-____
-
 ### Miniscope
 The **2Pminiscope_A** import logic is as follows:
 - The base folder contains raw scanimage .tif files that follow a certain naming scheme:
-    - `basename_session_filenumber.tif`
+    - `basename_filenumber_filenumber.tif`
 
 - Wavesurfer synchronisation files (`basename_session.h5`)
 - Tracking 1D files (`basename_session_WHEEL.csv`)
@@ -44,6 +18,14 @@ _Example:_
 ![Miniscope session folder screenshot](../_static/imaging/miniscope_session_folder.PNG)
 
 **Important!** 
+Because the current ingest routine extracts a basename and timeseries name based on the assumption that the *basename* is buried in the filename like `basename_filenumber_filenumber.tif`, there should not be any underscores `_` within the basename. For example: 
+- `94557-imaging-20201013-withcookie_00002.tif` is **valid** and will lead to the basename `94557-imaging-20201013-withcookie`
+- `94557_imaging_20201013_withcookie_00002.tif` is **invalid** (or rather will confuse the basename / timeseries name extraction)
+
+It is best to specify the `basename` in scanimage before you start an acquisition. **Please do not include any `_` in that text field.**.
+For more info check out the "Imaging Web GUI" page in this documentation. 
+
+![Miniscope session folder screenshot](../_static/imaging/scanimage_basefolder.PNG)
 
 ____
 
@@ -71,14 +53,14 @@ _root_
 ### Suite2p
 
 Suite2p analysis outputs are stored in subfolder(s) of the root directory in the following naming convention:
-+ `combined_<hash>`: folder storing outputs of suite2p analysis on the session-combined data in this directory
-+ `split_<basename>_<hash>`: folder storing outputs of suite2p analysis on the individual session data in this directory
++ `combined*`: folder storing outputs of suite2p analysis on the session-combined data in this directory
++ `split_<basename>*`: folder storing outputs of suite2p analysis on the individual session data in this directory
 
-Within the `combine_` or `split_` directory, the following suite2p-related subfolders can be found:
+Within the `combine` or `split_basename` directory, the following suite2p-related subfolders can be found:
 
 ```
 root_data_dir/
-└───combined_hash/
+└───combined/
 │   └───suite2p/
 │   │   │   ops1.npy
 │   │   └───plane0/
@@ -91,7 +73,7 @@ root_data_dir/
 │   │   │   │   F.npy
 │   │   │   │   iscell.npy
 │   │   │   │   ...
-└───split_basename_hash/
+└───split_basename/
 │   └───suite2p/
 │   │   │   ops1.npy
 │   │   └───combined/
@@ -119,4 +101,63 @@ _Example:_
 
 _root/split_82951_2595624e4d44f92b/suite2p_
 
+
 ![suite2p_folder_screenshot_1](../_static/imaging/preprocessed_folder_struct_1_suite2p.PNG)
+
+
+____
+
+### Femtonics
+The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
+- The base folder contains `.mesc` files
+- These .mesc files and contained image series represent individual sessions
+- For every one of these sessions there can be additional files: 
+    - Tracking rotary encoder or optical mouse tracking files (.csv) - must contain .mesc container session identifier (`MUnit_NUMBER`). The different files are identified during pre-processing based on their header.
+    - Tracking video files (.mp4) - must contain .mesc container session identifier (`MUnit_NUMBER`)
+
+    - Sub folders called somewhat like the .mesc container session identifiers with:
+        - Raw tif(s)
+        - Suite2p python analysis output (`suite2p` folder)
+        - Relic from Suite2P Matlab: Additional subfolder called "Plane 1" (because image acquisition is single plane
+            and Suite2P automatically names it like this) with processed tifs 
+
+_Example:_
+
+_Root Folder_
+
+![Femtonics root session folder screenshot](../_static/imaging/femtonics_root_session_folder.JPG)
+
+_Session (Sub)Folder (MUnit_0 above)_
+
+![Femtonics session folder screenshot](../_static/imaging/femtonics_session_folder.JPG)
+
+ ____
+
+## DeepLabCut
+
+DLC analysis outputs stored in subfolder of the root directory in the following naming convention:
+
+    <basename>_dlc
+    
+_Example:_
+
+![DLC_root_session_folder](../_static/imaging/DLC_root_session_folder.JPG)  
+    
+Contained within the `<basename>_dlc` folder are the DLC outputs, including:
++ .yamel   : the configuration file (.yamel) used for this DLC analysis
++ .h5      : the tracked body part outputs from DLC analysis
++ .pickle  : the meta information file (.pickle) about this run
+
+_Example:_
+
+![DLC_folder](../_static/imaging/DLC_folder.JPG)
+
+
+#### Multiple DLC outputs
+If the `<basename>_dlc` folder contains multiple set of DLC outputs - e.g. multiple ***.h5*** and ***.pickle*** files, 
+the DLC output data will be concatenated in the file order.
+
+_Example:_
+
+![DLC_multi_folder](../_static/imaging/DLC_multi_folder.JPG)
+
