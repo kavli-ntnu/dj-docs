@@ -18,6 +18,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    common/finding
    common/conventions
    common/nomenclature
+   common/building_your_own
    common/troubleshooting
 
 .. toctree::
