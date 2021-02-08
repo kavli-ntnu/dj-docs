@@ -2,9 +2,28 @@
 
 This guide will cover what you need to do to begin working with the Electrophysiology and Imaging pipelines in user in the Moser Group at the Kavli Institute for Systems Neuroscience. 
 
+
 ### Programming Language
 
 Datajoint is available as a library in both Python and Matlab, and the database can be accessed from either language. Main development and support takes place primarily in Python, and if you are new to programming, we recommend that you use Python. Experienced Matlab or Python developers should continue using their language of choice. This guide covers the process for getting started with Datajoint in **Python**.
+
+
+#### The terminal
+
+A lot of interaction with Python will take place on the commandline. In general, we recommend that you use the Anaconda Terminal, as that interfaces well with conda environments. Examples in this page assume that you are using the anaconda terminal, and will have a layout like this
+`(environment) local/path/to/working/directory $ command_to_run`
+(the `$` symbol may be replaced by a `>` symbol on some systems). For example:
+![](../../_static/common/terminal.png)
+
+Where explicit commands are given in this guide, they usually look like the above, including the environment name. If you copy and and paste them, make sure you copy and paste the elements _after_, and not including, the `$` symbol (e.g., above, `python myscript.py`
+
+Examples will typically be given _excluding_ the local path, as it is _usually_ not relevant
+
+On Windows 10, you can open the anaconda terminal as follows:
+* open the Start menu with the Windows key
+* Type `anaconda` to search
+* Select the `Anaconda Prompt`
+
 
 #### Installing Python
 
@@ -18,11 +37,8 @@ If you will only work with one pipeline or the other, skip the step that is not 
   * Install in a directory that has no spaces in its path. 
   * [If on WIndows] Select the option to add Python to the Windows PATH
 * Install the Jupyter tool in your base environment
-  * We recommend using the Anaconda command prompt for command-line work
-    * In Windows 10, search for `anaconda` and select the Anaconda Command Prompt
-  * Ensure you are in the `base` environment
-    * `conda deactivate`
-    * `conda install jupyter nb_conda_kernels` 
+  * `(base) $ conda install jupyter nb_conda_kernels`
+
 
 In general, we recommend using the `conda` package manager in preference to `pip` wherever possible. Mixng the two package managers is possible, but not recommended. 
 
@@ -30,29 +46,35 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
 
 ##### Creating an environment for Electrophysiology
 
-* `conda install graphviz python-graphviz pydotplus ipykernel`
-
 * Create a new Conda environment for the **Ephys** pipeline
   * Create an environment with the following:
-    * `conda create --name ephys python=3.6`
+    * `(base) $ conda create --name ephys python=3.6`
     * Confirm creation by pressing `Y`
     * This creates an environment with the name `ephys` 
   * Activate the newly created environment to begin using it
-    * `conda activate ephys`
+    * `(base) $ conda activate ephys`
   * Install the minimum necessary packages
-    * `conda install datajoint -c conda-forge`
+    * `(ephys) $ conda install datajoint -c conda-forge`
+    * `(ephys) $ conda install graphviz python-graphviz pydotplus ipykernel`
 
 ##### Creating an environment for Imaging 
 
 * Create a new Conda environment for the **Imaging** pipeline
   * Create an environment with the following:
-    * `conda create --name imaging python=3.6`
+    * `(base) $ conda create --name imaging python=3.6`
     * Confirm creation by pressing `Y`
     * This creates an environment with the name `imaging` 
   * Activate the environment
-    * `conda activate imaging`
+    * `(base) $ conda activate imaging`
   * Install the minimum necessary packages
-    * `conda install datajoint -c conda-forge`
+    * `(imaging) $ conda install datajoint -c conda-forge`
+    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel`
+
+* A session viewer graphical user interface  has been developed for the Imaging pipeline. Due to it's wide variety of dependences, and the necessity to install via `pip`, it is **strongly recommended** to install it in its own private environment. 
+  * `(base) $ conda create --name imaging-viewer python=3.6`
+  * `(base) $ conda activate imaging-viewer`
+  * `(imaging-viewer) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git`
+  * `(imaging-viewer) $ session_viewer`
 
 ##### Working with Jupyter lab
 
@@ -60,15 +82,20 @@ Jupyter lab is a popular interactive tool for working with Python.
 It enables you to view `.ipynb` files (like the *notebooks* in folder `Helper_notebooks` in the imaging repository).
 Datajoint interacts well with notebooks and renders fast previews of tables throughout the schema. 
 
-  * `conda deactivate` (It's recommended to install in `(base)` environemnt)
-  * `conda install -c conda-forge jupyterlab`
+Jupyter has an older interface "Jupyter notebook", and a newer interface "jupyter lab". Throughout this guide, we assume that you will use Jupyter lab. Other guides on the internet may look somewhat different if they use the older notebook style. 
 
-Jupyter lab only has access to the folders downstream of the folder you start it from. So if you have a code folder like `C:/code/my_cool_python_code/` (where you for example cloned `dj-moser-imaging`) and want to start a new jupyter lab environment there, you 
-* make sure the specific environment you want to work with (`imaging` or `ephys`, see above) is active
-  * e.g. `conda activate imaging`
-* `cd C:/code/my_cool_python/` to change directory to that folder
-* `jupyter lab` (to start jupyter lab)
+Jupyter lab includes a file browser to navigate to your notebooks, but it is only able to navigate from the local working folder it was started in. So, for instance, if your notebooks are stored in `C:/python/my_notebooks`, then you will need to start Jupyter in one of `C:/`, `C:/python` or `C:/python/my_notebooks`. If you start from `C:/users/my_user`, you will not be able to navigate to your notebooks. This limitation _only_ applies to loading your notebooks - once inside a notebook, you can load arbitrary files from where on your computer.
 
+You should start Jupyter lab from the `base` environment, if you followed the setup guide above. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). 
+
+* `(base) C:/users/simoba $ jupyter lab`
+
+Inside the notebook user interface, you will then need to select the appropriate kernel. Click on the highlighted text, and then choose your preferred kernel. COnda environments show up prefixed by `conda env:`
+
+![](../../_static/common/jupyter_kernels_1.png)
+
+
+![](../../_static/common/jupyter_kernels_2.png)
 
 ### Connecting to the pipeline database
 
@@ -170,13 +197,13 @@ conda install spyder
 
 Spyder does not directly support either `conda` environments, or the older styles `venv` virtual environments. However, you can work with them anyway in one of two ways:
 
-* Install `spyder` into the environment you wish to use, and use the resulting binary to run `spyder`
-* Install `spyder-kernels` into the environment you wish to use, and use `spyder` installed from the base environment.
+* Install `spyder` into the environment you wish to use, and use the resulting binary to run `spyder`, **or**
+* Install `spyder-kernels` into the environment you wish to use, and use `spyder` installed from the `base` environment.
 
 In the latter case, you must change `spyder` Preferences to use the appropriate Python interpreter. You can find the correct path by running the following code _inside the environment you wish to use_:
 
-```python
-python -c "import sys; print(sys.executable)"
+```
+(ephys) $ python -c "import sys; print(sys.executable)"
 ```
 
 And then copying this path to the provided textbox in `Preferences > Python Interpreter > Use the following interpreter`
