@@ -1,6 +1,6 @@
-======================================
-Building your own pipeline
-======================================
+
+## Building your own pipeline
+
 
 
 The common pipelines are not designed or intended to represent all possible analyses that you require for your own research. Eventually, your own requirements will diverge from what the pipeline supports. 
@@ -10,8 +10,8 @@ At that point, you can continue your own analysis in one of two ways:
 - define your own, private, database tables to which data can be written back.
 
 
-Your own schema namespace
--------------------------
+### Your own schema namespace
+
 
 The database server is configured such that every user can define their own schemas (groups of tables), to which they have unrestricted read/write/delete access. Other users can _see_ the data in these tables, but cannot reference or modify it.
 
@@ -23,8 +23,8 @@ schema = dj.schema("user_USERNAME_SCHEMANAME")
 ```
 
 
-Defining your own tables
--------------------------
+### Defining your own tables
+
 
 Each table is defined in a specific way, in Python (or Matlab) code. A table must:
 * be wrapped by a Schema object
@@ -47,8 +47,8 @@ class MyTable(dj.Computed):
 
 
 
-Defining your choice of source data
-------------------------------------
+### Defining your choice of source data
+
 
 The table definition includes primary key columns and secondary key columns. Typically, the primary key columns will include at least one foreign key: a reference to another table (denoted by `->` in the definition)
 
@@ -89,8 +89,8 @@ If the the key source calculation is quite complex, you can replace with with a 
         return ks
 ```
 
-Defining your own Populate logic
----------------------------------
+### Defining your own Populate logic
+
 
 Imported and Computed tables support population logic: they define a fixed method of transforming szome input data to some output data, and isnerting that output data back into themselves. 
 
@@ -120,8 +120,8 @@ You can see what proportion of keys that should be there are there already with 
 
 
 
-Populating your own tables
-----------------------------
+### Populating your own tables
+
 
 The main pipeline is populated by a set of dedicated "worker" servers - virtual machines running on NTNU's openstack. These dedicated servers do not have access to the populate logic for your personal tables, and so cannot populate them for you. 
 
@@ -130,8 +130,8 @@ In general, you will need to run the population logic yourself, on your own offi
 If you require computational resources exceeding the computer(s) you have available, NTNU does have various compute resources that are available to researchers that can be requested. 
 
 
-Full Example
---------------
+### Full Example
+
 
 For further examples, consult the source code for the two main pipelines on github. 
 
