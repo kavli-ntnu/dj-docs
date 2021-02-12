@@ -27,6 +27,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    
    ephys/connecting
    ephys/fetching
+   ephys/folder_structure
    ephys/ingestion_webgui
    ephys/multi_sess_units
 
