@@ -131,7 +131,6 @@ dj.config.save_global()
 ```
 
 
-
 ##### Working with Jupyter lab
 
 Jupyter lab is a popular interactive tool for working with Python. 
@@ -141,12 +140,17 @@ Datajoint interacts well with notebooks and renders fast previews of tables thro
 Jupyter has an older interface "Jupyter notebook", and a newer interface "jupyter lab". Throughout this guide, we assume that you will use Jupyter lab. Other guides on the internet may look somewhat different if they use the older notebook style. 
 
 Jupyter lab includes a file browser to navigate to your notebooks, but it is only able to navigate from the local working folder it was started in. So, for instance, if your notebooks are stored in `C:/python/my_notebooks`, then you will need to start Jupyter in one of `C:/`, `C:/python` or `C:/python/my_notebooks`. If you start from `C:/users/my_user`, you will not be able to navigate to your notebooks. This limitation _only_ applies to loading your notebooks - once inside a notebook, you can load arbitrary files from where on your computer.
+* To navigate to your folder, use `cd` followed by the path, like so: 
+  * `(base) $ cd C:/python`
+
+* If that does not change the path (i.e. because you are trying to navigate to another drive), use the `/d` command in addition like so:
+  * `(base) $ cd /d C:/python`)
 
 You should start Jupyter lab from the `base` environment, if you followed the setup guide above. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). 
 
-* `(base) C:/users/simoba $ jupyter lab`
+* `(base) $ jupyter lab`
 
-Inside the notebook user interface, you will then need to select the appropriate kernel. Click on the highlighted text, and then choose your preferred kernel. COnda environments show up prefixed by `conda env:`
+Inside the notebook user interface, you will then need to select the appropriate kernel. Click on the highlighted text, and then choose your preferred kernel. Conda environments show up prefixed by `conda env:`
 
 ![](../../_static/common/jupyter_kernels_1.png)
 
@@ -191,6 +195,8 @@ ephys.CuratedClustering()
 ephys.Unit()
 ephys.UnitSpikeTimes()
 ```
+
+To exit jupyter lab, close the browser window and use `ctrl+c` in the Anaconda prompt window
 
 
 #### GUI for imaging users
