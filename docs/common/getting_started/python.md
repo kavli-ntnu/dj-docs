@@ -178,7 +178,7 @@ schema.spawn_missing_classes()
 
 Session()
 Cell.Rois()
-Tifs()
+Tif()
 
 ```
 
