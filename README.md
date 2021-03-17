@@ -29,5 +29,3 @@ This repository contains the documentation on the two core pipelines in use in t
 * Technical details
   * [Pipeline architecture](docs/technical/architecture.md)
   * [Database server](docs/technical/database.md)
-
-RIJ test
