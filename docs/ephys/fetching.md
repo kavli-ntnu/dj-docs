@@ -2,181 +2,137 @@
 
 This guide assumes that you understand the basics of fetching data with Datajoint (covered extensively at [the Datajoint documentation](https://docs.datajoint.io/python/queries/Queries.html)). It assumes you have created database interface objects as discussed in *Ephys: Connecting*.
 
+#### fetch vs fetch1
 
+These two functions can catch the unwary out.
+- `.fetch1()` requires **exactly** one responsive row to your query, and will throw an error if there are either 0, or more than 1, responsive rows. 
+- `.fetch()` works with any number of responsive rows: 0, 1, or many. It will **always** return a list of results, even if there is exactly one row to be fetched, and you will have to index the list to get any single result. 
 
+#### Controlling fetching
 
+When fetching data, you often want the fetch structured in some particular way. You _can_ do this structuring yourself, in Python or Matlab on your local computer, but several common forms can be specified for the database server to do for you:
+- fetch order: If you don't specify any particular ordering, then you should expect the results to be returned in a different order every time you fetch them. This can be fixed by `.fetch(... order_by=<column_name> <order>"): `ephys.Unit.fetch(order_by="curation_timestamps ASC")`. THis will fetch all recorded Units, with the members of the oldest curation first ("ascending"). "DESC" can be used for descending order instead
+- limit: sometimes, you may have a query with many results, but you don't need all of them. For very large queries, requesting only as many as you need can save some time by needing to transfer less data to your computer: `ephys.Unit.fetch(limit=10)`. Only applies to `.fetch()`, not `.fetch1()`. Even if `limit=1`, still returns a list
+- as_dict: Forces the data to be returned as a list of dictionaries, instead of a sturctured array `ephys.Unit.fetch(as_dict=True)`. Only applies to `.fetch()`, not `.fetch1()`
 
-### Animal
 
-Shared between the ephys and imaging pipelines, and contains information imported from the mLims colony management systems in use at Kavli.
 
-#### Identifying Animals
 
-Animals are identified throughout the pipeline by two columns:
-* `animal_id` : this is an alphanumeric string, e.g., `e098f50d626e0650`. This is not the same as the mlims identifier
-* `datasource_id`: this is always 0 for animals from any of the mLims management systems at Kavli. Included for future expansion to additional datasources. 
+### Core components
 
-These two identifiers are matched to a more human-friendly `animal_name` (shared with mLims) in the table `animal.Animal`. The human-friendly name is not used throughout as it does not guarantee uniqueness. 
+The pipeline contains a relatively minimal selection of critical tables that all researchers will care about., In addition there are many peripheral tables that handle administrative functions that few or no researchers need to worry about. 
 
-The human-friendly name can be used as a restriction throughout the pipeline as follows:
+The following screenshot includes the major tables in the pre-analysis pipeline. If you are writing your own from-scratch analyses, then it is quite probable that they will diverge from the main pipeline somewhere within this group. 
 
-`animal.Animal & {"animal_name":26230}`
 
+![](../_static/ephys/pipeline_structure/session_recording_clustering.png)
 
 
+##### animal
 
+The `animal` schema contains information about the animals themselves, and is automatically updated from the mLims colony management system. The primary table is `animal.Animal`, whichcontains the lookup for animal names (e.g. `"animal_name = 102"`)
 
-### Reference
+##### acquisition
 
-Contains lookup tables of information that is referenced throughout the pipeline
+The `acquisition` schema contains information about data acquisition: recording sessions that took place, who was involved, and where the data is stored. 
 
-#### Arenas
+The primary tables are: 
+- `acquisition.ProbeInsertion` - Contains details on probe implants. 
+- `acquisition.Session` and its part tables (`.Experimenter` for the researchers involved and `.Directories` for the data location(s)) - contains details on specific recording sessions that took place
+- `acquisition.Recording` - tracks individual recording files (of which there may be several per session)
 
-Information about the arenas in which animals run, and the objects, cue-cards etc that they react to
 
-`reference.ArenaApparatus`
-`reference.ArenaApparatus.ArenaGeometry`
-`reference.ArenaObject`
-`reference.CueCard`
+##### `tracking`
 
+The `tracking` schema contains details about tracking the subject's motion. 
 
-#### General
+##### ephys
 
-`reference.Experimenter`
-`reference.ExperimentRoom`
+The `ephys` schema contains details about the electrophysiolgical data - Clustering, Units, and matched spike times / tracking
 
+- `ephys.CuratedClustering` - contains details about any user-curated spike-clustering outcomes. 
+- `ephys.Unit` - contains records of each unit in a Clustering
+- `ephys.SpikeTimes` - contains the time-series of spiketimes per unit
+- `ephys.SpikesTracking` - contains the matched subject motion to spike times. 
 
 
+#### Restricting Curation by Session
 
+From the above image, you can see that Curation is not directly dependent on Session, and so you cannot directly restrict a Curation by a Session. This is because Curations might span across several sessions, and so there is not a one-to-one matching. 
 
-### Acquisition
+```python
+# This will not achieve anything
+# Pick a random session key
+session_key = acquisition.Session.fetch("KEY", limit=1)[0]
+ephys.CuratedClustering & session_key
+```
 
-Contains information about recording sessions and surgery on animals
+Instead, you need to use another table to join them up: `acquisition.ClusterSessionGroup.GroupMember`
 
-#### Probe Insertion
+```python
+# Instead, you need to include the ClusterSessionGroup table
+# Again, pick a random session key
+session_key = acquisition.Session.fetch("KEY", limit=1)[0]
+ephys.CuratedClustering * acquisition.ClusterSessionGroup.GroupMember & session_key
+```
 
-`acquisition.ProbeInsertion`
 
-#### ProbeAssociation
 
-Where multiple probes are inserted and recorded, Datajoint must be informed which physical probe (identified in `acquisition.ProbeInsertion`) matches which data files. 
 
-`acquisition.Session.NeuropixelsProbeAssociation`
-`acquisition.Session.NeurologgerProbeAssociation`
-`acquisition.Session.TetrodeProbeAssociation`
+### Tasks and downstream analysis
 
-#### Session
+The pipeline has severtal approaches to how a Session is divided. A Session corresponds to a "recording group" - e.g. a researcher goes into his or her lab in the morning, runs a bunch of experiments, and comes out in the afternoon.
 
-Groups (of 1 or more) recordings as part of a single session. See *Noemclature* for discussion of the relative meanings between the two pipelines
+Recordings are, roughly, raw data files. E.g. if for some reason a recording starts/stops, then it might be split across several physical files, that all correspond to the same session. Recordings are not a particularly important distinction within the pipeline.
 
-`acquisition.Session`
-`acquisition.Recording`
+Tasks are the major distinction. They are used to denote separate experimental stages within a session. All downstream analyses are automatically segmented by Task. Tasks are denoted by their start/stop times within a Session, and are completely independent of Recordings.
 
-#### Project
+![](../_static/ephys/pipeline_structure/task_tracking.png)
 
-Provides a way to group multiple Sessions together as part of a longer running project. A project can contain any number of sessions, and a session may be a member of many (or none) projects. Intended to provide a simple administrative interface for grouping data together. For example, consider a project to evaluate how animals react to darkness. This could prompt one project for all sessions involved in the project at all, and a 2nd project which groups only those sessions used in publishing a paper.
+![](../_static/ephys/pipeline_structure/analysis.png)
 
-`acquisition.Project`
-`acquisition.ProjectSession`
+##### behavior
 
+Tasks are handled within the `behavior` schema.
+- `behavior.Task` - contains details of specific Tasks within a single Session
+- `behavior.TaskEvent` - contains details of _other_ inputs into the acquisition system, e.g. a digital input stream. A single TaskEvent might be, e.g., a list of all photostimulation on/off times. 
 
+##### analysis
 
+The two most critical tables are:
+- `analysis.TaskSpikesTracking` - stores the contents of `ephys.SpikesTracking`, but separated by Task
+- `analysis.TaskTracking` - stores the contents of `tracking.ProcessedTracking`, but separated by Task
 
-### Ephys
+#### Restricting Analysis by pre-Analysis
 
-Contains information about the electrophysiology data - LFP, waveforms, clusterings and units, spikes. 
+For technical reasons, tables _after_ `analysis.TaskSpikesTracking` cannot be directly joined to a set of tables _before_. In order to replace that link, an administrative table called `analysis.TaskSpikesTrackingProxy` exists. You should never need to fetch anything from that table, just join with it as part of a query. For example, suppose you wish to find the CuratedClustering associated with a specific Ratemap
 
-#### LFP
+```python
+# Pick a random ratemap key
+my_ratemap_key =  = analysis.RateMap.fetch("KEY", limit=1)[0]
+ephys.CuratedClustering * analysis.TaskSpikesTrackingProxy & my_ratemap_key
+# should have a single result
+```
 
-Stores LFP information from the probe(s).
+If you exclude that `* analysis.TaskSpikesTrackingProxy` term, then you will get back _every_ CuratedClustering associated with that subject (and that probe if you're working with multi-probe recordings).
 
-`ephys.LFP`
-`ephys.LFP.ChannelLFP`
 
-`ephys.LFP` contains the mean LFP across all channels. `ephys.LFP.ChannelLFP` contains the LFP for each channel. For Neuropixels probes, a ChannelLFP is stored for 1 in every 10 channels due to the high channel density. 
+#### Restricting Analysis by analysis parameter sets
 
-#### Clustering
+Analyses will be run multiple times for as many analysis parameter sets as apply to your username and task types, and you will typically only want to deal with a single one at once. These can either be filtered off on an as-needed basis, but the following can fix things more proactively:
 
-The ephys pipeline is designed to accept multiple clustering outputs for a single session - for example, if the researcher later refines their clustering, or if a session is clustered again by another user. Optionally, a user can assign a single CuratedClustering as a FinalizedClustering, to simplify selecting a single "authoritative" clustering
+```python
+# Pick a random curation - should hav _many_ TaskSpikesTracking outcomes
+my_curation_key = ephys.CuratedClustering.fetch("KEY", limit=1)[0]
 
-`ephys.CuratedClustering`
-`ephys.FinalizedClustering`
-`ephys.Unit`
-
-The logic for linking a CuratedClustering to one (or more) Sessions is quite complicated, because it is designed to allow clustering to be performed over one session, multiple sessions, *or parts of sessions*
-
-This information is contained in four tables in the **acquisition** schema:
-
-`acquisition.ClusterSessionGroup`
-`acquisition.ClusterSessionGroup.GroupMember`
-`acquisition.ClusterTimeWindows`
-`acquisition.ClusterTimeWindows.TimeWindow`
-
-`acquisition.ClusterSessionGroup` stores a unique identifier for a group of sessions for which a clustering has been performed. `acquisition.ClusterSessionGroup.GroupMember` lists all of the sessions that are included in that group. A group *can*, and often does, only include a single session.
-
-`acquisition.ClusterTimeWindows` stores a unique identifier for the time windows over which a clustering is performed within a ClusterSessionGroup. There is a time window for each Session within the ClusterSessionGroup, and these individual time windows are stored in `acquisition.ClusterTimeWindows.TimeWindow`. By default, TimeWindows cover the entire session duration. 
-
-
-#### Units
-
-Specific units are keyed by the CuratedClustering that identifies them, and by a `unit_id`. For tetrodes, `unit_id`s are created as a 4 digit number, in the format TTCC (for example, cluster 8 from tetrode 12 would have the unit_id 1208)
-
-`ephys.Unit`
-
-Units are characterised by a `cluster_type` column, inspired by the qualities assigned in Kilosort 2:
-
-* Good
-* MUA - multi unit activity
-* Noise
-* Unknown
-
-Manual curation methods, such as Tint and MClust automatically assign the quality "Good" to all included units. 
-
-Note that unit_ids are created from the output of the researcher's clustering. `unit_id`s are guaranteed to be unique **only within a single clustering output**. The method for creating `unit_id` is consistent and based on the clustering output, so users can manipulate this (in advance) by modifying their clustering output if they wish
-
-There is ongoing work to create a method to track the same physical cell across multiple clustering outputs, but as of now, researchers must manage this tracking **themselves**
-
-#### Unit tracking across multiple clusterings
-
-See "Following units across multiple sessions"
-
-#### Spikes
-
-Contains the spike times, and spike tracking for each Unit. 
-
-`ephys.UnitSpikeTimes`
-`ephys.SpikesTracking`
-
-SpikesTracking can only be populated once the **Tracking** section is completed. SpikesTracking is only populated for units that have a `cluster_type` of `good`. Tracking data for each spikes is identified by finding the nearest tracking frame by time, and using those values. Tracking values are not interpolated to assign this tracking
-
-
-
-
-### Tracking
-
-Contains information about the animal's movement - position tracking from camera(s). 
-
-
-
-
-
-
-### Behavior
-
-Contains information about the experimental protocol - what tasks animal was subjected to, and what, if any, stimulus was applied. In particular, this is where information about what arena the animal was running in is stored (referenced to the **Reference** schema)
-
-
-
-
-
-### Analysis
-
-Contains common analysis results, split by Task (see **Behavior**). Parameters involved in analysis methods are tracked in **Analysis Parameters**. If multiple sets of parameters apply, multiple sets of analysis outcomes will be generated
-
-
-
-
-
-### Analysis Parameters
-
-Stores sets of analysis parameters. 
+paramsets = (analysis_param.CellAnalysisMethod.CellSelectionParams
+             * analysis_param.CellAnalysisMethod.FieldDetectParams
+             * analysis_param.CellAnalysisMethod.OccupancyParams
+             * analysis_param.CellAnalysisMethod.SmoothingParams 
+             * analysis_param.CellAnalysisMethod.ScoreParams 
+             * analysis_param.CellAnalysisMethod.ShuffleParams)
+             
+# Only evaluate the `default` analysis method
+my_paramset = paramsets & 'cell_analysis_method = "default"'
+analysis.TaskSpikesTracking & my_curation_key & my_paramset
+```
