@@ -45,7 +45,7 @@ The relevant files are listed. Other files may also be present, but aren't incor
 
 Tracking data is stored in the `motive` folder, and may either be in the `matmot` format, streamed via Matlab during acquisition, or in the `optitrack.csv` format output by Optitrack's software. 
 
-Ephys data is stored in `probe_x` folders, one per probe (2 in this case). Each `probe_x` folder contains the raw data in the form of `.bin` and `.meta` files. 
+Ephys data is stored in `probe_x` folders, one per probe (2 in this case). Each `probe_x` folder contains the raw data in the form of `.bin` and `.meta` files. The exact name of these files is less important than the suffixes (`.ap.meta`, `.ap.bin`, `.lf.meta`, `.lf.bin`)
 - First generation neuropixel probes have separate `ap` and `lf files for high and low frequency data. 
 - Neuropixel 2.0 probes do not have `lf` data files, as all data is stored in the `ap` file. 
 - If clustered with Kilosort, it is expected that the Kilosort output for each probe will be stored inside that probe's directory.
