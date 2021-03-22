@@ -196,7 +196,7 @@ ephys.Unit()
 ephys.UnitSpikeTimes()
 ```
 
-**Congratulations, you are now connected to and interacting with the datajoint pipeline!**
+**Congratulations, you are now connected to and interacting with a datajoint pipeline!**
 
 
 #### GUI for imaging users
