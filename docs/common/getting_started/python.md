@@ -72,6 +72,39 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel`
 
 
+##### Working with Jupyter lab
+
+The next steps are easier to execute in a Jupyter lab notebook, so let's get that set up before we continue.
+
+Jupyter lab is a popular interactive tool for working with Python. 
+It enables you to view `.ipynb` files (like the *notebooks* in folder `Helper_notebooks` in the imaging repository).
+Datajoint interacts well with notebooks and renders fast previews of tables throughout the schema. 
+
+Jupyter has an older interface "Jupyter notebook", and a newer interface "jupyter lab". Throughout this guide, we assume that you will use Jupyter lab. Other guides on the internet may look somewhat different if they use the older notebook style. 
+
+Jupyter lab includes a file browser to navigate to your notebooks, but it is only able to navigate from the local working folder it was started in. So, for instance, if your notebooks are stored in `C:/python/my_notebooks`, then you will need to start Jupyter in one of `C:/`, `C:/python` or `C:/python/my_notebooks`. If you start from `C:/users/my_user`, you will not be able to navigate to your notebooks. This limitation _only_ applies to loading your notebooks - once inside a notebook, you can load arbitrary files from where on your computer.
+* To navigate to your folder, use `cd` followed by the path, like so: 
+  * `(base) $ cd C:/python`
+
+* If that does not change the path (i.e. because you are trying to navigate to another drive), add the `/d` command:
+  * `(base) $ cd /d C:/python`)
+
+You should start Jupyter lab from the `base` environment, if you followed the setup guide above. This will open Jupyter lab in your browser:
+
+* `(base) $ jupyter lab`
+
+You can now create a new notebook by selecting one of the notebook options in the **Launcher** on the right, or open an existing one in the folder menu on the left.
+
+Inside the notebook user interface, you will then need to select the appropriate kernel, if you haven't already. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). Click on the highlighted text, and then choose your preferred kernel. Conda environments show up prefixed by `conda env:`
+
+![](../../_static/common/jupyter_kernels_1.png)
+
+
+![](../../_static/common/jupyter_kernels_2.png)
+
+To exit jupyter lab, close the browser window and use `ctrl+c` in the Anaconda prompt window
+
+
 ### Connecting to the pipeline database
 
 The fundamental building block of the pipeline is the database server that stores processed data. Each pipeline is made up of one or more _schemas_, each of which contains many _tables_. 
@@ -89,19 +122,13 @@ You should only need to execute this code block once, and the computer on which 
 
 You will use your NTNU username, but the password is separate - contact Simon Ball or Haagen Wade for a password. The `ACCESS_KEY` and `SECRET_KEY` values are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines) (log in with your NTNU credentials).
 
-* Activate one of your environments and open a Python prompt there
-  * `(base) $ conda activate imaging`
-  * `(imaging) $ python`
-* Run the following lines, adding the neccessary info between the quotes
+* Copy this code block into a jupyter lab notebook cell and add the neccessary info before executing it:
 ```python
 ACCESS_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
 SECRET_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
 USERNAME = "" #Use your NTNU username
 PASSWORD = "" #Get password from Simon Ball or Haagen Wade
-```
 
-* Copy and paste the following lines, making sure the `dj.config.save_global()`line at the end is included to avoid having to run this step again in the future
-```python
 import datajoint as dj
 dj.config['database.host'] = 'datajoint.it.ntnu.no'
 dj.config['database.user'] = USERNAME
@@ -129,33 +156,6 @@ dj.config['custom'] = {
 
 dj.config.save_global()
 ```
-
-
-##### Working with Jupyter lab
-
-Jupyter lab is a popular interactive tool for working with Python. 
-It enables you to view `.ipynb` files (like the *notebooks* in folder `Helper_notebooks` in the imaging repository).
-Datajoint interacts well with notebooks and renders fast previews of tables throughout the schema. 
-
-Jupyter has an older interface "Jupyter notebook", and a newer interface "jupyter lab". Throughout this guide, we assume that you will use Jupyter lab. Other guides on the internet may look somewhat different if they use the older notebook style. 
-
-Jupyter lab includes a file browser to navigate to your notebooks, but it is only able to navigate from the local working folder it was started in. So, for instance, if your notebooks are stored in `C:/python/my_notebooks`, then you will need to start Jupyter in one of `C:/`, `C:/python` or `C:/python/my_notebooks`. If you start from `C:/users/my_user`, you will not be able to navigate to your notebooks. This limitation _only_ applies to loading your notebooks - once inside a notebook, you can load arbitrary files from where on your computer.
-* To navigate to your folder, use `cd` followed by the path, like so: 
-  * `(base) $ cd C:/python`
-
-* If that does not change the path (i.e. because you are trying to navigate to another drive), use the `/d` command in addition like so:
-  * `(base) $ cd /d C:/python`)
-
-You should start Jupyter lab from the `base` environment, if you followed the setup guide above. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). 
-
-* `(base) $ jupyter lab`
-
-Inside the notebook user interface, you will then need to select the appropriate kernel. Click on the highlighted text, and then choose your preferred kernel. Conda environments show up prefixed by `conda env:`
-
-![](../../_static/common/jupyter_kernels_1.png)
-
-
-![](../../_static/common/jupyter_kernels_2.png)
 
 
 #### Connecting to the pipelines
@@ -196,7 +196,7 @@ ephys.Unit()
 ephys.UnitSpikeTimes()
 ```
 
-To exit jupyter lab, close the browser window and use `ctrl+c` in the Anaconda prompt window
+**Congratulations, you are now connected to and interacting with the datajoint pipeline!**
 
 
 #### GUI for imaging users
