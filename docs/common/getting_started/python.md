@@ -69,7 +69,7 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * `(base) $ conda activate imaging`
   * Install the minimum necessary packages
     * `(imaging) $ conda install datajoint -c conda-forge`
-    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel`
+    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel seaborn`
 
 
 ##### Working with Jupyter lab
