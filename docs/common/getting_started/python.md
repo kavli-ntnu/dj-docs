@@ -87,10 +87,9 @@ Jupyter lab includes a file browser to navigate to your notebooks, but it is onl
   * `(base) $ cd C:/python`
 
 * If that does not change the path (i.e. because you are trying to navigate to another drive), add the `/d` command:
-  * `(base) $ cd /d C:/python`)
+  * `(base) $ cd /d C:/python`
 
 You should start Jupyter lab from the `base` environment, if you followed the setup guide above. This will open Jupyter lab in your browser:
-
 * `(base) $ jupyter lab`
 
 You can now create a new notebook by selecting one of the notebook options in the **Launcher** on the right, or open an existing one in the folder menu on the left.
