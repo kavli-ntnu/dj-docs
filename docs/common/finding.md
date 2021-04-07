@@ -28,6 +28,7 @@ schema.spawn_missing_classes()
 dj.ERD(schema)
 ```
 ![](../_static/imaging/Imaging_schema.png)
+
 *Image showing part of the imaging schema.*
 
 
@@ -86,6 +87,7 @@ dj.Diagram(ephys.Spikes) +2
 dj.ERD(Cell)+2
 ```
 ![](../_static/imaging/cell_schema_plus2.png)
+
 *The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Spikes`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredSpikes`.*
 
 
@@ -125,6 +127,7 @@ ephys.CuratedClustering()
 Cell()
 ```
 ![](../_static/imaging/cell_table.png)
+
 *The `Cell` table contains five primary keys (black font) and one non-primary key (white font) for each and every cell within the database (at the time of writing: >340 000 cells).*
 
 
@@ -144,6 +147,7 @@ ephys.CuratedClustering.describe()
 Cell.describe()
 ```
 ![](../_static/imaging/cell_table_description.png)
+
 *The `---` separates between primary (above) and non-primary (below) attributes, and can typically be thought of as:* 
 
 + *the "things" needed to perform the computation*
