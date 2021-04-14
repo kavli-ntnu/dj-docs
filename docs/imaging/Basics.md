@@ -70,7 +70,7 @@ To create your own:
 * Click 'Save ops to file' to save a new options file.
 * Test these new options on your data (without involving the pipeline):
     * Click *Add directory to data_path* to choose the folder that contains your raw data.
-    * If you already have a suite2p folder in that location, rename it if you want to keep it, or delete it.
+    * If you already have a suite2p folder in that location, move it to another folder if you want to keep it, or delete it.
     * Click *RUN SUITE2P* (the panel below will show the analysis progress and let you know when it's finished).
     * The analysis output will automatically load into the suite2p GUI where you can evaluate it.
 * When you are happy with your modified options, make this new options file available in the imaging web GUI by uploading it under *Suite2p -> Add Suite2p Options*
