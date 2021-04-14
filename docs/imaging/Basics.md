@@ -6,6 +6,7 @@ After completing the instructions under [Getting Started](https://moser-pipeline
 ### Add imaging data to the pipeline
 The easiest way to do this is via the [Web GUI](http://2p.neuroballs.net:5000/) for which you can find detailed instructions [here](https://moser-pipelines.readthedocs.io/en/latest/imaging/How-to-add-sessions.html).
 If you are just getting started with the pipeline, these steps might be a good place to start:
+
 * Go to the [imaging web GUI](http://2p.neuroballs.net:5000/) and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is the first time you're logging in)
 * Go to _BaseFolder_ -> _Add BaseFolder_
 * Fill in the form as follows:
@@ -24,11 +25,11 @@ If you are just getting started with the pipeline, these steps might be a good p
 * Click *Submit*
 * Go to *BaseFolder* -> *BaseFolders* to see the status of your data entry. If any errors have popped up, contact Simon Ball or Horst Obenhaus for help.
 * Once Suite2p has finished running, you will be able to see your data listed under *Suite2p* -> *Finished Suite2p Jobs* (depending on the data, this can take anything from minutes to hours).
-* After Suite2p has done its thing, it's time to take a look at the cells it identified (see below).
+* After Suite2p has done its thing, it's time to take a look at the cells it identified and decide which ones should be added to the pipeline (see below).
 
 
 ### Evaluate the cells Suite2p identified in your data
-Suite2p is an imaging processing pipeline for registering images and detecting cells and spikes. It is written by Carsen Stringer and Marius Pachitariu. To sort through the cells it has identified in your data, discarding artefacts etc, you first need to install Suite2p locally so you can use the Suite2p GUI.
+Suite2p is an imaging processing pipeline for registering images and detecting cells and spikes. It is written by Carsen Stringer and Marius Pachitariu. To sort through the cells it has identified in your data, discarding artefacts etc that shouldn't be added to the pipeline, you first need to install Suite2p locally so you can use the Suite2p GUI.
 
 #### Install Suite2p
 If you are familiar with git, you can follow the installation instructions in the [suite2p documentation](https://suite2p.readthedocs.io/en/latest/installation.html). If not, then these steps might be more intuitive:
@@ -51,12 +52,23 @@ With suite2p installed, you can open the GUI via the Anaconda Prompt after activ
 * `(suite2p) $ suite2p`
 
 You can find the documentation for how to use the GUI [here](https://suite2p.readthedocs.io/en/latest/gui.html), but here are a few basic steps to get your started:
-* Locate the stat.npy file that suite2p generated when it ran through your analysis (the path may look something like this: N:\Ragnhild\Mouse 000\YearMonthDate\MUnit_0\suite2p\plane0. Details on the folder logic can be found [here](https://moser-pipelines.readthedocs.io/en/latest/imaging/Folder-logic.html#suite2p)).
+* Locate the stat.npy file that suite2p generated when it ran through your analysis (the path may look something like this: 
+`N:\Ragnhild\Mouse 000\YearMonthDate\MUnit_0\suite2p\plane0` or like this: `N:\Ragnhild\Mouse 000\YearMonthDate\combined_xxx\mini2p_GC6m1\plane0`. Details on the folder logic can be found [here](https://moser-pipelines.readthedocs.io/en/latest/imaging/Folder-logic.html#suite2p).
 * Drag and drop the stat.npy file into the suite2p GUI or open it via *File -> Load processed data* in the GUI.
 * Use the buttons along the top of the GUI to determine your view (the buttons named *cells - both - not cells*): click *both* to see the ROIs that suite2p has picked out as cells on the left, and ROIs that it has discarded on the right.
 * Left click any ROI to see its associated trace at the bottom of the GUI.
 * Right click any ROI to move it from one category to another (e.g. right clicking on an ROI in the *cells* panel will move it to the *not cells* panel). NOTE: changes are saved automatically to the stat.npy file.
-* [What to do next if you have modified the ROIs](https://moser-pipelines.readthedocs.io/en/latest/imaging/How-to-add-sessions.html#what-happens-if-i-don-t-like-this-or-that-cell-from-the-suite2p-output).
+* When you have finished, i.e. you have all the ROIs you want to keep in the *cells* window, go back to *Suite2p* -> *Finished Suite2p Jobs* in the web GUI
+* Click the *Add* button by your session **only once** to tell the pipeline to incorporate the ROIs you have selected. The pipeline will now calculate ratemaps etc for every ROI - this will take time.
+* While the pipeline is working hard  adding your cells, you can take a well deserved break and check the progress by, for example, following these steps: 
+
+    * Identify the *Session hash* of your session by filtering under *Sessions* in the imaging web GUI. 
+    * Execute these commands within a jupyter notebook, using your session hash between the double quotes:
+
+![](../_static/imaging/check_cell_progress.png)
+
+
+NOTE: if you decide to re-sort the ROIs, you can follow the exact same steps, including using the *Add* button to notify the pipeline of the change, but only click *Add* **after the progress indicator has reached 100%.** If the *Add* button is no longer there (because it has been more that 14 days), you can [re-add the Basefolder](https://moser-pipelines.readthedocs.io/en/latest/imaging/How-to-add-sessions.html#what-happens-if-i-don-t-like-this-or-that-cell-from-the-suite2p-output).
 
 If suite2p hasn't done a good job of identifying cells, it may be worth creating your own options file with settings tuned specifically to your data (see below).
 
