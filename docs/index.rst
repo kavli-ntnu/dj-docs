@@ -36,6 +36,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Imaging:
    
+   imaging/Basics
    imaging/Overview
    imaging/Folder-logic
    imaging/How-to-add-sessions
