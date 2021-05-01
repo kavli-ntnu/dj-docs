@@ -4,13 +4,9 @@ Session Viewer is a desktop application for screening individual sessions in the
 
 ### Installation
 
-It requires additional libraries beyond those enumerated in the [Getting Started guide](../common/getting_started/python), and it is _strongly recommended_ to install the viewer in a separate `conda` environment. The libraries required to display a graphical user interface on screen can cause problems with other libraries, hence the recommendation to isolate this application in its own environment. 
-
 ```bash
-$ conda env create -n viewer python=3.7
-...
-$ conda activate viewer
-(viewer) $ pip install -U git+https://github.com/kavli-ntnu/dj-imaging-user.git
+$ conda activate YOUR_ENVIRONMENT_NAME
+(YOUR_ENVIRONMENT_NAME) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U
 ...
 ```
 
