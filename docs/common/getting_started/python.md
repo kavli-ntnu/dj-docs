@@ -198,13 +198,12 @@ ephys.UnitSpikeTimes()
 **Congratulations, you are now connected to and interacting with a datajoint pipeline!**
 
 
-#### GUI for imaging users
+#### GUI for imaging users (session viewer)
 
-* A session viewer graphical user interface  has been developed for the Imaging pipeline. Due to it's wide variety of dependences, and the necessity to install via `pip`, it is **strongly recommended** to install it in its own private environment. Make sure you have access to the [dj-imaging-user repository](https://github.com/kavli-ntnu/dj-imaging-user) before you start (if clicking the link leads to a 404 page, contact Simon for access. If not, you are all good and can proceed).
-  * `(base) $ conda create --name imaging-viewer python=3.6`
-  * `(base) $ conda activate imaging-viewer`
-  * `(imaging-viewer) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git`
-  * `(imaging-viewer) $ session_viewer`
+* A session viewer graphical user interface  has been developed for the Imaging pipeline. Make sure you have access to the [dj-imaging-user repository](https://github.com/kavli-ntnu/dj-imaging-user) before you start (if clicking the link leads to a 404 page, contact Simon for access. If not, you are all good and can proceed).
+  * `(base) $ conda activate YOUR_ENVIRONMENT_NAME`
+  * `(YOUR_ENVIRONMENT_NAME) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U`
+  * `(YOUR_ENVIRONMENT_NAME) $ session_viewer`
 
 
 ##### Optional: Working with Conda Environments in Spyder
