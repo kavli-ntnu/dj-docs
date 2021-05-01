@@ -9,18 +9,12 @@ $ conda activate YOUR_ENVIRONMENT_NAME
 (YOUR_ENVIRONMENT_NAME) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U
 ...
 ```
-
-This will:
-* create a `conda` environment called `viewer`
-* Install the latest version of the code from Github, including all dependencies
-
-The various libraries
-
+This will install the latest version of the code from Github, including all dependencies.
 
 In order to run the session viewer, you will need to activate the relevant environment, and then call the command `session_viewer`:
 ```bash
-$ conda activate viewer
-(viewer) $ session_viewer
+$ conda activate YOUR_ENVIRONMENT_NAME
+(YOUR_ENVIRONMENT_NAME) $ session_viewer
 ```
 
 Running the gui relies upon you already having configured your Datajoint credentials and saved them with `dj.config.save_global()`, see [Getting Started](../common/getting_started/python)
