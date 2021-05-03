@@ -1,7 +1,7 @@
 ## Imaging:  Web GUI
 
 1. Copy files to a file server
-2. Open the [imaging web GUI](http://2p.neuroballs.net:5000/) and log in 
+2. Open the [imaging web GUI](http://2p.neuroballs.net:5000/) and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
     - Go to _BaseFolder_ -> _Add BaseFolder_
 3. Fill out the details in the mask on that website. Make sure you get the session logic **_combined_** right. It determines how (meta)sessions are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). For femtonics recordings this function is not implemented and has to remain on "no" (not combined). **Explanation**: 
 

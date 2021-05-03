@@ -25,12 +25,3 @@ The following users have some degree of admin permissions:
 * Edgar Walker
 * Horst Oberhaus
 * Thinh Nguyen
-
-#### MySQL configuration details
-
-* TODO
-
-#### Server hardware details
-
-* TODO
-

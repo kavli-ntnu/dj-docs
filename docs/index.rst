@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to dj-docs's documentation!
-===================================
+Welcome to the Moser Group neuroscience pipelines
+==================================================
 
-Herein lies the book of Datajoint, the last and most sacred documentation of the Moser Group. 
+These web pages provide documentation for the two data management pipelines in use in the Moser Group at NTNU. 
 
 Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
 
@@ -36,6 +36,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Imaging:
    
+   imaging/Basics
    imaging/Overview
    imaging/Folder-logic
    imaging/How-to-add-sessions
@@ -49,7 +50,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     :maxdepth: 2
     :caption: Developer Documentation:
     
-    technical/architecture
+    technical/contributing
     technical/database
     technical/working_parts
     technical/install_imaging
