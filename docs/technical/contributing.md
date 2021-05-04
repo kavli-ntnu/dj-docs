@@ -8,7 +8,7 @@ Have you found anbug, or just something that could be improved? Contributions ar
 * Better: open an issue in the relevent code repository
 * Best: Fork the repository, make your changes, and make a Pull Request to have your changes reviewed and merged back into the main code base. 
 
-## COmponents of the pipeline
+## Components of the pipeline
 
 ### User interfaces
 
