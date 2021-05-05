@@ -2,6 +2,8 @@
 
 This guide will cover what you need to do to begin working with the Electrophysiology and Imaging pipelines in user in the Moser Group at the Kavli Institute for Systems Neuroscience. 
 
+If you have questions and/or run into problems, ask for help in the ["Support" channel](https://teams.microsoft.com/l/channel/19%3a6978d4ea8cf64eeabe3b91dd8d13c91d%40thread.skype/Support?groupId=f0c36029-e927-4135-aa7c-c303f33244cf&tenantId=09a10672-822f-4467-a5ba-5bb375967c05) in the Datajoint team on Microsoft Teams.
+
 
 ### Programming Language
 
@@ -31,7 +33,6 @@ Both pipelines are written for Python 3.6. Using the two-photon calcium imaging 
 
 More information on working with Conda environments is available in the [Conda official documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
-If you will only work with one pipeline or the other, skip the step that is not relevant to you
 
 * Install [Miniconda Python 3.x](https://docs.conda.io/en/latest/miniconda.html).
   * Install in a directory that has no spaces in its path. 
@@ -61,22 +62,19 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
 
 * Create a new Conda environment for the **Imaging** pipeline
   * Create an environment with the following:
-    * `(base) $ conda create --name imaging python=3.6`
+    * `(base) $ conda create --name imaging python=3.7`
     * Confirm creation by pressing `Y`
     * This creates an environment with the name `imaging` 
   * Activate the environment
     * `(base) $ conda activate imaging`
   * Install the minimum necessary packages
     * `(imaging) $ conda install datajoint -c conda-forge`
-    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel`
+    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel seaborn`
 
-* A session viewer graphical user interface  has been developed for the Imaging pipeline. Due to it's wide variety of dependences, and the necessity to install via `pip`, it is **strongly recommended** to install it in its own private environment. 
-  * `(base) $ conda create --name imaging-viewer python=3.6`
-  * `(base) $ conda activate imaging-viewer`
-  * `(imaging-viewer) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git`
-  * `(imaging-viewer) $ session_viewer`
 
 ##### Working with Jupyter lab
+
+The next steps are easier to execute in a Jupyter lab notebook, so let's get that set up before we continue.
 
 Jupyter lab is a popular interactive tool for working with Python. 
 It enables you to view `.ipynb` files (like the *notebooks* in folder `Helper_notebooks` in the imaging repository).
@@ -85,17 +83,26 @@ Datajoint interacts well with notebooks and renders fast previews of tables thro
 Jupyter has an older interface "Jupyter notebook", and a newer interface "jupyter lab". Throughout this guide, we assume that you will use Jupyter lab. Other guides on the internet may look somewhat different if they use the older notebook style. 
 
 Jupyter lab includes a file browser to navigate to your notebooks, but it is only able to navigate from the local working folder it was started in. So, for instance, if your notebooks are stored in `C:/python/my_notebooks`, then you will need to start Jupyter in one of `C:/`, `C:/python` or `C:/python/my_notebooks`. If you start from `C:/users/my_user`, you will not be able to navigate to your notebooks. This limitation _only_ applies to loading your notebooks - once inside a notebook, you can load arbitrary files from where on your computer.
+* To navigate to your folder, use `cd` followed by the path, like so: 
+  * `(base) $ cd C:/python`
 
-You should start Jupyter lab from the `base` environment, if you followed the setup guide above. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). 
+* If that does not change the path (i.e. because you are trying to navigate to another drive), add the `/d` command:
+  * `(base) $ cd /d C:/python`
 
-* `(base) C:/users/simoba $ jupyter lab`
+You should start Jupyter lab from the `base` environment, if you followed the setup guide above. This will open Jupyter lab in your browser:
+* `(base) $ jupyter lab`
 
-Inside the notebook user interface, you will then need to select the appropriate kernel. Click on the highlighted text, and then choose your preferred kernel. COnda environments show up prefixed by `conda env:`
+You can now create a new notebook by selecting one of the notebook options in the **Launcher** on the right, or open an existing one in the folder menu on the left.
+
+Inside the notebook user interface, you will then need to select the appropriate kernel, if you haven't already. Jupyter is able to work with separate Conda environments as "kernels", and if you need to work with multiple environments, you may have multiple notebooks open, each one pointed at a separate kernel (or environment). Click on the highlighted text, and then choose your preferred kernel. Conda environments show up prefixed by `conda env:`
 
 ![](../../_static/common/jupyter_kernels_1.png)
 
 
 ![](../../_static/common/jupyter_kernels_2.png)
+
+To exit jupyter lab, close the browser window and use `ctrl+c` in the Anaconda prompt window
+
 
 ### Connecting to the pipeline database
 
@@ -106,19 +113,21 @@ To connect to and interrogate the pipeline, you require two things:
 * Access credentials and configuration for the database
 * Interface classes to the schemas and tables
 
-Access credentials are shared between both pipelines. Configuration is data is similar, and the code below will generate a configuration file that is valid for both pipelines
+Access credentials are shared between both pipelines. Configuration of data is similar, and the code below will generate a configuration file that is valid for both pipelines
 
 #### Once-off configuration
 
 You should only need to execute this code block once, and the computer on which it was executed will remember your configuration. The code defining `stores` is platform and computer specific: the example provided here is for a Windows computer that has mounted the `\\forskning.it.ntnu.no\ntnu\mh-kin\moser` shared network drive at `N:/`. Users on Linux or Mac, or users on Windows with a non-standard mounting, must adjust the settings below to match their local system. 
 
-You will use your NTNU username, but the password is separate - contact Simon Ball or Haagen Wade for a password. The `ACCESS_KEY` and `SECRET_KEY` values are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Electrophysiology+Pipeline).
+You will use your NTNU username, but the password is separate - contact Simon Ball or Haagen Wade for a password. The `ACCESS_KEY` and `SECRET_KEY` values are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines) (log in with your NTNU credentials).
 
+* Copy this code block into a jupyter lab notebook cell and add the neccessary info before executing it:
 ```python
-ACCESS_KEY = ""
-SECRET_KEY = ""
-USERNAME = ""
-PASSWORD = ""
+ACCESS_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
+SECRET_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
+USERNAME = "" #Use your NTNU username
+PASSWORD = "" #Get password from Simon Ball or Haagen Wade
+
 import datajoint as dj
 dj.config['database.host'] = 'datajoint.it.ntnu.no'
 dj.config['database.user'] = USERNAME
@@ -168,7 +177,7 @@ schema.spawn_missing_classes()
 
 Session()
 Cell.Rois()
-Tifs()
+Tif()
 
 ```
 
@@ -185,6 +194,16 @@ ephys.CuratedClustering()
 ephys.Unit()
 ephys.UnitSpikeTimes()
 ```
+
+**Congratulations, you are now connected to and interacting with a datajoint pipeline!**
+
+
+#### GUI for imaging users (session viewer)
+
+* A session viewer graphical user interface  has been developed for the Imaging pipeline. Make sure you have access to the [dj-imaging-user repository](https://github.com/kavli-ntnu/dj-imaging-user) before you start (if clicking the link leads to a 404 page, contact Simon for access. If not, you are all good and can proceed).
+  * `(base) $ conda activate YOUR_ENVIRONMENT_NAME`
+  * `(YOUR_ENVIRONMENT_NAME) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U`
+  * `(YOUR_ENVIRONMENT_NAME) $ session_viewer`
 
 
 ##### Optional: Working with Conda Environments in Spyder

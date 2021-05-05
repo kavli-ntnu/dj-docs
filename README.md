@@ -2,7 +2,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/moser-pipelines/badge/?version=latest)](https://moser-pipelines.readthedocs.io/en/latest/?badge=latest)
 
-This repository contains the documentation on the two core pipelines in use in the Moser Group at the Kavli Institute. 
+**The official Datajoint Documentation on the two core pipelines in use in the Moser Group at the Kavli Institute can be found [here](https://moser-pipelines.readthedocs.io/en/latest/index.html).** This repository is the source.
 
 ## Contents
 
@@ -29,4 +29,3 @@ This repository contains the documentation on the two core pipelines in use in t
 * Technical details
   * [Pipeline architecture](docs/technical/architecture.md)
   * [Database server](docs/technical/database.md)
-
