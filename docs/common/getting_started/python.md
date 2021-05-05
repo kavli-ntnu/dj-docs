@@ -73,6 +73,7 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * `(imaging) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U
 
 
+
 ##### Working with Jupyter lab
 
 The next steps are easier to execute in a Jupyter lab notebook, so let's get that set up before we continue.
