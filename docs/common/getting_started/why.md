@@ -53,15 +53,18 @@ Let's look at both of those in more detail.
 
 In the course of your studies, you will generate large amounts of research data, probably far more than you are able to categorise just in your head. Eventually, you will find yourself asking questions like "Which data sets met criteria `X` and `Y`? How to find the data sets that you want to analyse?
 
-Just about every scientist will have some kind of written index to their data sets, whether it be stored in Excel sheets, or jotted on the back of post-it notes scattered around the lab. If those indexes store the criteria information you carte about, then you can find the data sets you want (fairly) quickly. 
+Just about every scientist will have some kind of written index to their data sets, whether it be stored in Excel sheets, or jotted on the back of post-it notes scattered around the lab. If those indicies store the criteria information you care about, then you can find the data sets you want (fairly) quickly. Your existing indicies probably track very obvious information like, say, date and subject ID. 
 
-But if they don't, then you face a daunting task - sorting through _all_ of your data to find the ones that match. This is inefficient, and may be impractical depending on how fast you need an answer.
+But what if you're searching for a criteria that is not stored in the index? In that case, then you face a daunting task - sorting through _all_ of your data to find the ones that match. That's inefficient, and may be impractical depending on how fast you need an answer.
 
-The answer is: structure your data, and your data indexes, so that as many possible criteria are easily accessible and searchable. You can - and should - already be doing this! But it's tedious work, and humans aren't good at tedious. We get bored, we skip over things, and quality declines. Computers _excel_ at this sort of job - which is why the two pipelines were written. To do this for you. 
+The solution is to _structure_ that metadata, in such a way that it can be easily searched (by either human or computer). You can - and should - already be doing this! Most researchers either maintain handwritten records, or spreadsheets with this information. But it's a tedious job, and humans aren't good at tedious. We get bored, we skip over things, and quality declines. Computers _excel_ at this sort of job - which is why the two pipelines were written. To do this for you.
+
+You can think of this as the difference between storing an entire library of books just alphabetically by author - and by having a proper library catalogue, with new searchable categories like subject, publisher, title, date, length, etc.  
+
 
 #### Standardised format
 
-The raw data on disk will likely already be in a standardised format - but ther eis intermediate processing that must be performed. Commonly, this intermediate data will be stored in many subtlely different formats over time, and by different users. That fragmentation leads to difficulty in _using_ the data you have collected.
+The raw data on disk will likely already be in a standardised format - but there is intermediate processing that must be performed. Commonly, this intermediate data will be stored in many subtlely different formats over time, and by different users. That fragmentation leads to difficulty in _using_ the data you have collected.
 
 By planning a common format in advance - and updating _all_ data if and when that format changes - you can access any set of data in a common way, rather than writing (or selecting) a different method for each data set. This commonality also makes it much easier to apply a new analysis method to your older data with relative ease. 
 
