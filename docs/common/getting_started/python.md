@@ -69,7 +69,8 @@ The Ephys and Imaging pipelines have subtly different requirements. Therefore, w
     * `(base) $ conda activate imaging`
   * Install the minimum necessary packages
     * `(imaging) $ conda install datajoint -c conda-forge`
-    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel seaborn`
+    * `(imaging) $ conda install graphviz python-graphviz pydotplus ipykernel seaborn scikit-image pyqt pyqtgraph natsort`
+    * `(imaging) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U
 
 
 ##### Working with Jupyter lab
