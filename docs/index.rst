@@ -15,6 +15,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :caption: Common:
 
    common/getting_started/index.rst
+   common/common_operations
    common/finding
    common/conventions
    common/nomenclature
