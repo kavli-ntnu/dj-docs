@@ -4,21 +4,17 @@ Session Viewer is a desktop application for screening individual sessions in the
 
 ### Installation
 
-```bash
-$ conda activate YOUR_ENVIRONMENT_NAME
-(YOUR_ENVIRONMENT_NAME) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U
-...
-```
-This will install the latest version of the code from Github, including all dependencies.
+Prior to 2021-05-05, the session viewer was installed separately. Subsequent to this date, it is recommended to install the viewer simultaneously with general set up for working with the imaging pipeline. 
 
-In order to run the session viewer, you will need to activate the relevant environment, and then call the command `session_viewer`:
-```bash
-$ conda activate YOUR_ENVIRONMENT_NAME
-(YOUR_ENVIRONMENT_NAME) $ session_viewer
-```
+To install separately, or in another environment, or to update to the latest version, run the following command:
+`(your_environment) $ pip install git+https://github.com/kavli-ntnu/dj-imaging-user.git -U`
 
+
+### Running
 Running the gui relies upon you already having configured your Datajoint credentials and saved them with `dj.config.save_global()`, see [Getting Started](../common/getting_started/python)
 
+To begin the viewer, run the following command in your terminal:
+`(imaging) $ session_viewer`
 
 
 ### Overview

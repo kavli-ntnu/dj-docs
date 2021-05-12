@@ -23,5 +23,5 @@ The following users have some degree of admin permissions:
 * Simon Ball
 * Haagen Wade
 * Edgar Walker
-* Horst Oberhaus
+* Horst Obenhaus
 * Thinh Nguyen

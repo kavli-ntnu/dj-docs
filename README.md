@@ -29,3 +29,7 @@
 * Technical details
   * [Pipeline architecture](docs/technical/architecture.md)
   * [Database server](docs/technical/database.md)
+
+## Notes
+
+Something about the `docutils` package v0.17.1 breaks bullet pointed lists. Currently pinned to 0.16, review when either 0.17.2 or 0.18 comes out
