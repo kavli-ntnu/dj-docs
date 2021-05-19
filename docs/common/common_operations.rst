@@ -137,6 +137,7 @@ Joining identifies what (if any) column names are shared between two tables, and
 
    >>> 36
    >>> 147
+
 +----------+---------------+----------+--------+
 | **name** | **attribute** | pantheon | gender |
 +----------+---------------+----------+--------+
@@ -343,3 +344,40 @@ Both ``fetch()`` and ``fetch1()`` offer a lot of flexibility:
   - Note! Even with ``limit=1``, you will *still* get an *array*, containing 1 result. 
 
 
+
+
+
+
+
+
+Permissions
+-----------------
+
+The back end infrastructure to these pipelines is a database server, which provides very fine-grained permissions on a per-user, per-table level. 
+
+By default, these permissions are set quite restrictively:
+
+* Read-only and reference access to the various shared databases
+* read-only access to other users' personal schemas
+* Full read/write/delete permissions to your own schemas (any schema prefixed by ``user_<username>_``, e.g. ``user_simoba_example``)
+
+The default set of permissions are deliberately restrictive, and there is a good reason for this: it provides peace of mind that you can explore and experiment *without risk of causing any damage*.
+
+With the default set of permissions, you have full read-access to any data in the database, but you cannot write (or delete) anything. At worst, you may be able to introduce corrupted data via the web gui (note: this is not a challenge!).
+
+Additional permissions **can be granted when needed,** but with great power comes great responsibility: if you have deletion permissions, you have the power to screw things up for everybody. More (potentially) destructive permissions will not be given lightly, but they will be given if you can demonstrate why you need them, and that you know how to use them safely. 
+
+Database permission: meaning
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The database server offers very fine-grained control compared to the file systems you may be familiar with. Several important permissions to be aware of:
+
+* ``SELECT`` : this is, essentially "read-only" access: if you have `SELECT` permission to a table, you can see the data in that table, and fetch it back to your computer to work with.
+
+* ``REFERENCES`` : Allows entries in this table to be used as foreign keys elsewhere, for example in building your own personal schema to contain and extend your own analyses. 
+
+* ``INSERT`` : This is similar to "write access": this allows you to _add_ new rows to a table. It does not, however, allow the modification or deletion of existing rows
+
+* ``UPDATE`` : Allows existing rows to be modified, but not deleted.
+
+* ``DELETE`` : Allows the deletion of existing rows, but not their modification.
