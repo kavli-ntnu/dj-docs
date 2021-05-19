@@ -1,6 +1,20 @@
 ======================================
 Pipeline Conventions
 ======================================
+Language
+-----------
+
+The pipeline code is written in a mixture of Python and Matlab. 
+
+Documentation is written in English. Where there exist differences in dialects of English, American english is standard, e.g., "color" instead of "colour". 
+
+The pipeline code and database accept text in the Danish unicode format. This supports the standard Danish/Norwegian characters æ ø å, as well as the Swedish variations. Support of other accented Latin characters (e.g. â or ü) have not been tested. No support is provided for non-Latin characters (e.g. greek, cyrillic, etc).
+
+Date formats
+--------------
+
+Date formats are generally given in ISO8601 format, i.e. YYYY-MM-DD. For example, November 9 1989 is given as 1989-11-09. Timestamps are typically provided accurate to the second, with missing information automatically filled in as zero. For example, "1989-11-09" will be converted to "1989-11-09 00:00:00"
+
 
 Folders and paths
 ---------------
@@ -19,19 +33,19 @@ User-facing angles are typically in degrees
 
 For ease of computation, angles in tables mostly used for intermediate calculation are in Radians. 
 
-If you are in any doubt which is which, check the table description, or check the maximum value stored in that column. Any values exceeding 6.283 indicates that the angles are stored in degrees.
+If you are in any doubt which is which, check the table description, or check the maximum value stored in that column. Any values exceeding 6.283 (2 pi) indicates that the angles are stored in degrees.
 
 Angles  are referenced to the X-axis, i.e:
 
-* 0° (=0 rad) points from the origin `(x=0,y=0)` towards the point `(x=1, y=0)`.
-* 90° (=pi/2 rad) points from the origin `(x=0, y=0)` towards the point `(x=0, y=1)`.
+* 0° (=0 rad) points from the origin ``(x=0,y=0)`` towards the point ``(x=1, y=0)``.
+* 90° (=pi/2 rad) points from the origin ``(x=0, y=0)`` towards the point ``(x=0, y=1)``.
 
 Coordinates
 ------------------
 
-The calculation library `opexebo <https://github.com/kavli-ntnu/opexebo>`_ uses the convention that co-ordinates should be given as `(x, y)` pairs, and all published functions have been tested as such. 
+The calculation library `opexebo <https://github.com/kavli-ntnu/opexebo>`_ uses the convention that co-ordinates should be given as ``(x, y)`` pairs, and all published functions have been tested as such. 
 
-NumPy typically uses the convention `(y, x)` - be very sure of which you are using! There are good reasons for the difference, tied to the history of the language C, and its role as a general purpose programming language rather than a mathematical tool (as Matlab and its predecessor Fortran were). 
+NumPy typically uses the convention ``(y, x)`` - be very sure of which you are using! There are good reasons for the difference, tied to the history of the language C, and its role as a general purpose programming language rather than a mathematical tool (as Matlab and its predecessor Fortran were). 
 
 
 Coordinates, images, and `imshow`
@@ -39,11 +53,11 @@ Coordinates, images, and `imshow`
 
 The function `imshow`, either in Matlab or in matplotlib in Python, is a common source of confusion when comparing spatial and angular data. 
 
-Conventionally, a **graph** is plotted with `(x=0, y=0)` at the bottom left, with `y` increasing towards the **top** of the page and `x` increasing towards the **right** hand side of the page.
+Conventionally, a **graph** is plotted with ``(x=0, y=0)`` at the bottom left, with ``y`` increasing towards the **top** of the page and ``x`` increasing towards the **right** hand side of the page.
 
-However, **images** are conventionally plotted **upside down** - with `(x=0, y=0)` at the **top** left; `y` increasing towards the **bottom** of the page, and `x` still increasing towards the **right** hand side of the page.
+However, **images** are conventionally plotted **upside down** - with ``(x=0, y=0)`` at the **top** left; ``y`` increasing towards the **bottom** of the page, and ``x`` still increasing towards the **right** hand side of the page.
 
-This is most relevant when you are comparing maps (e.g. a ratemap) with a angular plot, e.g. a head direction tuning curve. Intuitively, we consider an angle of 90° (=pi/2 rad) to point upwards, i.e. to `(x=0, y=1)`. However, in the conventional image plotting approach, the unit vector `(0, 1)` points **down**, *not* up. 
+This is most relevant when you are comparing maps (e.g. a ratemap) with a angular plot, e.g. a head direction tuning curve. Intuitively, we consider an angle of 90° (=pi/2 rad) to point upwards, i.e. to ``(x=0, y=1)``. However, in the conventional image plotting approach, the unit vector `(0, 1)` points **down**, *not* up. 
 
 Consider the following simple example:
 
