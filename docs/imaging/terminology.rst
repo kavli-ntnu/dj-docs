@@ -1,5 +1,5 @@
 ======================================
-Imaging pipeline terminology
+Imaging: Terminology
 ======================================
 
 .. _Imaging Terminology:

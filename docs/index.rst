@@ -11,7 +11,7 @@ These web pages provide documentation for the two data management pipelines in u
 Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Common:
 
    common/getting_started/index.rst
@@ -22,7 +22,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    common/troubleshooting
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Electrophysiology:
    
    ephys/connecting
@@ -35,7 +35,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    ephys/multi_sess_units
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Imaging:
    
    imaging/terminology
@@ -50,7 +50,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: Developer Documentation:
     
     technical/contributing

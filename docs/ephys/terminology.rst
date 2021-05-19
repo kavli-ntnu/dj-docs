@@ -1,7 +1,7 @@
 .. _Ephys Terminology:
 
 ======================================
-Ephys pipeline terminology
+Ephys: Terminology
 ======================================
 
 
