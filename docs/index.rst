@@ -25,9 +25,10 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Electrophysiology:
    
-   ephys/terminology
    ephys/connecting
    ephys/fetching
+   ephys/terminology
+   ephys/naming_conventions
    ephys/folder_structure
    ephys/ephys_processing
    ephys/ingestion_webgui
