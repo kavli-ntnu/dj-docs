@@ -3,18 +3,21 @@ Common database operations
 ========================================
 This page will discuss some of the common database operations required to use the Datajoint pipelines. It is not intended to be exhaustive, and for deeper insights, please consult the `Datajoint documentation <https://docs.datajoint.io/python/>`_, and the wealth of MySQL documentation available on the internet.
 
-The three operations covered on this page are:
+The four operations covered on this page are:
 
 * Joining
 * Restricting
 * Projecting
+* Fetching
 
 Note that, in general, there are several possible ways to construct a query to return the information you require. 
 
 Quick reference
 -----------------
 
-Joining: ``table1 * table2``
+Joining: 
+
+* ``table1 * table2``
 
 Restricting
 
@@ -30,8 +33,11 @@ Constructing restrictions
 * Greater than: ``table1 & value > other_value"``
 * Less than: ``table1 & value < other_value"``
 * Pattern matching: ``table1 & value LIKE 'partial%'"``
+  
   - ``%`` is a wild-card, representing any number of other characters at that location.
+  
 * Restrictions involving variables:
+  
   - The contents of one column equal to another column: ``table1 & "column1 = column2"``
     + Careful! Be aware of the distinction between ``"column1 = column2"`` and ``column1 = 'column2'"``.
   - Comparing time intervals: ``table1 & "TIMESTAMPDIFF(MONTH, date1, date2) > value``
@@ -45,7 +51,22 @@ Projection
 * Rename column: ``table1.proj(my_new_column="my_old_column")``
 * Keep everything else: ``table1.proj(..., my_new_column="my_old_column")``
 * Calculation: ``table1.proj(value="sql_syntax()")``
+  
   - Just about any SQL syntax is supported in this way
+
+
+Fetching
+
+* Fetch either from existing tables or from queries: ``table1.fetch()`` vs ``(table1 & restriction).fetch()``
+* Fetch any number of rows (zero, one, or many), as a list, with ``fetch()``
+* Fetch **exactly** one row, with ``.fetch1()``
+* Specify specific columns by name to avoid spending time transferring data you don't care about: ``table1.fetch("my_column_1", "my_column_2")``
+* Decide what format you want data returned in. The default is an array (or set of arrays)
+  
+  - Dictionary: ``table1.fetch(as_dict=True)``
+  - Pandas dataframe: ``table1.fetch(format="frame")``
+  
+* If fetching as a series of arrays, you can assign these to multiple names in the same line via list comprehension: ``x, y = table1.fetch("thing1", "thing2")``
 
 
 
@@ -205,7 +226,7 @@ Critera can be specified in several ways:
 
     Total: 3
 
-* Multiple criteria can also be specified, i.e.e an **OR** conditional. To do this, we provide a list of criteria, and we will recieve rows which match one (or more) of those crteria. For example, all gods that are Roman, or whose name begins with ``b`` (or both) ::
+* Multiple criteria can also be specified, i.e. an **OR** conditional. To do this, we provide a list of criteria, and we will recieve rows which match one (or more) of those crteria. For example, all gods that are Roman, or whose name begins with ``b`` (or both). Whether this is and **AND (X OR Y)** condition, or **AND NOT EITHER (X OR Y)** condition can be controlled with ``&`` or ``-``::
 
     example.Deity & ["name LIKE 'b%'", "pantheon = 'roman'"]
 
@@ -218,5 +239,93 @@ Critera can be specified in several ways:
   +-----------+----------+--------+
 
     Total: 12
+
+
+The above restrictions are the basic building blocks, but more complicated queries can be constructed by restricting with *tables*. The above all follow the pattern ``table & restriction``, where ``table`` might be the product of joining tables together. The restriction can *also* be the product of joining (and restricting!) tables together.
+
+When restricting by a table, that means: "include (or exclude) rows from table1 that **also** occur in the restricting table". To demonstrate, let's combine two examples from above. Let's look for all deities with names ending in the letter ``n``, that are members of pantheons still worshipped after 1AD ::
+
+    example.Deity & "name LIKE '%n'" & (example.Pantheon & "latest > 1")
+
++-----------+----------+--------+
+| **name**  | pantheon | gender |
++-----------+----------+--------+
+| poseidon  | greek    | m      |
++-----------+----------+--------+
+| vulcan    | roman    | m      |
++-----------+----------+--------+
+
+  Total: 2
+
+We can also break the equation down into multiple, simpler, equations by assigning parts to variables ::
+
+    gods_n = example.Deity & "name LIKE '%n'"
+    groups = example.Pantheon & "latest > 1"
+    gods_n & groups
+
++-----------+----------+--------+
+| **name**  | pantheon | gender |
++-----------+----------+--------+
+| poseidon  | greek    | m      |
++-----------+----------+--------+
+| vulcan    | roman    | m      |
++-----------+----------+--------+
+
+  Total: 2
+
+
+
+Fetching
+-----------
+
+All of the above is about constructing a query that contains the data you want - but it doesn't *give* you the data, it just shows an abbreviated section of the data on screen. 
+
+In order to actually work with the data, you need to **fetch** it. Data can be fetched either from existing tables on disk, or from queries that you have constructed as above. Data is fetched via either of two methods:
+
+* ``fetch()``
+* ``fetch1()``
+
+Fetch is also the only way to work with "blob" data, as that is never displayed in the on-screen summary of query objects. 
+
+Fetch1()
+^^^^^^^^^^^
+
+``fetch1()`` is used whenever you have **exactly one** row of data to fetch. It will throw an exception if there are either more, or fewer, rows of data. ::
+
+  my_data = (example.Deity & "name = 'zeus'").fetch1()
+  type(my_data)
+  >>> dict
+  example.Deity.fetch1()
+  ## This will throw an error
+
+
+Fetch()
+^^^^^^^^^^
+
+``fetch()`` is used with any arbitrary number of rows (or zero). ``fetch()`` will *always* return an array - even if fetching a single row. If you need to extract a single object, indexin that object is required::
+
+  my_data = (example.Deity & "name = 'zeus'").fetch1()
+  type(my_data)
+  >>> numpy.ndarray
+  type(my_data[0])
+  >>> numpy.void
+
+Using Fetches
+^^^^^^^^^^^^^^^^^^
+
+Both ``fetch()`` and ``fetch1()`` offer a lot of flexibility:
+
+* With no arguments, data from all columns will be fetched: 
+* Columns can be named to fetch only from those columns: ``table.fetch("my_column_1", "my_column_2")``
+* Data can be ordered by any column in the table, either ascending or descending: ``table.fetch(order_by="my_column_3 asc")``
+* Data can be fetched in various formats
+
+  - List of dictionaries: ``table.fetch(as_dict=True)``
+  - Pandas Dataframe: ``table.fetch(format="frame")``
+  - Array of arrays (default): ``table.fetch()``
+  
+* A subset of data can be fetched - this is great if you're testing something and want a faster result: ``table.fetch(limit=10)``
+
+  - Note! Even with ``limit=1``, you will *still* get a *array*, containing 1 result. 
 
 
