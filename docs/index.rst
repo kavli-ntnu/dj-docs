@@ -54,7 +54,6 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     
     technical/contributing
     technical/database
-    technical/working_parts
     technical/install_imaging
 
 
