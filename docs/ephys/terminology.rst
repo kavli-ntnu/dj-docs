@@ -1,8 +1,10 @@
+.. _Ephys Terminology:
+
 ======================================
 Ephys pipeline terminology
 ======================================
 
-.. _Ephys Terminology:
+
 
 
 Due to the divergent development process, some different terminology has evolved between the imaging and ephys pipelines. This page, and it's :ref:`imaging twin<Imaging Terminology>`, will cover some of the distinctions. 

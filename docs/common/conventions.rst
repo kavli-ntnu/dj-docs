@@ -1,6 +1,11 @@
+.. _Common conventions:
+
 ======================================
 Common Pipeline Conventions
 ======================================
+
+
+
 Language
 -----------
 
@@ -9,6 +14,9 @@ The pipeline code is written in a mixture of Python and Matlab.
 Documentation is written in English. Where there exist differences in dialects of English, American English is standard, e.g., "color" instead of "colour". 
 
 The pipeline code and database accept text in the Danish unicode format. This supports the standard Latin alphabet, and the Norwegian/Danish characters æ ø å, as well as the Swedish variations. Support of other accented Latin characters (e.g. â or ü) have not been tested. No support is provided for non-Latin characters (e.g. Greek, Cyrillic, etc).
+
+
+.. _Common conventions dates:
 
 Date formats
 --------------
