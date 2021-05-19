@@ -15,9 +15,9 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :caption: Common:
 
    common/getting_started/index.rst
+   common/common_operations
    common/finding
    common/conventions
-   common/nomenclature
    common/building_your_own
    common/troubleshooting
 
@@ -25,6 +25,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Electrophysiology:
    
+   ephys/terminology
    ephys/connecting
    ephys/fetching
    ephys/folder_structure
@@ -36,6 +37,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 2
    :caption: Imaging:
    
+   imaging/terminology
    imaging/Basics
    imaging/Overview
    imaging/Folder-logic
@@ -43,7 +45,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    imaging/Helper-notebooks
    imaging/Sync
    imaging/FOV-unwarping
-   imaging/Session-viewer-GUI
+   imaging/session-viewer-gui
 
 
 .. toctree::
@@ -51,8 +53,6 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     :caption: Developer Documentation:
     
     technical/contributing
-    technical/database
-    technical/working_parts
     technical/install_imaging
 
 
