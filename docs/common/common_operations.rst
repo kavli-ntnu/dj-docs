@@ -93,6 +93,8 @@ The example contains three tables (contents abridged)
 +--------------+----------+--------+
 | greek        |-1200     | 313    |
 +--------------+----------+--------+
+| ...          |...       | ...    |
++--------------+----------+--------+
 
 **Deity**
 
@@ -101,6 +103,8 @@ The example contains three tables (contents abridged)
 +----------+----------+--------+
 | amon     | egyptian | m      |
 +----------+----------+--------+
+| ...      | ...      | ...    |
++----------+----------+--------+
 
 **Attribute**
 
@@ -108,6 +112,8 @@ The example contains three tables (contents abridged)
 | **name** | **attribute** |
 +----------+---------------+
 | amon     | air           |
++----------+---------------+
+| ...      | ...           |
 +----------+---------------+
 
 
@@ -134,9 +140,11 @@ Joining identifies what (if any) column names are shared between two tables, and
 +----------+---------------+----------+--------+
 | **name** | **attribute** | pantheon | gender |
 +----------+---------------+----------+--------+
-| amon     | air           | eqyptian | m      |
+| amon     | air           | egyptian | m      |
 +----------+---------------+----------+--------+
-| amon     | creation      | eqyptian | m      |
+| amon     | creation      | egyptian | m      |
++----------+---------------+----------+--------+
+| ...      | ...           | ...      | ...    |
 +----------+---------------+----------+--------+
 
    Total: 147
@@ -158,6 +166,8 @@ If no column names match, then the outcome is closer to the Kronecker product of
 | roman        | amon     | air           |-753      | 1453   |
 +--------------+----------+---------------+----------+--------+
 | greek        | amon     | air           |-1200     | 313    |
++--------------+----------+---------------+----------+--------+
+| ...          | ...      | ...           | ...      | ...    |
 +--------------+----------+---------------+----------+--------+
 
    Total: 441
@@ -192,6 +202,8 @@ Critera can be specified in several ways:
   | aphrodite | greek    | f      |
   +-----------+----------+--------+
   | apollo    | greek    | m      |
+  +-----------+----------+--------+
+  | ...       | ...      | ...    |
   +-----------+----------+--------+
    
      Total: 14
@@ -236,6 +248,8 @@ Critera can be specified in several ways:
   | bastet    | egyptian | f      |
   +-----------+----------+--------+
   | ceres     | roman    | f      |
+  +-----------+----------+--------+
+  | ...       | ...      | ...    |
   +-----------+----------+--------+
 
     Total: 12
@@ -326,6 +340,6 @@ Both ``fetch()`` and ``fetch1()`` offer a lot of flexibility:
   
 * A subset of data can be fetched - this is great if you're testing something and want a faster result: ``table.fetch(limit=10)``
 
-  - Note! Even with ``limit=1``, you will *still* get a *array*, containing 1 result. 
+  - Note! Even with ``limit=1``, you will *still* get an *array*, containing 1 result. 
 
 
