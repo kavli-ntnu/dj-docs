@@ -17,7 +17,7 @@ Date formats are generally given in ISO8601 format, i.e. YYYY-MM-DD. For example
 
 
 Folders and paths
----------------
+-------------------
 
 All recording workstations, and the majority of researcher office computers run Windows, and therefore examples are primarily given for Windows. 
 
