@@ -1,10 +1,10 @@
-.. _Ephys naming
+.. _Ephys naming:
 
 ======================================
-Ephys Pipeline Naming Conventions
+Ephys Naming Conventions
 ======================================
 
-The Ephys pipeline will, over time, build up numerous lists of user-entered names and labels. It is important that individual researchers give at least some thought to how they name entries in the pipeline
+The Ephys pipeline will, over time, build up numerous lists of user-entered names and labels. It is important that individual researchers give at least some thought to how they name entries in the pipeline in order to keep these lists meaningfully searchable.
 
 - Be *systematic*: Calling your objects "ham" "spam", and "eggs" tells you nothing at all about what the object is or if it relates to you. Try to use a consistent, systematic approach to naming objects, preferable using the conventions discussed below
 
@@ -21,7 +21,7 @@ The Ephys pipeline will, over time, build up numerous lists of user-entered name
 
 When trying to come up with a name, consider the following:
 
-- You are not the only user of the pipeline - try not to "monopolise" common words, phrase, conventions that everyone might need
+- Names are often used for uniqueness, and you are not the only user of the pipeline - try not to "monopolise" common words, phrase, conventions that everyone might need
 
 - Likewise, try not to identify specific things as yours that are not necessarily unique to you - For example, numerous people might use an identical 1m arena, and so rather than "claim" a 1m arena entry as your own, make it non-user-specific. 
 
@@ -29,37 +29,41 @@ When trying to come up with a name, consider the following:
 
 
 
-.. _Ephys naming probes
+
+
+.. _Ephys naming probes:
 
 Probe names
 ---------------------
 
-The standard probe naming convention is as follows:
+The standard probe naming convention is as follows::
 
   <probe_type>_<subject_id>_<probe_number>
 
-For example, that might result in
+For example, that might result in::
   
   tetrode_98765
 
 (A tetrode implanted in subject 98765)
-or
+or::
 
   npx_34567_2
   
 (The second Neuropixel probe implanted in subject 34567)
 
 
-.. _Ephys naming arenas
+
+
+.. _Ephys naming arenas:
 
 Arena Names
 ------------------
 
-The standard arena naming convention is:
+The standard arena naming convention is::
 
   <dimension>_<shape>_<height>
 
-For example:
+For example::
 
   050_square
   100/150_rectangle_50
@@ -67,3 +71,18 @@ For example:
 
 More unique names *can* be given if an arena is less generic, but a more informative name is preferred where possible
 
+
+
+
+.. _Ephys naming multisession-clustering:
+
+Multisession Clustering
+---------------------------
+
+In the case of multisession clustering, the user must provide a manual cluster group naming. The standard group naming in this case is, subject to a limit of 64 characters. If a very large number of sessions are grouped together, it may be sensible to specify only a first and final session date, rather than all sessions dates::
+
+  <subject_id>_<session_time_1>_<session_time_2>_...
+  
+For example::
+
+  26966_2020-12-14_2020-12-16
