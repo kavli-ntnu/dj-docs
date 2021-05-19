@@ -53,7 +53,6 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     :caption: Developer Documentation:
     
     technical/contributing
-    technical/database
     technical/install_imaging
 
 
