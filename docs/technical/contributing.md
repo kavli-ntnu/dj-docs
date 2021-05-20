@@ -2,7 +2,7 @@
 
 The pipeline infrastructure at Kavli is a large and complex software undertaking, with numerous moving parts, stored in numerous code repositories. 
 
-Have you found anbug, or just something that could be improved? Contributions are welcome
+Have you found a bug, or just something that could be improved? Contributions are welcome
 
 * The simplest option is to tell one of the maintainers (see below)
 * Better: open an issue in the relevent code repository
@@ -11,6 +11,14 @@ Have you found anbug, or just something that could be improved? Contributions ar
 ## Components of the pipeline
 
 ### User interfaces
+
+#### Documentation
+
+The documentation is written in a mixture of MarkDown and ReStructured Text. New pages should be written in ReStructured Text, and where substantial modifications are made to MarkDown formatted pages, they should be converted.
+
+Problems can be reported to Simon Ball, and fixes are welcomed as Pull Requests to the [documentation repository](https://github.com/kavli-ntnu/dj-docs).
+
+Documentation is hosted on [ReadTheDocs](https://moser-pipelines.readthedocs.io/en/latest/).
 
 #### Web GUI
 
@@ -64,4 +72,4 @@ The pipelines also depend on several external components, over which the pipelin
 
 * Object storage: intermediate processed data is stored on an s3-compatible storage system run by NTNU (`ceph` based)
 
-* Openstack: Worker servers are virtual machines run in NTNU's Openstack infrastructure. VMs are configured by the configuration code in `dj-utils`, but 
+* Openstack: Worker servers are virtual machines run in NTNU's Openstack infrastructure. VMs are configured by the configuration code in `dj-utils`. 

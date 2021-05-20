@@ -11,31 +11,34 @@ These web pages provide documentation for the two data management pipelines in u
 Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Common:
 
    common/getting_started/index.rst
+   common/common_operations
    common/finding
    common/conventions
-   common/nomenclature
    common/building_your_own
    common/troubleshooting
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Electrophysiology:
    
    ephys/connecting
    ephys/fetching
+   ephys/terminology
+   ephys/naming_conventions
    ephys/folder_structure
    ephys/ephys_processing
    ephys/ingestion_webgui
    ephys/multi_sess_units
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Imaging:
    
+   imaging/terminology
    imaging/Basics
    imaging/Overview
    imaging/Folder-logic
@@ -43,16 +46,14 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    imaging/Helper-notebooks
    imaging/Sync
    imaging/FOV-unwarping
-   imaging/Session-viewer-GUI
+   imaging/session-viewer-gui
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: Developer Documentation:
     
     technical/contributing
-    technical/database
-    technical/working_parts
     technical/install_imaging
 
 
