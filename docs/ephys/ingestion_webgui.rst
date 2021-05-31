@@ -109,6 +109,8 @@ Once a subject implant has been recorded, the Session Ingestion becomes the main
   
   - Arena(s) and Arena objects, cue-cards etc must be created first if appropriate objects do not already exist. The dropdown menu can be searched by typing - provided you have :ref:`followed naming conventions <Ephys naming arenas>`, it will be easy to find what you need. 
   
+  - *Details* is an optional free-form text entry field, allowing the user to enter a description of the task (for example, the laser power used in a photostimulation session). It defaults to the inferred detail, if any, but may be modified prioer to insertion. 
+  
 .. figure:: /_static/ephys/webgui/add_task_1.PNG
    :alt: Adding behavioural tasks
 
