@@ -100,8 +100,23 @@ Consider the following simple example:
     plt.show()
 
 
-.. figure:: /_static/common/implot_y_axis.png
+.. figure:: /_static/common/implot_y_axis.PNG
     :scale: 100%
     :alt: Demonstration of graph/image inversion
 
 All three axes plot exactly the same ``(3, 3)`` vector. The first and final axes show exactly the same matrix (the identity matrix). The only distinction is the default way ``matplotlib`` chooses to display the ``y`` axis, and whether the user chooses to exert control over that choice of visualisation: in the first plot, ``y=0`` is at **top**-left, and in the second and third plots, ``y=0`` is at **bottom**-left.
+
+
+
+Tracking and mirror-flips
+-----------------------------
+
+Camera-based tracking in both the ephys and imaging pipelines raise some questions about co-ordinate conventions beyond those introduced by ``imshow``. 
+
+The fundamental unit of tracking is the co-ordinate of a pixel within the camera. Different cameras may have different conventions about how this is labelled, which may introduce Up/Down and/or Left/Right flips compared to your expectations. 
+
+Hardware systems like Axona also include their own data visualisation, which may introduce their own data manipulation to compensate for the known behaviour of the attached camera. Data extraction into the pipelines *does not take these unknown data manipulation into account*. Data ingested into the pipelines uses the raw data format, *whatever that format is* without additional manipulation. 
+
+It is the responsibility of the user to identify what, if any, manipulation is required to match the actual data with their expectations (for example, to correctly identify where the cue card exists within the camera's reference frame). Comparing the path plot to the tracking video is the best way to compare these two sets of data
+
+
