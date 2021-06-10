@@ -1,3 +1,5 @@
+.. _Common Operations:
+
 ========================================
 Common database operations
 ========================================
@@ -11,6 +13,8 @@ The four operations covered on this page are:
 * Fetching
 
 Note that, in general, there are several possible ways to construct a query to return the information you require. 
+
+.. _Common Operations Reference:
 
 Quick reference
 -----------------
@@ -176,6 +180,8 @@ If no column names match, then the outcome is closer to the Kronecker product of
 Essentially, a copy of the first table has been created for each entry in the second table. Observe the vastly increased size - this is a good warning sign that you may have made an error in your query. 
 
 
+.. _Common Operations Restrict:
+
 Restricting
 -----------------
 
@@ -289,6 +295,7 @@ We can also break the equation down into multiple, simpler, equations by assigni
   Total: 2
 
 
+.. _Common Operations Fetch:
 
 Fetching
 -----------
@@ -348,7 +355,7 @@ Both ``fetch()`` and ``fetch1()`` offer a lot of flexibility:
 
 
 
-
+.. _Common Operations Permission:
 
 Permissions
 -----------------

@@ -1,3 +1,5 @@
+.. _Imaging Basics:
+
 ==========================
 Imaging: The basics
 ==========================
@@ -5,32 +7,43 @@ Imaging: The basics
 After completing the instructions under :ref:`Gettinng Started Python`, these next steps will show you how to add data to the pipeline and evaluate some of its outputs (which cells does it identify and what are their functional properties?).
 
 
+Workflows
+-------------------
+
+Primary workflows
+^^^^^^^^^^^^^^^^^^^^
+
+Most interactions with the imaging pipeline will be either:
+
+- **Adding data** to the pipeline after recording. Mostly done via the :ref:`Imaging ingestion`
+- **Evaluating cells** identified by Suite2p or other algorithm. :ref:`Imaging Basics Evaluate`
+- **Fetching data** from the pipeline for analysis. :ref:`Common Operations Fetch`
+
+Less common processes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+A few less common activities to be aware of:
+
+* If a new **setup** or **scope** is developed and used, new entries should be added to the pipeline to represent these physical entities
+  
+  - A ``scope`` is the microscope objective - it (partially) controls factors such as field of view, and the unwarping routine used to correct for the distortion of the field of view
+  
+  - A ``setup`` is pretty much everything else in the room *except* the arena and the subject. It keeps track of the most recent calibration data, hardware configuration, etc. 
+
+* New subject implants can be recorded in the ``Implant`` table. There is currently no user interface other than code to work with this table
+
+* Parameter sets. Most analysis steps in the pipeline offer the ability to choose different parameters. An interface for this system is under development. 
+
+
+
+
 Add imaging data to the pipeline
 ----------------------------------------
 
-The easiest way to do this is via the web gui, (:ref:`Imaging ingestion`)
-If you are just getting started with the pipeline, these steps might be a good place to start:
+The easiest way to do this is via the web gui, (:ref:`Imaging ingestion`), although it may also be done via Python or Matlab code if you prefer. 
 
-- Go to the imaging web GUI and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is the first time you're logging in)
 
-- Go to *BaseFolder* -> *Add BaseFolder*
-- Fill in the form as follows:
-    - **Experimenter:** select your username from the list.
-    - **File path:** specify the file path to where your raw data is stored.
-    - **Combined?:** should the data within this folder be analysed together? **Miniscope users:** maybe you recorded images while the mouse was running on a wheel before you started a *new* recording with the mouse in an open field. In this case, you might want the cells from both sessions to be analysed together, as they are likely the same in both, so *Combined=yes*. In contrast, you may have removed the microscope in between these two sessions, meaning you may have different cells in your field of view. In this case, *Combined=no*. **Femtonics users:** *Combined* should always be set to *no*.
-    - **Setup:** Select which microscope type you used (Illuminato = Femtonics).
-    - **Scope model:** for miniscope users only, select which model you used.
-    - **Animal ID in mLIMS:** the animal ID of your furry collaborator as registered in mLIMS. 
-    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can make your own set of options that work best with your data, but for now just choose an existing one and see how that works. **Miniscope users:** choose an option that matches the indicator you're using. **Femtonics users:** flavio-develop is a good place to start. 
-
-.. figure:: /_static/imaging/gui_basefolder_example.png
-   :alt: Adding a Femtonics base folder via the web gui
-
-- Click *Submit*
-- Go to *BaseFolder* -> *BaseFolders* to see the status of your data entry. If any errors have popped up, contact Simon Ball or Horst Obenhaus for help.
-- Once Suite2p has finished running, you will be able to see your data listed under *Suite2p* -> *Finished Suite2p Jobs* (depending on the data, this can take anything from minutes to hours).
-- After Suite2p has done its thing, it's time to take a look at the cells it identified and decide which ones should be added to the pipeline (see below).
-
+.. _Imaging Basics Evaluate:
 
 Evaluate the cells Suite2p identified in your data
 -----------------------------------------------------
