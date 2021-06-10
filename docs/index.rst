@@ -39,13 +39,13 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :caption: Imaging:
    
    imaging/terminology
-   imaging/Basics
-   imaging/Overview
-   imaging/Folder-logic
-   imaging/How-to-add-sessions
-   imaging/Helper-notebooks
-   imaging/Sync
-   imaging/FOV-unwarping
+   imaging/basics
+   imaging/overview
+   imaging/folder-logic
+   imaging/how-to-add-sessions
+   imaging/helper-notebooks
+   imaging/sync
+   imaging/fov-unwarping
    imaging/session-viewer-gui
 
 
