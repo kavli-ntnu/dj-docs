@@ -1,8 +1,8 @@
+.. _Imaging ingestion:
+
 ===========================
 Imaging:  Web GUI
 ===========================
-
-.. _Imaging ingestion:
 
 1. Copy files to a file server
 2. Open the imaging `Website`_ and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
@@ -62,6 +62,8 @@ What happens if I forgot to copy over a file?
 
 Just add the BaseFolder entry again. The ingest routines will recognize what is new and only add that. 
 
+
+.. _Imaging ingestion change_cell:
 
 What happens if I don't like this or that cell from the suite2p output? 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
