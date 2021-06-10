@@ -1,4 +1,4 @@
-## Imaging: Folder logic
+## Imaging: Naming and Folder logic
 
 Ingest of raw/processed data folders follows a certain logic determined by the corresponding "Experiment type".
 
