@@ -1,0 +1,36 @@
+.. _Imaging Sync:
+
+======================================
+Imaging: Synchronisation
+======================================
+
+The two-photon miniscopes make use of multiple independent simultaneous data acquisition streams - imaging, tracking, running wheel etc, which must be synchronised together to a single master clock. For this purpose, the software `Wavesurfer <http://wavesurfer.janelia.org/>`_ is used. Wavesurfer records the stream of (digital) input signals on different ports of a NI GPIO card. The frame clock is recorded (exported from `ScanImage <http://scanimage.vidriotechnologies.com/display/SIH/ScanImage+Home>`_) and serves as the master event stream to which other events are aligned. A wavesurfer reader class that extracts the digital streams from wavesurfer's hdf5 container format can be found under `/helpers/mini2p_wavesurfer.py <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/helpers/mini2p_wavesurfer.py>`_. 
+
+For the femtonics setup (.mesc files), the internal oscilloscope function is used to record events in sync with acquisition (see `/helpers/femto_mesc.py <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/helpers/femto_mesc.py>`_).
+
+Ingest of sync data happens in the ``Sync`` table (see /dj_schemas/sync.py). For this, sync data is extracted according to dataset type (*Wavesurfer* vs. *MESC* vs. ...). Each experiment type (e.g. *femtonics*,*2Pminiscope_A*) has an entry under ``Setup``, which holds at least the *polarity* and for Wavesurfer files also info about which stream served as master and what tolerance to allow between the end of sync streams. The ``Naming`` part table allows downstream processes to infer what specific sync streams were called and to retrieve them accordingly. For example, if a table requires sync data for rotary (wheel) tracking data, it will query the ``Naming`` table to retrieve the name of the sync stream for that particular setup. That sync stream can then be retrieved from the main ``Sync`` table. 
+
+
+.. figure:: /_static/imaging/sync_tables.PNG
+   :alt: Synchronisation section of the imaging schema
+
+
+Wavesurfer sync
+----------------------
+
+Below is an example of the raw recording of 3 sync streams (digital inputs) via wavesurfer. After an initial delay, the acquisition is triggered and the scanning starts (*2P frames*, master). At the same time the camera for tracking of 2 LEDs is triggered and every exposure is registered (*Tracking frames*). The (*Wheel*) stream records serial events that are sent from a microcontroller that is registering data from a rotary encoder attached to a running wheel (irregular since script wasn't running). 
+
+.. figure:: /_static/imaging/wavesurfer_sync_example.png
+   :alt: Synchronisation of parallel data streams
+
+Events are extracted according to the polarity of the digital signal - i.e. rising or falling edge - and shown on the image below as red bars. A *last_index_master* is inferred (since not actually recorded) and the other sync streams are cut accordingly. To concatenate multiple (sub-)sessions, sync streams are zeroed on master (*first_index_master*)  and every subsequent sync stream is concatenated to the previous one adding 1 to *last_index_master*.
+
+![Wavesurfer ](../_static/imaging/wavesurfer_sync-01.jpg)
+
+.. figure:: /_static/imaging/wavesurfer_sync_example.png
+   :alt: Synchronisation of parallel data streams
+
+Scanimage sync
+---------------------
+
+Data can be ``pre-synced`` with scanimage. That means that either scanimage is triggering a - for example - tracking camera for every frame it acquires or timestamp information is recorded at imaging clock rate on one of 4 ``AUX`` inputs. The timing info for every frame and also an array of time stamps at imaging clock precision (`AUX 0 to 3`) get saved in the header of every page of the scanimage tif file. 
