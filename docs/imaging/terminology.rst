@@ -29,11 +29,14 @@ A Data Set may consist of one or more physical files relating to a specific kind
 
 
 
+
 Setups and Scopes
 --------------------
 
-The Imaging pipeline separates the concetp of **setup** from that of **Scope**. 
-
-- A **Setup** describes the majority of the experimental hardware, photodetectors, lasers, calibrations, etc.
+As part of the metadata stored about acquired data, the imaging pipeline keeps track of the physical hardware used, and its most recent calibration data. This "hardware tracking" (mostly) occurs under the ``Scope`` and ``Setup`` tables. 
 
 - A **Scope** describes the microscope objective and scanner, corresponding to specific fields of view, warping/dewarping proceedures etc. This is relevant only for the experimental miniscopes, as the Femontics system, the **Scope** cannot be changed.
+
+- A **Setup** describes the majority of the experimental hardware, photodetectors, lasers, calibrations, etc. In general, it describes everything else in the recording room *except* the **Scope**, the **arena** and the **subject**. 
+
+Entries in these tables describe and refer to a single, unique, physical object. Multiple copies of the same design of hardware should have one (or more) entries *each*. Multiple entries per physical object are used to keep track of the date of calibration data.
