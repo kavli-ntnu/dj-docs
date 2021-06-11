@@ -1,3 +1,5 @@
+.. _Imaging session viewer:
+
 ============================
 Imaging: Session Viewer
 ============================

@@ -38,15 +38,15 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 1
    :caption: Imaging:
    
+   imaging/overview
    imaging/terminology
-   imaging/Basics
-   imaging/Overview
-   imaging/Folder-logic
-   imaging/How-to-add-sessions
-   imaging/Helper-notebooks
-   imaging/Sync
-   imaging/FOV-unwarping
+   imaging/basics
+   imaging/folder-logic
+   imaging/how-to-add-sessions
    imaging/session-viewer-gui
+   imaging/sync
+   imaging/fov-unwarping
+   imaging/helper-notebooks
 
 
 .. toctree::
