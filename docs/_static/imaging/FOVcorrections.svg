@@ -1,0 +1,188 @@
+<svg height="247pt" viewBox="0.00 0.00 425.43 247.00" width="425pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(4 243)">
+<title>%3</title>
+<polygon fill="#ffffff" points="-4,4 -4,-243 421.4253,-243 421.4253,4 -4,4" stroke="transparent"/>
+<!-- ImagingFOVRaw.Beads -->
+<g class="node" id="node1">
+<title>ImagingFOVRaw.Beads</title>
+<g id="a_node1"><a xlink:title="beads_picture_id     → ImagingFOVRaw------------------------------beads_size           beads_picture=null   INDEX (beads_picture)">
+<polygon fill="transparent" points="122.5784,-89.5056 .1403,-89.5056 .1403,-69.4944 122.5784,-69.4944 122.5784,-89.5056" stroke="transparent"/>
+<text fill="#000000" font-family="arial" font-size="10.00" text-anchor="middle" x="61.3594" y="-77.2495">ImagingFOVRaw.Beads</text>
+</a>
+</g>
+</g>
+<!-- MetaSession.Setup -->
+<g class="node" id="node2">
+<title>MetaSession.Setup</title>
+<g id="a_node2"><a xlink:title="→ MetaSession------------------------------→ Setup">
+<polygon fill="transparent" points="249.5785,-160.5056 147.1402,-160.5056 147.1402,-140.4944 249.5785,-140.4944 249.5785,-160.5056" stroke="transparent"/>
+<text fill="#000000" font-family="arial" font-size="10.00" text-anchor="middle" x="198.3594" y="-148.2495">MetaSession.Setup</text>
+</a>
+</g>
+</g>
+<!-- ImagingFOV -->
+<g class="node" id="node3">
+<title>ImagingFOV</title>
+<g id="a_node3"><a xlink:title="→ ImagingFOVRaw------------------------------calibration_fov      grid_spacing_px      grid_picture_unwarped=null affine_transform     INDEX (grid_picture_unwarped)INDEX (affine_transform)">
+<ellipse cx="182.3594" cy="-79.5" fill="#ff0000" fill-opacity="0.125490" rx="13.0563" ry="13" stroke="#ff0000" stroke-opacity="0.125490"/>
+<text fill="#7f0000" font-family="arial" font-size="12.00" text-anchor="middle" x="182.3594" y="-76.7994">ImagingFOV</text>
+</a>
+</g>
+</g>
+<!-- RoisCorr -->
+<g class="node" id="node5">
+<title>RoisCorr</title>
+<g id="a_node5"><a xlink:title="→ ImagingFOV→ Cell.Rois------------------------------npix_corr            center_x_corr        center_y_corr        xpix_corr            ypix_corr            compress_ratio       : double                       # Compression ratio original → unwarpedINDEX (xpix_corr)INDEX (ypix_corr)">
+<ellipse cx="351.3594" cy="-13" fill="#ff0000" fill-opacity="0.125490" rx="13.0697" ry="13" stroke="#ff0000" stroke-opacity="0.125490"/>
+<text fill="#7f0000" font-family="arial" font-size="12.00" text-anchor="middle" x="351.3594" y="-10.2994">RoisCorr</text>
+</a>
+</g>
+</g>
+<!-- ImagingFOV&#45;&gt;RoisCorr -->
+<g class="edge" id="edge1">
+<title>ImagingFOV-&gt;RoisCorr</title>
+<path d="M194.5134,-74.7175C225.5438,-62.5073 307.4547,-30.2761 338.8595,-17.9186" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- ProjectionCorr -->
+<g class="node" id="node6">
+<title>ProjectionCorr</title>
+<g id="a_node6"><a xlink:title="→ ImagingFOV→ Projection------------------------------width_microns        height_microns       mean_image_corr      mean_image_enhanced_corr mean_image_ref_corr  max_img_corr=null    vcorr_image_corr=null vmap_image_corr=null mean_image_second_corr=null mean_image_second_corr_corr=null x_range_microns      y_range_microns      INDEX (mean_image_corr)INDEX (mean_image_enhanced_corr)INDEX (mean_image_ref_corr)INDEX (max_img_corr)INDEX (vcorr_image_corr)INDEX (vmap_image_corr)INDEX (mean_image_second_corr)INDEX (mean_image_second_corr_corr)INDEX (x_range_microns)INDEX (y_range_microns)">
+<ellipse cx="231.3594" cy="-13" fill="#ff0000" fill-opacity="0.125490" rx="12.9571" ry="13" stroke="#ff0000" stroke-opacity="0.125490"/>
+<text fill="#7f0000" font-family="arial" font-size="12.00" text-anchor="middle" x="231.3594" y="-10.2994">ProjectionCorr</text>
+</a>
+</g>
+</g>
+<!-- ImagingFOV&#45;&gt;ProjectionCorr -->
+<g class="edge" id="edge2">
+<title>ImagingFOV-&gt;ProjectionCorr</title>
+<path d="M190.2321,-68.8156C199.3219,-56.4794 214.1934,-36.2967 223.3434,-23.8788" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Cell -->
+<g class="node" id="node4">
+<title>Cell</title>
+<g id="a_node4"><a xlink:title="→ ImagingAnalysiscell_id              ------------------------------entry_time=CURRENT_TIMESTAMP ">
+<ellipse cx="376.3594" cy="-150.5" fill="#00007f" fill-opacity="0.250980" rx="23.3734" ry="17.5" stroke="#00007f" stroke-opacity="0.250980"/>
+<text fill="#00007f" font-family="arial" font-size="12.00" text-anchor="middle" x="376.3594" y="-147.7994">Cell</text>
+</a>
+</g>
+</g>
+<!-- Cell.Rois -->
+<g class="node" id="node11">
+<title>Cell.Rois</title>
+<g id="a_node11"><a xlink:title="→ Cell------------------------------npix=null            center_x             center_y             xpix                 ypix                 lambda               mrs=null             mrs0=null            compact=null         footprint=null       isoverlap            aspect_ratio=null    ipix_neuropil        skew=null            std=null             ellipse              radius=null          noiselevel=null      cell_prob=null       redcell=null         redcell_prob=null    INDEX (xpix)INDEX (ypix)INDEX (lambda)INDEX (isoverlap)INDEX (ipix_neuropil)INDEX (ellipse)">
+<polygon fill="transparent" points="404.3691,-89.5056 348.3496,-89.5056 348.3496,-69.4944 404.3691,-69.4944 404.3691,-89.5056" stroke="transparent"/>
+<text fill="#000000" font-family="arial" font-size="10.00" text-anchor="middle" x="376.3594" y="-77.2495">Cell.Rois</text>
+</a>
+</g>
+</g>
+<!-- Cell&#45;&gt;Cell.Rois -->
+<g class="edge" id="edge3">
+<title>Cell-&gt;Cell.Rois</title>
+<path d="M376.3594,-132.9494C376.3594,-119.3159 376.3594,-100.8894 376.3594,-89.6184" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width="2"/>
+</g>
+<!-- ImagingFOVRaw -->
+<g class="node" id="node7">
+<title>ImagingFOVRaw</title>
+<g id="a_node7"><a xlink:title="→ Setup→ Scopezoom                 ------------------------------grid_spacing_microns grid_picture=null    original_points      transformed_points   entry_time_imaging_fov=CURRENT_TIMESTAMP INDEX (grid_picture)INDEX (original_points)INDEX (transformed_points)">
+<polygon fill="#00ff00" fill-opacity="0.188235" points="115.2252,-168 7.4935,-168 7.4935,-133 115.2252,-133 115.2252,-168" stroke="#00ff00" stroke-opacity="0.188235"/>
+<text fill="#006400" font-family="arial" font-size="12.00" text-anchor="middle" x="61.3594" y="-147.7994">ImagingFOVRaw</text>
+</a>
+</g>
+</g>
+<!-- ImagingFOVRaw&#45;&gt;ImagingFOVRaw.Beads -->
+<g class="edge" id="edge4">
+<title>ImagingFOVRaw-&gt;ImagingFOVRaw.Beads</title>
+<path d="M61.3594,-132.9494C61.3594,-119.3159 61.3594,-100.8894 61.3594,-89.6184" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- ImagingFOVRaw&#45;&gt;ImagingFOV -->
+<g class="edge" id="edge5">
+<title>ImagingFOVRaw-&gt;ImagingFOV</title>
+<path d="M91.2695,-132.9494C117.0234,-117.8376 152.8133,-96.837 170.9079,-86.2195" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width="2"/>
+</g>
+<!-- ImagingAnalysis -->
+<g class="node" id="node8">
+<title>ImagingAnalysis</title>
+<g id="a_node8"><a xlink:title="→ Session.Data------------------------------plane=null           order                filetype             entry_time_imaginganalysis=CURRENT_TIMESTAMP ">
+<ellipse cx="351.3594" cy="-221.5" fill="#00007f" fill-opacity="0.250980" rx="66.132" ry="17.5" stroke="#00007f" stroke-opacity="0.250980"/>
+<text fill="#00007f" font-family="arial" font-size="12.00" text-anchor="middle" x="351.3594" y="-218.7994">ImagingAnalysis</text>
+</a>
+</g>
+</g>
+<!-- ImagingAnalysis&#45;&gt;Cell -->
+<g class="edge" id="edge6">
+<title>ImagingAnalysis-&gt;Cell</title>
+<path d="M357.5392,-203.9494C361.4143,-192.9441 366.3891,-178.8155 370.2507,-167.8487" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Projection -->
+<g class="node" id="node10">
+<title>Projection</title>
+<g id="a_node10"><a xlink:title="→ ImagingAnalysis------------------------------mean_image           mean_image_enhanced  mean_image_ref       max_img              vcorr_image          vmap_image           mean_image_second    mean_image_second_corr x_range              y_range              entry_time_projection=CURRENT_TIMESTAMP INDEX (mean_image)INDEX (mean_image_enhanced)INDEX (mean_image_ref)INDEX (max_img)INDEX (vcorr_image)INDEX (vmap_image)INDEX (mean_image_second)INDEX (mean_image_second_corr)INDEX (x_range)INDEX (y_range)">
+<ellipse cx="286.3594" cy="-79.5" fill="#00007f" fill-opacity="0.250980" rx="44.1569" ry="17.5" stroke="#00007f" stroke-opacity="0.250980"/>
+<text fill="#00007f" font-family="arial" font-size="12.00" text-anchor="middle" x="286.3594" y="-76.7994">Projection</text>
+</a>
+</g>
+</g>
+<!-- ImagingAnalysis&#45;&gt;Projection -->
+<g class="edge" id="edge7">
+<title>ImagingAnalysis-&gt;Projection</title>
+<path d="M343.3891,-204.088C330.9138,-176.8344 306.9101,-124.3955 294.3948,-97.0544" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width="2"/>
+</g>
+<!-- MetaSession -->
+<g class="node" id="node9">
+<title>MetaSession</title>
+<g id="a_node9"><a xlink:title="metasession_name     ------------------------------entry_time=CURRENT_TIMESTAMP ">
+<polygon fill="#00ff00" fill-opacity="0.188235" points="241.2293,-239 155.4894,-239 155.4894,-204 241.2293,-204 241.2293,-239" stroke="#00ff00" stroke-opacity="0.188235"/>
+<text fill="#006400" font-family="arial" font-size="12.00" text-anchor="middle" x="198.3594" y="-218.7994">MetaSession</text>
+</a>
+</g>
+</g>
+<!-- MetaSession&#45;&gt;MetaSession.Setup -->
+<g class="edge" id="edge8">
+<title>MetaSession-&gt;MetaSession.Setup</title>
+<path d="M198.3594,-203.9494C198.3594,-190.3159 198.3594,-171.8894 198.3594,-160.6184" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width="2"/>
+</g>
+<!-- Projection&#45;&gt;ProjectionCorr -->
+<g class="edge" id="edge9">
+<title>Projection-&gt;ProjectionCorr</title>
+<path d="M272.4806,-62.7192C262.17,-50.2528 248.4417,-33.654 239.7501,-23.1451" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Cell.Rois&#45;&gt;RoisCorr -->
+<g class="edge" id="edge10">
+<title>Cell.Rois-&gt;RoisCorr</title>
+<path d="M372.6705,-69.6877C368.2699,-57.9819 360.9047,-38.3906 356.0892,-25.5814" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Scope -->
+<g class="node" id="node12">
+<title>Scope</title>
+<g id="a_node12"><a xlink:title="scope_name           ------------------------------entry_time_scope=CURRENT_TIMESTAMP ">
+<polygon fill="#00ff00" fill-opacity="0.188235" points="72.3848,-239 22.334,-239 22.334,-204 72.3848,-204 72.3848,-239" stroke="#00ff00" stroke-opacity="0.188235"/>
+<text fill="#006400" font-family="arial" font-size="12.00" text-anchor="middle" x="47.3594" y="-218.7994">Scope</text>
+</a>
+</g>
+</g>
+<!-- Scope&#45;&gt;ImagingFOVRaw -->
+<g class="edge" id="edge11">
+<title>Scope-&gt;ImagingFOVRaw</title>
+<path d="M50.8201,-203.9494C52.9577,-193.1083 55.693,-179.2366 57.8413,-168.3418" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Setup -->
+<g class="node" id="node13">
+<title>Setup</title>
+<g id="a_node13"><a xlink:title="setup_name           setup_timestamp      ------------------------------→ ExperimentType">
+<polygon fill="#00ff00" fill-opacity="0.188235" points="138.2201,-239 90.4986,-239 90.4986,-204 138.2201,-204 138.2201,-239" stroke="#00ff00" stroke-opacity="0.188235"/>
+<text fill="#006400" font-family="arial" font-size="12.00" text-anchor="start" text-decoration="underline" x="98.6797" y="-219.7994">Setup</text>
+</a>
+</g>
+</g>
+<!-- Setup&#45;&gt;MetaSession.Setup -->
+<g class="edge" id="edge12">
+<title>Setup-&gt;MetaSession.Setup</title>
+<path d="M135.1234,-203.9494C151.2532,-190.3159 173.0536,-171.8894 186.3884,-160.6184" fill="none" stroke="#000000" stroke-dasharray="5,2" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+<!-- Setup&#45;&gt;ImagingFOVRaw -->
+<g class="edge" id="edge13">
+<title>Setup-&gt;ImagingFOVRaw</title>
+<path d="M101.2582,-203.9494C93.1656,-193.1083 82.8106,-179.2366 74.6779,-168.3418" fill="none" stroke="#000000" stroke-opacity="0.250980" stroke-width=".75"/>
+</g>
+</g>
+</svg>

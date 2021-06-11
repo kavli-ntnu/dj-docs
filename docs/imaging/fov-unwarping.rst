@@ -1,13 +1,13 @@
 .. _Imaging unwarping:
 
 ===================================
-Imaging: field-of-view unwarping
+Imaging: Field-of-view unwarping
 ===================================
 
 Miniscope images have to be unwarped since scanner irregularities cause distortions in the imaged field of view (FOV). 
 
 
-.. figure:: https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/ERDs/FOVcorrections.svg
+.. figure:: /_static/imaging/FOVcorrections.svg
    :alt: Field of View unwarping schema
 
 For this, information has to first be saved in the ``ImagingFOVRaw`` table, which is defined by Setup and Scope entries and a zoom factor. It holds information about a single imaged grid from which spacing and distortions can be extracted/corrected. 50 micron Thorlabs standard grids seem to work fine for all purposes, but finer grid spacings might be desirable for even higher accuracy. The experimenter has to have some means of defining anchor points on the imaged grid and define what these anchor points should be warped into, e.g. an isotropic grid. This is done in a MATLAB GUI at the moment. Point pairs from this GUI are exported as .csv and inserted into the ``ImagingFOVRaw`` table. 
