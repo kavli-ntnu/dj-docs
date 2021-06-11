@@ -10,7 +10,7 @@ This page documents the jupyter notebooks available under `/Helper_notebooks <ht
 Introductory notebooks
 ---------------------------
 
-- `Starting notebook <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Starting%20notebook.ipyn>`_): 
+- `Starting notebook <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Starting%20notebook.ipyn>`_: 
   Boilerplate notebook - starts by loading the schema code and making a connection to the database. This can be re-used for whatever purpose. 
 - `Starting notebook - follow the tree <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Starting%20notebook-%20follow%20the%20tree.ipynb>`_: 
   Follows the main branches of the schema. This is a good starting point if you haven't worked with the imaging database before and just want to get a rough overview over what is there.

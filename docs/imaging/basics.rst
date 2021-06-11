@@ -4,7 +4,7 @@
 Imaging: The basics
 ==========================
 
-After completing the instructions under :ref:`Gettinng Started Python`, these next steps will show you how to add data to the pipeline and evaluate some of its outputs (which cells does it identify and what are their functional properties?).
+After completing the instructions under :ref:`Getting Started Python`, these next steps will show you how to add data to the pipeline and evaluate some of its outputs (which cells does it identify and what are their functional properties?).
 
 
 Workflows
@@ -56,7 +56,7 @@ Install Suite2p
 
 If you are familiar with git, you can follow the installation instructions in the `suite2p documentation <https://suite2p.readthedocs.io/en/latest/installation.html>`_. If not, then these steps might be more intuitive:
 
-* Download `GitHub Desktop <https://desktop.github.com/>`_ (this is a useful program for interfacing with GitHub, learn more `here <https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop>`_).
+* Download `GitHub Desktop <https://desktop.github.com/>`_ (this is a useful program for interfacing with GitHub, `learn more <https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop>`_).
 * Within GitHub Desktop, go to *File -> Clone repository...*
 * Select the *URL* tab, add the link to the suite2p repository (``https://github.com/MouseLand/suite2p``) and select a location in which to save it (e.g. locally on your computer).
 * Click *Clone*
