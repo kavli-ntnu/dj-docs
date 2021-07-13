@@ -44,14 +44,14 @@ The following screenshot includes the major tables in the pre-analysis pipeline.
 
 
 animal
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``animal`` schema contains information about the subjects themselves, and is automatically updated from the mLims colony management system. The primary table is ``animal.Animal``, whichcontains the lookup for animal names (e.g. ``"animal_name = 102"``).
 
 
 
 acquisition
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``acquisition`` schema contains information about data acquisition: recording sessions that took place, who was involved, and where the data is stored. 
 
@@ -65,14 +65,14 @@ The primary tables are:
 
 
 tracking
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``tracking`` schema contains details about tracking the subject's motion. 
 
 
 
 ephys
-~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``ephys`` schema contains details about the electrophysiolgical data - Clustering, Units, and matched spike times / tracking
 
@@ -87,7 +87,7 @@ The ``ephys`` schema contains details about the electrophysiolgical data - Clust
 
 
 Restricting Curation by Session
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 From the above image, you can see that Curation is not directly dependent on Session, and so you cannot directly restrict a Curation by a Session. This is because Curations might span across several sessions, and so there is not a one-to-one matching. 
 
@@ -104,7 +104,7 @@ Instead, you need to use another table to join them up: ``acquisition.ClusterSes
 
 .. code-block:: python
     :linenos:
-    
+
     # Instead, you need to include the ClusterSessionGroup table
     # Again, pick a random session key
     session_key = acquisition.Session.fetch("KEY", limit=1)[0]
@@ -112,7 +112,7 @@ Instead, you need to use another table to join them up: ``acquisition.ClusterSes
 
 
 Tasks and downstream analysis
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The pipeline has severtal approaches to how a Session is divided. A Session corresponds to a "recording group" - e.g. a researcher goes into his or her lab in the morning, runs a bunch of experiments, and comes out in the afternoon.
 
@@ -127,7 +127,7 @@ Tasks are the major distinction. They are used to denote separate experimental s
     :alt: Analysis ERD
 
 behavior
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Tasks are handled within the `behavior` schema.
 
@@ -135,8 +135,9 @@ Tasks are handled within the `behavior` schema.
 
 - ``behavior.TaskEvent`` - contains details of *other* inputs into the acquisition system, e.g. a digital input stream. A single TaskEvent might be, e.g., a list of all photostimulation on/off times. 
 
+
 analysis
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The two most critical tables are:
 
@@ -155,13 +156,13 @@ In addition, the following tables are provided:
 TODO
 
 Restricting Analysis by pre-Analysis
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For technical reasons, tables *after* ``analysis.TaskSpikesTracking`` cannot be directly joined to a set of tables *before*. In order to replace that link, an administrative table called ``analysis.TaskSpikesTrackingProxy`` exists. You should never need to fetch anything from that table, just join with it as part of a query. For example, suppose you wish to find the CuratedClustering associated with a specific Ratemap
 
 .. code-block:: python
     :linenos:
-    
+
     # Pick a random ratemap key
     my_ratemap_key =  = analysis.RateMap.fetch("KEY", limit=1)[0]
     ephys.CuratedClustering * analysis.TaskSpikesTrackingProxy & my_ratemap_key
@@ -172,24 +173,24 @@ If you exclude that ``* analysis.TaskSpikesTrackingProxy`` term, then you will g
 
 
 Restricting Analysis by analysis parameter sets
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Analyses will be run multiple times for as many analysis parameter sets as apply to your username and task types, and you will typically only want to deal with a single one at once. These can either be filtered off on an as-needed basis, but the following can fix things more proactively:
 
 .. code-block:: python
     :linenos:
     
-  # Pick a random curation - should hav _many_ TaskSpikesTracking outcomes
-  my_curation_key = ephys.CuratedClustering.fetch("KEY", limit=1)[0]
+    # Pick a random curation - should hav _many_ TaskSpikesTracking outcomes
+    my_curation_key = ephys.CuratedClustering.fetch("KEY", limit=1)[0]
 
-  paramsets = (analysis_param.CellAnalysisMethod.CellSelectionParams
-               * analysis_param.CellAnalysisMethod.FieldDetectParams
-               * analysis_param.CellAnalysisMethod.OccupancyParams
-               * analysis_param.CellAnalysisMethod.SmoothingParams 
-               * analysis_param.CellAnalysisMethod.ScoreParams 
-               * analysis_param.CellAnalysisMethod.ShuffleParams)
-               
-  # Only evaluate the `default` analysis method
-  my_paramset = paramsets & 'cell_analysis_method = "default"'
-  analysis.TaskSpikesTracking & my_curation_key & my_paramset
+    paramsets = (analysis_param.CellAnalysisMethod.CellSelectionParams
+                 * analysis_param.CellAnalysisMethod.FieldDetectParams
+                 * analysis_param.CellAnalysisMethod.OccupancyParams
+                 * analysis_param.CellAnalysisMethod.SmoothingParams 
+                 * analysis_param.CellAnalysisMethod.ScoreParams 
+                 * analysis_param.CellAnalysisMethod.ShuffleParams)
+                 
+    # Only evaluate the `default` analysis method
+    my_paramset = paramsets & 'cell_analysis_method = "default"'
+    analysis.TaskSpikesTracking & my_curation_key & my_paramset
 

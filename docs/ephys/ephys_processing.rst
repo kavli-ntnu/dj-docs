@@ -1,4 +1,4 @@
-.. _Ephys processing
+.. _Ephys processing:
 
 ======================================================
 How is data in the Ephys pipeline processed?
@@ -55,14 +55,16 @@ Speed and the Walk Filter
 Data presented in the ``analysis`` schema and later (e.g. in ``analysis.TaskTracking``, ``analysis.TaskSpikesTracking`` and then used in screening tools such as ratemaps) have a walk filter applied. The walk filter excludes *all* data, both positional and spike, for all times at which the animal is moving below a specified speed (specified in the ``analysis_param.CellSelectionParams`` table in column ``speed_cutoff``. By default, this is 2.5cm/s for mice, and 5cm/s for rats. 
 
 The walk filter is calculated using the same LOESS prediction method, but with a longer window: 2.5s. The walk filter is determined as:
+
 .. code-block:: python
    :linenos:
-    speed = smooth(raw_speed, 0.8)
-    extra_smooth_speed = smooth(raw_speed, 2.5)
-    to_include = extra_smooth_speed >= SPEED_CUTOFF
-    speed = speed[to_include]
-    x_pos = x_pos[to_include]
-    ...
+
+   speed = smooth(raw_speed, 0.8)
+   extra_smooth_speed = smooth(raw_speed, 2.5)
+   to_include = extra_smooth_speed >= SPEED_CUTOFF
+   speed = speed[to_include]
+   x_pos = x_pos[to_include]
+   ...
 
 
 An unfiltered set of data is available via the ``CellSelectionParams`` method ``default_unfiltered``. 

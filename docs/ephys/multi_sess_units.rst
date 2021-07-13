@@ -34,7 +34,7 @@ Option 2 functionally requires the researcher to maintain their own records to k
 
 This approach is currently not supported by the website interface, and requires use of a Jupyter notebook to proceed. (see the helper notebook in the `Ephys repository <https://github.com/kavli-ntnu/dj-elphys/blob/master/notebooks/Ephys_Usecase/Follow%20unit%20over%20sessions.ipynb>`_)
 
-The data can be provided as an :download:`Excel spreadsheet </_static/ephys/moser_multisess_unit.xlsx>`_
+The data can be provided as an :download:`Excel spreadsheet </_static/ephys/moser_multisess_unit.xlsx>`
 
 Please contact Simon Ball if you require any assistance getting this to work, as you may need to be given explicit database permissions. 
 
