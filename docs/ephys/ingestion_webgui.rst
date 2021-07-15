@@ -1,5 +1,7 @@
+.. _Ephys web-gui:
+
 =======================================
-Ephys: Ingesting data with the web gui
+Ephys: Web GUI
 =======================================
 
 Data can be ingested into the ephys pipeline in two different ways. All users are encouraged to use the web GUI. Advanced users may insert directly into the pipeline via Python or Matlab scripts. 
@@ -123,7 +125,7 @@ Once a subject implant has been recorded, the Session Ingestion becomes the main
     
     - Specify the **Curation Time**, which is used to uniquely identify the clustering results, in the case of multiple clusterings being saved
     
-    - Specify the **Curation Output Directory**, the location where clustering output is saved. The background worker will perform a recursive search from this directory to find any supported clustering outputs. In the case of a multi-probe clustering, you should select an outer folder which will include a clustering output for *each* probe.
+    - Specify the **Curation Output Directory**, the location where clustering output is saved. The background worker will perform a recursive search from this directory to find any supported clustering outputs. In the case of a multi-probe clustering, you should select an outer folder which will include a clustering output for *each* probe (see also :ref:`Ephys folders npx multiple-clusterings`
   
   .. figure:: /_static/ephys/webgui/add_clustering_1.PNG
      :alt: Adding single-session clustering
