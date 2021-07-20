@@ -130,10 +130,27 @@ When a new model, or a new iteration of a model, is to be used, it must be regis
 
 The Imaging pipeline supports automated DLC processing, assuming that the model requested is available to one or more of the workers running the pipeline. If the model is not available, the job will never complete.
 
-Alternatively, users may run the model themselves (just as with Suite2p), although in this case, several manual steps must also be taken
+Alternatively, users may run the model themselves (just as with Suite2p), although in this case, several manual steps must also be taken. A function is provided within the Imaging pipeline to run the model and do these manual steps automatically:
 
-  * TODO
+.. code-block:: python
+    
+    from dj_schemas.jobs_dlc import do_DLC_prediction
+    
+    do_DLC_prediction(
+        video_filepaths=(r"D:/mydata/my_video_1.mp4",),
+        model_name="DLC_resnet50_mouse_openfieldJun30shuffle1_1030000",
+        tif_filepaths=(r"D:/mydata/tif1.tif", r"D:/mydata/tif2.tif"),
+      )
 
-Filenaming for DeepLabCut files is discussed in :ref:`Imaging naming dlc`.
+If you run DLC via the command line instead, then these manual steps are:
+  
+  * Open the ``.pickle`` file and add the attribute ``Start Timestamp``, indicating the date/time at which the video was recorded (formatted as iso8601)
+  * Name the files accordingly (see :ref:`Imaging naming dlc` for more discussion of file naming conventions)
 
+.. code-block:: bash
 
+    metasession_directory
+    |- dlc_{basename}
+        |- dlc_config_file.yml
+        |- {modelname}.h5
+        |- {modelname}includingmetadata.pickle
