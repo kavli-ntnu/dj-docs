@@ -25,6 +25,10 @@ New users may find the following pages to be useful:
 * :ref:`Imaging ingestion`:
 
   An interface for inserting freshly acquired data into the pipeline.
+  
+* :ref:`Imaging dlc`:
+
+  Generating Tracking data via the DeepLabCut software package
 
 * :ref:`Imaging session viewer`:
 
