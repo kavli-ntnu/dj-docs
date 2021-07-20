@@ -142,7 +142,7 @@ Alternatively, users may run the model themselves (just as with Suite2p), althou
 
 If you run DLC via the command line instead, then these manual steps are:
   
-  * Open the ``.pickle`` file and add the attribute ``Start Timestamp``, indicating the date/time at which the video was recorded (formatted as iso8601)
+  * Open the ``.pickle`` file and add the attribute ``Start Timestamp``, indicating the date/time at which the video was recorded (formatted as iso8601). A `notebook <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Add%20timestamp%20to%20DLC%20pickle.ipynb>`_ is provided to help with this. 
   * Name the files accordingly (see :ref:`Imaging naming dlc` for more discussion of file naming conventions)
 
 .. code-block:: bash
