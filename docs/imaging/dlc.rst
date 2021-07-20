@@ -109,10 +109,6 @@ Alternatively, users may run the model themselves (just as with Suite2p), althou
 
   * TODO
 
+Filenaming for DeepLabCut files is discussed in :ref:`Imaging naming dlc`.
 
-
-File Naming
---------------
-
-TODO. Should this be here, or in folder logic, or in terminology? Ephys has a specific "naming conventions" section, perhaps Imaging should have a similar section?
 
