@@ -8,7 +8,7 @@ The two-photon miniscopes make use of multiple independent simultaneous data acq
 
 For the femtonics setup (.mesc files), the internal oscilloscope function is used to record events in sync with acquisition (see `/helpers/femto_mesc.py <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/helpers/femto_mesc.py>`_).
 
-Ingest of sync data happens in the ``Sync`` table (see /dj_schemas/sync.py). For this, sync data is extracted according to dataset type (*Wavesurfer* vs. *MESC* vs. ...). Each experiment type (e.g. *femtonics*,*2Pminiscope_A*) has an entry under ``Setup``, which holds at least the *polarity* and for Wavesurfer files also info about which stream served as master and what tolerance to allow between the end of sync streams. The ``Naming`` part table allows downstream processes to infer what specific sync streams were called and to retrieve them accordingly. For example, if a table requires sync data for rotary (wheel) tracking data, it will query the ``Naming`` table to retrieve the name of the sync stream for that particular setup. That sync stream can then be retrieved from the main ``Sync`` table. 
+Ingest of sync data happens in the ``Sync`` table (see /dj_schemas/sync.py). For this, sync data is extracted according to dataset type (*Wavesurfer* vs. *MESC* vs. ...). Each experiment type (e.g. *femtonics*, *2PminiscopeA*) has an entry under ``Setup``, which holds at least the *polarity* and for Wavesurfer files also info about which stream served as master and what tolerance to allow between the end of sync streams. The ``Naming`` part table allows downstream processes to infer what specific sync streams were called and to retrieve them accordingly. For example, if a table requires sync data for rotary (wheel) tracking data, it will query the ``Naming`` table to retrieve the name of the sync stream for that particular setup. That sync stream can then be retrieved from the main ``Sync`` table. 
 
 
 .. figure:: /_static/imaging/sync_tables.PNG
@@ -25,9 +25,7 @@ Below is an example of the raw recording of 3 sync streams (digital inputs) via 
 
 Events are extracted according to the polarity of the digital signal - i.e. rising or falling edge - and shown on the image below as red bars. A *last_index_master* is inferred (since not actually recorded) and the other sync streams are cut accordingly. To concatenate multiple (sub-)sessions, sync streams are zeroed on master (*first_index_master*)  and every subsequent sync stream is concatenated to the previous one adding 1 to *last_index_master*.
 
-![Wavesurfer ](../_static/imaging/wavesurfer_sync-01.jpg)
-
-.. figure:: /_static/imaging/wavesurfer_sync_example.png
+.. figure:: /_static/imaging/wavesurfer_sync-01.jpg
    :alt: Synchronisation of parallel data streams
 
 Scanimage sync
