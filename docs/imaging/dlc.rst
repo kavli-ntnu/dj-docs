@@ -121,12 +121,10 @@ In summary, the combination of (dlc_task, dlc_date, dlc_iteration, dlc_shuffle, 
 Workflow
 --------------
 
-DLC is not currently supported via the web gui, and requires handling via code. Sample notebooks for model ingestion are provided:
-  
-  1. `DLC model insertion <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/DLC%20model%20insertion.ipynb>`_
-  2. `SessionDLC insertion <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Insert%20Session%20DLC.ipynb>`_
+There are two stages to working with DLC:
 
-When a new model, or a new iteration of a model, is to be used, it must be registered in the Datajoint pipeline (see notebook 1 above). When a Session will be processed via DLC, it should be added to the ``SessionDLC`` table, (see notebook 2 above).
+  1. Registering a model. This must currently be done via code, and is currently reserved to pipeline administrators only, to handle the naming complexity of models. Please contact Simon Ball or Horst Obenhaus to `register a new model. <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/DLC%20model%20insertion.ipynb>`_
+  2. SessionDLC insertion. This can be done via the imaging web gui, to map a **Session** to  a specific DLC model and processing method (see :ref:`Imaging ingestion`).
 
 The Imaging pipeline supports automated DLC processing, assuming that the model requested is available to one or more of the workers running the pipeline. If the model is not available, the job will never complete.
 
