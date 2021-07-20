@@ -4,7 +4,7 @@
 Imaging: DLC
 =========================
 
-`DeepLabCut <http://www.mackenziemathislab.org/deeplabcut>`_ is a software package for inferring motion capture information from tracking video. Whereas Optitrack makes use of one infra-red reflectors attached to the subject(s), DeepLabCut instead uses a deep neural network trained on human-labelled data of the subject(s), allowing for less interference with subject behaviour. 
+`DeepLabCut <http://www.mackenziemathislab.org/deeplabcut>`_ is a software package for inferring motion capture information from tracking video. Whereas Optitrack makes use of infra-red reflectors attached to the parts of the subject's body that are to be tracked, DeepLabCut instead analyses a video of the subject using a deep neural network. The latter approach interferes less with the subject's natural behaviour. 
 
 
 
@@ -16,36 +16,39 @@ The DLC implementation in the imaging pipeline is shown below
 .. figure:: /_static/imaging/dlc_schema.png
    :alt: DLC in the Imaging schema
    
-   DLC in the Imaging schema
+   DLC in the Imaging schema.
 
 * ``DLCTrackingType``
 
-  Keeps track of the kinds of tracking to which DLC can be assigned. At present, DLC data is only supported for *openfield* tasks
+  Determines which kinds of session (e.g. a 1D wheel session vs a 2D open field session) will be processed beyond the ``TrackingRaw`` table. At present, only `*openfield* sessions are supported. 
 
 * ``DLCModel``
 
-  Contains the full specification of a trained DLC model used in prediction. Due to the way DLC is designed, this data is derived from several separate files.
-  When creating a new Method, please pay careful attention to how body parts are named (see ``TrackedBodyPart``)
+  Contains the full specification of a trained DLC model used in prediction. Due to the way DLC is designed, this data is derived from several separate files. When creating a new Method, please pay careful attention to how body parts are named (see ``TrackedBodyPart``).
 
 * ``DLCTrackingProcessingMethod``
 
   DLC by itself keeps track of individual body parts, not an entire subject; while the imaging pipeline is built around the assumption that a subject can be assigned to a single state vector at any given time. This table keeps track of the method to calculate that state vector given the set of body part co-ordinates provided by DLC. Note that it has to know the *exact* name of each body part in question, and so if models use new names for the same body part, a new tracking processing method must be provided. 
 
+* ``DLCProcessingMethod``
+  
+  Maps a DLCTrackingProcessingMethod to a DLCModel. This mapping is important to ensure that the expected data columns (matching specific ``TrackedBodyPart``) are available (and named correctly!).
+
 * ``SessionDLC``
 
-  Maps a specific Sessionto a specific Processing Method
+  Maps a specific Sessionto a specific Model / Processing Method.
 
 * ``TrackedBodyPart``
 
-  A list of the body parts that can be tracked. Please try to avoid adding to this list unnecessarily and follow the naming schems already in use
+  A list of the body parts that can be tracked. Please try to avoid adding to this list unnecessarily and follow the naming schemes already in use (for example, if the body part ``left_ear`` already exists, please try to avoid also creating ``leftear``, ``LEFTEAR``, and ``Left_Ear``).
   
 * ``TrackingRaw.DLCPart``
 
-  Stores the raw state vector calculated via the method identifed in ``DLCTrackingProcessingMethod``
+  Stores the raw tracking data calculated via the method identifed in ``DLCTrackingProcessingMethod``. Raw, i.e. the position of the subject (in arbitrary units) derived from the DLC data.
 
 * ``Tracking.DLCPart``
 
-  Stores the processed state vector, i.e. after conversion to real units, smoothing, and derivation of,e.g., speeds, angles etc. 
+  Stores the processed tracking data, i.e. after conversion to real units, smoothing, and derivation of,e.g., speeds, angles etc. 
 
 * ``DLCPrediction``
 
@@ -53,13 +56,35 @@ The DLC implementation in the imaging pipeline is shown below
 
 
 
+Models and Processing Methods
+-----------------------------------
+
+Models
+^^^^^^^^^^
+
+In the field of machine learning, a "model" is the outcome of the training stage, that may be used for inference. 
+
+In the case of DLC, this model is a weighted neural network that will be used to analyse the video file and produce a table containing position and probability data of each tracked body part at each timestamp. 
+
+The model also defines which body parts will be tracked and, importantly, what those body parts are called. 
+
 Processing Methods
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A Processing Method handles how to convert DLC's data output to something that the Imaging pipeline can handle. 
+
+DLC's data output is a time-series of position data for each tracked body part. The Imaging schema is designed around the assumption of tracking a single subject, defined by a single position. 
+
+A single TrackingProcessingMethod is an algorithm to convert the positions (and probabilities) for a specific set of body parts into the position data for a single body. If a different set of body parts are chosen (i.e. in a different model), a different TrackingProcessingMethod may be required.
+
+For example, one Model might use a camera underneath the arena, tracking the position of four feet, while a second model might use a camera underneath, tracking the position of two ears. A TrackingProcessingMethod accepting two timeseries from ``left_ear`` and ``right_ear`` cannot cope with four timeseries named ``left-front-foot``, ``right-front-foot``, ``left-back-foot``, ``right-back-foot``.
+
+Adding new processing methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Initial work with DLC within the Moser group has focused on duplicating the same tracking methods used in the past - tracking the position and angle of the head of the subject. Typically, this took the form of tracking the left and right ears, instead of LEDs mounted to the subject's head. Consequently, exactly the same calculation method could be used, with a pre-calculation stage of identifying what data corresponds to each "LED".
 
-Future methods may be added, including potentially 3D information, but these methods must first be written.
-
+Future methods may be added, including potentially 3D information, but these methods must first be formulated, written, and tested. 
 
 
 DLC Models
