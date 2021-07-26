@@ -43,6 +43,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    imaging/basics
    imaging/folder-logic
    imaging/how-to-add-sessions
+   imaging/dlc
    imaging/session-viewer-gui
    imaging/sync
    imaging/fov-unwarping

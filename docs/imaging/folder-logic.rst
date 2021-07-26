@@ -159,6 +159,8 @@ The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
 
 
 
+.. _Imaging naming dlc:
+
 DeepLabCut
 --------------
 
@@ -172,7 +174,7 @@ DLC analysis outputs stored in subfolder of the root directory in the following 
     
 Contained within the ``<basename>_dlc`` folder are the DLC outputs, including:
 
-+ ``.yaml``   : the configuration file (.yamel) used for this DLC analysis
++ ``.yaml``   : the configuration file (.yaml) used for this DLC analysis
 + ``.h5``      : the tracked body part outputs from DLC analysis
 + ``.pickle``  : the meta information file (.pickle) about this run
 
