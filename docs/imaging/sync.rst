@@ -111,8 +111,20 @@ In the case of "pre-synchronisation", every instrument that is used is triggered
 
 In the case of multi-plane imaging, a TTL signal will be sent at the start of each plane. Therefore, for a cell present in one plane out of ``N`` imaged planes, the tracking data will have ``N`` times more data points than the cell has fluoresence data points, and it is necessary to select the appropriate data points to be matched. For example, if the two-photon microscope is scanning an entire volume every 100 ms (10Hz), and the volume contains 2 planes, then the tracking camera will record every 50 ms (20Hz).
 
-For instruments where the acquisition rate of the two-photon imaging frames is too slow, a much higher rate of data may be transmitted to the "spare" imaging channels, with the data being saved as an array stored as another Tif. This method does not *directly* provide higher temporal resolution, since the timestamp data is only recorded per-Tif, and not per-Tif-pixel: a higher temporal resolution may be *approximately inferred*.
+For instruments where the acquisition rate of the two-photon imaging frames is too slow, a much higher rate of data may be transmitted to the "spare" imaging channels, with the data being saved as an array stored as another Tif. This method does not *directly* provide higher temporal resolution, since the timestamp data is only recorded per-Tif, and not per-Tif-pixel: a higher temporal resolution may be *approximately inferred* 
     
+    
+.. figure:: /_static/imaging/sync/presync_example.png
+   :alt: Pre-synchronisation via ScanImage
+   
+   In the case of pre-synchronised ScanImage data, a Tracking frame is generated every time a new plane acquisition starts. 
+   
+.. figure:: /_static/imaging/sync/presync_high_bandwidth_example.png
+   :alt: Pre-synchronisation via ScanImage with a high bandwidth instrument recording via a spare imaging channel
+   
+   Where 1:1 sampling frequency is not adequate, an external instrument running on its own independent clock can feed data into one of the spare imaging channels, with data saved as an additional tif layer per plane. 
+   
+Note that this approach has some drawbacks: data is streamed into the tif in parallel with the timing of the laser scanner, which may result either in un-recorded data (instrument faster than laser scanner) or empty pixels (instrument slower than laser scanner). Any non-linearity in the per-pixel timing owing to the non-linear behaviour of the laser scanner must be accounted for when inferring the per-pixel timing. 
 
 Femtonics Sync
 ---------------
