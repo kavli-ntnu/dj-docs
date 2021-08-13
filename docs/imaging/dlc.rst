@@ -13,7 +13,7 @@ Schema
 
 The DLC implementation in the imaging pipeline is shown below
 
-.. figure:: /_static/imaging/dlc_schema.png
+.. figure:: /_static/imaging/schemas/erd_dlc.png
    :alt: DLC in the Imaging schema
    
    DLC in the Imaging schema.

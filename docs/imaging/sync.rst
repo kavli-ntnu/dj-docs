@@ -11,7 +11,7 @@ For the femtonics setup (.mesc files), the internal oscilloscope function is use
 Ingest of sync data happens in the ``Sync`` table (see /dj_schemas/sync.py). For this, sync data is extracted according to dataset type (*Wavesurfer* vs. *MESC* vs. ...). Each experiment type (e.g. *femtonics*, *2Pminiscope_A*) has an entry under ``Setup``, which holds at least the *polarity* and for Wavesurfer files also info about which stream served as master and what tolerance to allow between the end of sync streams. The ``Naming`` part table allows downstream processes to infer what specific sync streams were called and to retrieve them accordingly. For example, if a table requires sync data for rotary (wheel) tracking data, it will query the ``Naming`` table to retrieve the name of the sync stream for that particular setup. That sync stream can then be retrieved from the main ``Sync`` table. 
 
 
-.. figure:: /_static/imaging/sync_tables.PNG
+.. figure:: /_static/imaging/schemas/erd_sync.png
    :alt: Synchronisation section of the imaging schema
 
 
