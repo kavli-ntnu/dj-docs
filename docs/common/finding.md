@@ -86,7 +86,7 @@ dj.Diagram(ephys.Spikes) +2
 ```python
 dj.ERD(Cell)+2
 ```
-![](../_static/imaging/cell_schema_plus2.png)
+![](../_static/imaging/schemas/erd_cell.png)
 
 *The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Spikes`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredSpikes`.*
 
@@ -104,7 +104,7 @@ dj.Diagram(ephys) + dj.Diagram(analysis) - dj.Diagram(analysis.ShuffledScores)
 ```python
 dj.ERD(Session)+dj.ERD(Cell)+dj.ERD(ImagingAnalysis)
 ```
-![](../_static/imaging/Session_ImagingAnalysis_Cell_schema.png)
+![](../_static/imaging/schemas/erd_imaging_analysis.png)
 
 
 ### Finding the data you need: columns
