@@ -29,6 +29,7 @@ A Data Set may consist of one or more physical files relating to a specific kind
 
 
 
+.. _Imaging Terminology Setup:
 
 Setups and Scopes
 --------------------
