@@ -137,3 +137,8 @@ Check out the functional properties of your cells
 Your data has been ingested and cells identified, so now it's finally time to check if they have any interesting properties! Datajoint automatically calculates all sorts of things for you, including each cell's ratemap and grid score, and a nice way to look at them is via the :ref:`Imaging session viewer` made by Horst Obenhaus. The documentation that link leads to also tells you which tables the GUI is collecting the data from, which is a helpful reference for when you start fetching and plotting data from the pipeline on your own. 
 
 You're now ready to delve deeper into the pipeline and start analysing all your cool data. **May all your analysis dreams come true!** (but if they don't, the Support channel on Teams is here to help)
+
+
+Database core design
+--------------------------
+

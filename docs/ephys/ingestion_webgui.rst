@@ -63,7 +63,7 @@ The ephys pipelines records the specific implants per subject.
 Ingesting Sessions
 ------------------
 
-See :ref:'Ephys terminology <Ephys Terminology>` for a discussion of what **Session** means within the Ephys pipeline, and how it differs from the Imaging pipeline
+See :ref:'Ephys terminology` for a discussion of what **Session** means within the Ephys pipeline, and how it differs from the Imaging pipeline
 
 Once a subject implant has been recorded, the Session Ingestion becomes the main point of entry into the pipeline for all future data associated with that subject. 
 
@@ -92,6 +92,14 @@ Once a subject implant has been recorded, the Session Ingestion becomes the main
 
 .. figure:: /_static/ephys/webgui/add_session_2.PNG
    :alt: Session Status page
+
+.. figure:: /_static/ephys/webgui/add_session_3.PNG
+   :alt: Probe association
+   
+   This subject has three implants recorded, and the session folder contains three data folders. User input is required to determine which implant corresponds to which data folder. 
+
+
+
    
 
 
