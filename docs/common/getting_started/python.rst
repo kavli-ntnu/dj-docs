@@ -213,8 +213,6 @@ Wiki <https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines
 
 .. code:: python
 
-    ACCESS_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
-    SECRET_KEY = "" #Get alphanumeric code from the Kavli Wiki link above
     USERNAME = "" #Use your NTNU username
     PASSWORD = "" #Get password from Simon Ball or Haagen Wade
 
@@ -224,24 +222,15 @@ Wiki <https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines
     dj.config['database.password'] = PASSWORD
     dj.config["enable_python_native_blobs"] = True
     dj.config["stores"] = {
-        'ephys_store': {
-            'access_key': ACCESS_KEY,
-            'bucket': 'ephys-store-computed',
-            'endpoint': 's3.stack.it.ntnu.no:443',
-            'secure': True,
-            'location': '',
-            'protocol': 's3',
-            'secret_key': SECRET_KEY},
         'imgstore': {'location': 'N:/datajoint/imgstore',    # Adjust as necessary for local system
                      'protocol': 'file'},
               }
     dj.config['custom'] = {
-        'database.prefix': 'group_shared_',
         'mlims.database': 'prod_mlims_data',
-            'flask.database': 'group_shared_flask',
-            "dj_imaging.database":"group_imaging_1b",
-            "dj_suite2p.database":"group_suite2p_1",
-              }
+        'flask.database': 'group_shared_flask',
+        "dj_imaging.database":"group_imaging_1b",
+        "dj_suite2p.database":"group_suite2p_1",
+        }
 
     dj.config.save_global()
 
