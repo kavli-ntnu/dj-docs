@@ -41,6 +41,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    imaging/overview
    imaging/terminology
    imaging/basics
+   imaging/table-overview
    imaging/folder-logic
    imaging/how-to-add-sessions
    imaging/dlc
