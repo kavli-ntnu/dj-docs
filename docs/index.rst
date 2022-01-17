@@ -6,9 +6,10 @@
 Welcome to the Moser Group neuroscience pipelines
 ==================================================
 
-These web pages provide documentation for the two data management pipelines in use in the Moser Group at NTNU. 
+**WARNING! This is a frozen branch of the documentation representating the final state of the ``dj-moser-imaging`` branch of the Imaging Pipeline in January 2022.**
 
-Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
+It is provided for users who may be searching the older version of the pipeline for historically published data. Active users of the current pipeline should search for the ``latest`` version of these documents, which reflect the substantial changes that were made to the Imaging pipeline reflecting the focus of the Moser research group.
+
 
 .. toctree::
    :maxdepth: 1
@@ -21,18 +22,6 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    common/building_your_own
    common/troubleshooting
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Electrophysiology:
-   
-   ephys/overview
-   ephys/terminology
-   ephys/fetching
-   ephys/naming_conventions
-   ephys/folder_structure
-   ephys/ephys_processing
-   ephys/ingestion_webgui
-   ephys/multi_sess_units
 
 .. toctree::
    :maxdepth: 1
