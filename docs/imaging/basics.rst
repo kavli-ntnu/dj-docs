@@ -24,11 +24,11 @@ Less common processes
 
 A few less common activities to be aware of:
 
-* If a new **setup** or **scope** is developed and used, new entries should be added to the pipeline to represent these physical entities
+* If a new **system** or **scope** is developed and used, new entries should be added to the pipeline to represent these physical entities
   
   - A ``scope`` is the microscope objective - it (partially) controls factors such as field of view, and the unwarping routine used to correct for the distortion of the field of view
   
-  - A ``setup`` is pretty much everything else in the room *except* the arena and the subject. It keeps track of the most recent calibration data, hardware configuration, etc. 
+  - A ``system`` is pretty much everything else in the room *except* the arena and the subject. It keeps track of the most recent calibration data, hardware configuration, etc. 
 
 * New subject implants can be recorded in the ``Implant`` table. There is currently no user interface other than code to work with this table
 
@@ -99,7 +99,7 @@ You can find the documentation for how to use the `Suite2p GUI <https://suite2p.
 
 * While the pipeline is working hard  adding your cells, you can take a well deserved break and check the progress by, for example, following these steps: 
 
-    * Identify the *Session hash* of your session by filtering under *Sessions* in the imaging web GUI. 
+    * Identify the *Recording hash* of your session by filtering under *Recordings* in the imaging web GUI. 
     * Execute these commands within a jupyter notebook, using your session hash between the double quotes:
 
 
