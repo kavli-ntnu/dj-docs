@@ -9,7 +9,7 @@ Imaging:  Web GUI
 
     - Go to *BaseFolder* -> *Add BaseFolder*
     
-3. Fill out the details in the mask on that website. Make sure you get the session logic *combined* right. It determines how (meta)sessions are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). For femtonics recordings this function is not implemented and has to remain on "no" (not combined). :ref:`Imaging ingestion combined`
+3. Fill out the details in the mask on that website. Make sure you get the session logic *combined* right. It determines how sessions and recordings are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). For femtonics recordings this function is not implemented and has to remain on "no" (not combined). :ref:`Imaging ingestion combined`
 
     - **Experimenter:** select your username from the list.
     
@@ -30,9 +30,9 @@ Imaging:  Web GUI
 
 4. Wait for the background worker process to run (no user interaction required)
 
-5. Check the *Sessions* subpage in the web GUI:
+5. Check the *Search -> Search Recordings (Imaging)* subpage in the web GUI:
   
-  - Your newly added sessions should pop up there.
+  - Your newly added recordings should pop up there.
   
   - If you have deep lab cut (DLC) data, you have to associate a `Model | ProcessingMethod` combination on a per session basis. Valid selections will be shown to you when you click on the blue `DLC` button. After that (or if you do not have any DLC data), you can click on the red `None` icon to fill out your session type and apparatus info. This will make sure that the correct session and apparatus information is found by downstream processes. 
   
@@ -46,7 +46,7 @@ Imaging:  Web GUI
 
 9. Datajoint will re-ingest the BaseFolder, but only add information that has been missing before (the imaging analysis (**Suite2P**) output.
  
-10. Lean back and watch things being calculated (web GUI: *Jobs* -> *Jobs Imaging*).
+10. Lean back and watch things being calculated (web GUI: *Miscellanious* -> *Jobs*).
 
 11. Go through the notebooks to make sense of your analysis results or use the [Session Viewer GUI](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/viewer) to inspect the results (the GUI is work in progress, so don't expect too much right now).
 
@@ -57,12 +57,12 @@ Imaging:  Web GUI
 Suite2p: Combined logic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Combined** addresses how a group of **Sessions** are analysed via Suite2p. 
+**Combined** addresses how a group of **Recordings** are analysed via Suite2p. 
 
 Summary:
 
-- If ``combined == yes``, then all **Sessions** in the **Basefolder** will be grouped as a single **MetaSession** and analysed together, resulting in consistent unit IDs. 
-- If ``combined == no``, then each **Session** will be assigned to its own **MetaSession**, and be analysed *separately*, such that a unit ID in the first session will not necessarily correspond to the same unit ID in another session
+- If ``combined == yes``, then all **Recordings** in the **Basefolder** will be grouped as a single **Session** and analysed together, resulting in consistent unit IDs. 
+- If ``combined == no``, then each **Recording** will be assigned to its own **Session**, and be analysed *separately*, such that a unit ID in the first session will not necessarily correspond to the same unit ID in another session
 
 Details:
 
@@ -74,7 +74,7 @@ Details:
 
 - Scanimage then has two counters: ``_00001_00001.tif``. 
 
-  - The first counter refers to how many times a user clicked abort or recorded a full session and **then started again under the same name**. This can happen, for example, if the pre-set number of acquired frames was estimated too low and the experimenter wishes to extend the current session. Or if there was a small problem with the recording (the subject twisted itself, ...) and that current recording had to be interrupted briefly. This has nothing to do with the *combined* logic and these interrupts are considered to be insignificant and have no relevance for downstream processing. So no matter how many times the experimenter clicked stop and started again, this will all be stitched together and count as *the same* **Session**. 
+  - The first counter refers to how many times a user clicked abort or recorded a full recording and **then started again under the same name**. This can happen, for example, if the pre-set number of acquired frames was estimated too low and the experimenter wishes to extend the current session. Or if there was a small problem with the recording (the subject twisted itself, ...) and that current recording had to be interrupted briefly. This has nothing to do with the *combined* logic and these interrupts are considered to be insignificant and have no relevance for downstream processing. So no matter how many times the experimenter clicked stop and started again, this will all be stitched together and count as *the same* **Session**. 
   
   - The second counter refers to the actual file number if tif splitting is activated within scanimage, e.g. if the experimenter specified that a maximum of 2000 frames should be saved within one file. 
   
@@ -109,12 +109,12 @@ If you re-ingested the imaging analysis output once and then change something fr
 If things fail
 ^^^^^^^^^^^^^^^^^^^^
 
-- Check the Imaging `Website`_ (*Jobs* -> *Jobs Imaging*)
+- Check the Imaging `Website`_ (*Miscellanious* -> *Jobs*)
 
-- If there was an error in the ``MakeDatasetsSessions`` table (so during the basic ingest), make sure the computer that runs the ``MakeDatasetsSessions`` job knows about the file server that the raw data was saved.
+- If there was an error in the ``MakeDatasetsRecordings`` table (so during the basic ingest), make sure the computer that runs the ``MakeDatasetsRecordings`` job knows about the file server that the raw data was saved.
 
 - Ask Horst or Simon on Teams or via email. 
 
 
 
-.. _Website: http://2p.neuroballs.net:5000
+.. _Website: datajoint.kavli.org.ntnu.no
