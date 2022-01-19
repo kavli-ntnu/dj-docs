@@ -20,7 +20,7 @@ The DLC implementation in the imaging pipeline is shown below
 
 * ``DLCTrackingType``
 
-  Determines which kinds of session (e.g. a 1D wheel session vs a 2D open field session) will be processed beyond the ``TrackingRaw`` table. At present, only `*openfield* sessions are supported. 
+  Determines which kinds of recording (e.g. a 1D wheel recording vs a 2D open field recording) will be processed beyond the ``TrackingRaw`` table. At present, only `*openfield* recording are supported. 
 
 * ``DLCModel``
 
@@ -34,9 +34,9 @@ The DLC implementation in the imaging pipeline is shown below
   
   Maps a DLCTrackingProcessingMethod to a DLCModel. This mapping is important to ensure that the expected data columns (matching specific ``TrackedBodyPart``) are available (and named correctly!).
 
-* ``SessionDLC``
+* ``RecordingDLC``
 
-  Maps a specific Sessionto a specific Model / Processing Method.
+  Maps a specific Recording to a specific Model / Processing Method.
 
 * ``TrackedBodyPart``
 
@@ -147,7 +147,7 @@ If you run DLC via the command line instead, then these manual steps are:
 
 .. code-block:: bash
 
-    metasession_directory
+    session_directory
     |- dlc_{basename}
         |- dlc_config_file.yml
         |- {modelname}.h5

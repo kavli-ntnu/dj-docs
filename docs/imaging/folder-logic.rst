@@ -16,10 +16,10 @@ The **2Pminiscope_A** import logic is as follows:
 
     - ``basename_filenumber_filenumber.tif``
 
-- Wavesurfer synchronisation files (``basename_session.h5``)
-- Tracking 1D files (``basename_session_WHEEL.csv``)
-- Tracking 2D files (``basename_session.csv``)
-- Tracking videos (``basename_session.avi``)
+- Wavesurfer synchronisation files (``basename_recording.h5``)
+- Tracking 1D files (``basename_recording_WHEEL.csv``)
+- Tracking 2D files (``basename_recording.csv``)
+- Tracking videos (``basename_recording.avi``)
 - Subfolder(s) for analysis output of suite2p python package (see below for suite2p directory structure)
 
 *Example:*
@@ -45,7 +45,7 @@ Miniscope preprocessed
 
 The ingestion routine is similar to that of the **Miniscope** above. Some major differences include:
 
-1. For preprocessed tif stack, the tif files are prepended with ``_preproc`` - e.g. ``basename_session_filenumber_preproc.tif``
+1. For preprocessed tif stack, the tif files are prepended with ``_preproc`` - e.g. ``basename_recording_filenumber_preproc.tif``
 2. The raw tif files are expected to be present as well
 3. For preprocessed tracking data, the name of tracking file is appended with ``_preproc`` - e.g. ``basename_preproc.csv``
 
