@@ -30,6 +30,7 @@ It is provided for users who may be searching the older version of the pipeline 
    imaging/overview
    imaging/terminology
    imaging/basics
+   imaging/table-overview
    imaging/folder-logic
    imaging/how-to-add-sessions
    imaging/dlc
