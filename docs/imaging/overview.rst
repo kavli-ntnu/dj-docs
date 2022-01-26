@@ -94,5 +94,5 @@ Further schema development:
 Documentation
 
 * Simon Ball
-* Horst Oberhaus
+* Horst Obenhaus
 * Ragnhild Jacobsen
