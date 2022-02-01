@@ -44,7 +44,16 @@ Constructing restrictions
   
   - The contents of one column equal to another column: ``table1 & "column1 = column2"``
     + Careful! Be aware of the distinction between ``"column1 = column2"`` and ``column1 = 'column2'"``.
-  - Comparing time intervals: ``table1 & "TIMESTAMPDIFF(MONTH, date1, date2) > value``
+    + ``"column_1 = column_2"`` will return all rows which individually have the same value in both columns 1 and 2
+    + ``"column_1 = 'column_2`" will return all rows which have a value in column 1 equal to the string ``"column_2"``
+  - Comparing time intervals (this example comparing the number of months): ``table1 & "TIMESTAMPDIFF(MONTH, date1, date2) > value``
+
+* Restricting by multiple choice
+
+  - You can use list comprehension to build your query: ``restriction = ["column_1 = '{}'".format(value) for value in my_list_of_values]``
+  - You can use the sql syntax IN, but only with round brackets: ``restriction = "column_1 IN ('value_1', 'value_2')"``
+  - If using IN with Python string formatting, remember to convert lists and numpy arrays to tuples first: ``restriction = "column_1 IN {}".format(tuple(my_list_of_values))``
+  
   
 
 
@@ -71,6 +80,7 @@ Fetching
   - Pandas dataframe: ``table1.fetch(format="frame")``
   
 * If fetching as a series of arrays, you can assign these to multiple names in the same line via list comprehension: ``x, y = table1.fetch("thing1", "thing2")``
+* Control fetching multiple rows with a maximum number (keyword ``limit``) and an order (``order_by="column_name direction"``, where "direction" is either ascending (``ASC``) or descending (``DESC``), e.g. ``order_by="timestamp DESC"``)
 
 
 
@@ -293,6 +303,42 @@ We can also break the equation down into multiple, simpler, equations by assigni
 +-----------+----------+--------+
 
   Total: 2
+
+
+We might also want to specify a restriction where a column can take one of several values. For example, suppose we wanted to know all of the attributes of the gods ``Bastet``, ``Ceres`` and ``Apollo``. 
+
+Based on what's written above, we can already construct this query using ``& [...]``, i.e. AND EITHER. Writing that out can get tedious quite fast ::
+
+    attr = example.Attribute & ["name = 'bastet'", "name='ceres'", "name='apollo'"]
+    attr
+
++-----------+-------------+
+| **name**  | **attribute |
++-----------+-------------+
+| apollo    | archery     |
++-----------+-------------+
+| apollo    | arts        |
++-----------+-------------+
+| ...       | ...         |
++-----------+-------------+
+
+  Total: 15
+
+We can shortcut this in several possible ways. One way is to use Python list comprehension to construct the repetitive bits for us ::
+
+    gods = ["bastet", "ceres", "apollo"]
+    attr = example.Attribute & ["name = '{}'".format(name) for name in gods]
+    attr
+
+Alternatively, we can use another SQL term: IN. Just like the use of ``in`` in Python, it allows us to check if a value is a memeber of a group of values. This one needs a little bit of care, though, because the restriction string is interpreted by SQL standards, and not by Python standards ::
+
+    attr = example.Attribute & "name IN ('bastet', 'ceres', 'apollo')"
+
+The two aspects to be aware of: each string is separately quoted (just as in previous queries), and the list is constructed here with ROUND brackets, not SQUARe - because SQL expects round brackets. If you want to construct this with Python string formatting, that means you need to convert from a list (or numpy array) to a ``tuple`` first ::
+
+    gods = ["bastet", "ceres", "apollo"]
+    attr = example.Attribute & "name IN {}".format(gods)   # This line will cause a QuerySyntaxException
+    attr = example.Attribute & "name IN {}".format(tuple(gods))  # This will work fine
 
 
 .. _Common Operations Fetch:
