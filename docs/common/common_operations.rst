@@ -43,9 +43,11 @@ Constructing restrictions
 * Restrictions involving variables:
   
   - The contents of one column equal to another column: ``table1 & "column1 = column2"``
-    + Careful! Be aware of the distinction between ``"column1 = column2"`` and ``column1 = 'column2'"``.
-    + ``"column_1 = column_2"`` will return all rows which individually have the same value in both columns 1 and 2
-    + ``"column_1 = 'column_2`" will return all rows which have a value in column 1 equal to the string ``"column_2"``
+  
+     + Careful! Be aware of the distinction between ``"column1 = column2"`` and ``column1 = 'column2'"``.
+     + ``"column_1 = column_2"`` will return all rows which individually have the same value in both columns 1 and 2
+     + ``"column_1 = 'column_2'`` will return all rows which have a value in column 1 equal to the string ``"column_2"``
+    
   - Comparing time intervals (this example comparing the number of months): ``table1 & "TIMESTAMPDIFF(MONTH, date1, date2) > value``
 
 * Restricting by multiple choice
