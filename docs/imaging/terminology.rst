@@ -38,6 +38,8 @@ As part of the metadata stored about acquired data, the imaging pipeline keeps t
 
 - A **Scope** describes the microscope objective and scanner, corresponding to specific fields of view, warping/dewarping proceedures etc. This is relevant only for the experimental miniscopes, as the Femontics system, the **Scope** cannot be changed.
 
-- A **System** describes the majority of the experimental hardware, photodetectors, lasers, calibrations, etc. In general, it describes everything else in the recording room *except* the **Scope**, the **arena** and the **subject**. 
+- A **System** describes the majority of the experimental hardware, photodetectors, lasers, calibrations, etc. In general, it describes everything else in the recording room *except* the **Scope**, the **arena** and the **subject**.
 
-Entries in these tables describe and refer to a single, unique, physical object. Multiple copies of the same design of hardware should have one (or more) entries *each*. Multiple entries per physical object are used to keep track of the date of calibration data.
+Entries in these tables describe and refer to a single, unique, physical object. Multiple copies of the same design of hardware should have one (or more) entries *each*. Multiple entries per single physical object are used to keep track of the date of calibration data.
+
+Both Systems and Scopes are given nicknames for easier discussion. These nicknames do not encode full information about every part of themselves, they are just pointers to the group documentation where that information can be found. Scopes are named as synonyms of either "fast" (for high speed scanners), or "large" (for wide field of view scanners). Systems are named after shades of green. 
