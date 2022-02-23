@@ -27,13 +27,23 @@ release = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
 
+# This should add a date to the footer of each page, _but_
+# That is based on the build time, not the modified time
+html_last_updated_fmt = '%Y-%m-%d'
+# Therefore, adding an extension that should handle this
+# https://github.com/mgeier/sphinx-last-updated-by-git/
+# Although am not 100% certain that it works correctly on rtd
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     'recommonmark',
     'sphinx.ext.graphviz',
+    'sphinx_last_updated_by_git',
 ]
+
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

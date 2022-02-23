@@ -55,8 +55,8 @@ If you are in any doubt which is which, check the table description, or check th
 
 Angles  are referenced to the ``X`` axis, i.e:
 
-* 0° (=0 rad) points from the origin ``(x=0,y=0)`` towards the point ``(x=1, y=0)``.
-* 90° (=pi/2 rad) points from the origin ``(x=0, y=0)`` towards the point ``(x=0, y=1)``.
+* 0° (=0 rad) points from the origin ``(x=0,y=0)`` towards the point ``(x=1, y=0)``. i.e. along the X-axis in the positive direction
+* 90° (=pi/2 rad) points from the origin ``(x=0, y=0)`` towards the point ``(x=0, y=1)``. i.e. along the Y-axis in the positive direction
 
 
 
@@ -100,8 +100,61 @@ Consider the following simple example:
     plt.show()
 
 
-.. figure:: /_static/common/implot_y_axis.png
+.. figure:: /_static/common/implot_y_axis.PNG
     :scale: 100%
     :alt: Demonstration of graph/image inversion
 
 All three axes plot exactly the same ``(3, 3)`` vector. The first and final axes show exactly the same matrix (the identity matrix). The only distinction is the default way ``matplotlib`` chooses to display the ``y`` axis, and whether the user chooses to exert control over that choice of visualisation: in the first plot, ``y=0`` is at **top**-left, and in the second and third plots, ``y=0`` is at **bottom**-left.
+
+
+
+Comparing open field and angular tracking
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Due to the confusion introduced by the y-axis inversion of ``imshow``, it can be quite confusing to be confident that your head-angle plots agree with your open field plots. 
+
+The easiest way to compare this is to directly plot head angles on a path/spike plot using Matplotlib's ``quiver`` function (`docs here <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.quiver.html>`_)
+
+The below code gives a specific example from the Ephys pipeline
+
+.. code-block:: python
+    :linenos:
+    
+    key = {"animal_id":"8931a088caf410cf", "session_time":"2017-03-20 11:34:40", "unit":4016, "cluster_param_name":"default_klustakwik", "task_spike_tracking_hash":"90cf03aa63db1a03ac6dabe2cac2d108"}
+    trk = (analysis.TaskTracking & key).fetch1()
+    spk = (analysis.TaskSpikesTracking & key).fetch1()
+    hd = (analysis.HDTuning & key).fetch1()
+    hd_angles = (analysis.AngularOccupancy & key).fetch1("angle_centers")
+
+    # arrow_unit_vectors:
+    i = 10
+    angles_radians = spk["head_yaw"][::i]
+    u, v = np.cos(angles_radians), np.sin(angles_radians)
+
+    fig = plt.figure(figsize=(16,10))
+    ax = (fig.add_subplot(121), fig.add_subplot(122, projection="polar"))
+
+    ax[0].plot(trk["x_pos"], trk["y_pos"], alpha=0.5, linewidth=1)
+    ax[0].plot(spk["x_pos"], spk["y_pos"], ".")
+    ax[0].quiver(spk["x_pos"][::i], spk["y_pos"][::i], u, v, pivot="mid", linewidth=1, scale_units="width", headwidth=4, minshaft=2)
+    ax[0].set_aspect(1)
+    ax[0].set_title("Path/split plot")
+
+    ax[1].plot(hd_angles, hd["hd_tuning"])
+    ax[1].set_title("Head direction tuning plot")
+
+.. figure:: /_static/common/matplotlib_quiver.png
+    :alt: Confirming head-direction plotting
+
+Tracking and mirror-flips
+-----------------------------
+
+Camera-based tracking in both the ephys and imaging pipelines raise some questions about co-ordinate conventions beyond those introduced by ``imshow``. 
+
+The fundamental unit of tracking is the co-ordinate of a pixel within the camera. Different cameras may have different conventions about how this is labelled, which may introduce Up/Down and/or Left/Right flips compared to your expectations. 
+
+Hardware systems like Axona also include their own data visualisation, which may introduce their own data manipulation to compensate for the known behaviour of the attached camera. Data extraction into the pipelines *does not take these unknown data manipulation into account*. Data ingested into the pipelines uses the raw data format, *whatever that format is* without additional manipulation. 
+
+It is the responsibility of the user to identify what, if any, manipulation is required to match the actual data with their expectations (for example, to correctly identify where the cue card exists within the camera's reference frame). Comparing the path plot to the tracking video is the best way to compare these two sets of data
+
+

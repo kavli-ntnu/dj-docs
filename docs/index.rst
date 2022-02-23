@@ -25,9 +25,9 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 1
    :caption: Electrophysiology:
    
-   ephys/connecting
-   ephys/fetching
+   ephys/overview
    ephys/terminology
+   ephys/fetching
    ephys/naming_conventions
    ephys/folder_structure
    ephys/ephys_processing
@@ -38,15 +38,17 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    :maxdepth: 1
    :caption: Imaging:
    
+   imaging/overview
    imaging/terminology
-   imaging/Basics
-   imaging/Overview
-   imaging/Folder-logic
-   imaging/How-to-add-sessions
-   imaging/Helper-notebooks
-   imaging/Sync
-   imaging/FOV-unwarping
+   imaging/basics
+   imaging/table-overview
+   imaging/folder-logic
+   imaging/how-to-add-sessions
+   imaging/dlc
    imaging/session-viewer-gui
+   imaging/sync
+   imaging/fov-unwarping
+   imaging/helper-notebooks
 
 
 .. toctree::
@@ -55,6 +57,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
     
     technical/contributing
     technical/install_imaging
+    technical/running_your_own_workers
 
 
 

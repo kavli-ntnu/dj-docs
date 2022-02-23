@@ -1,8 +1,12 @@
+.. _Imaging session viewer:
+
 ============================
 Imaging: Session Viewer
 ============================
 
 Session Viewer is a desktop application for screening individual sessions in the Imaging pipeline. 
+
+**The session viewer has not yet been updated to work with the updated imaging pipeline. For data in the older pipeline, it remains functional**
 
 Installation
 ---------------
