@@ -70,6 +70,8 @@ If you are familiar with git, you can follow the installation instructions in th
     * ``(suite2p) $ pip install suite2p``
 
 
+.. _Curate the imaging analysis results:
+
 Identify cells to keep
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 With suite2p installed, you can open the GUI via the Anaconda Prompt after activating the suite2p environment:
@@ -110,6 +112,7 @@ NOTE: if you decide to re-sort the ROIs, you can follow the exact same steps, in
 
 If suite2p hasn't done a good job of identifying cells, it may be worth creating your own options file with settings tuned specifically to your data (see below).
 
+.. _make your own set of options:
 
 Create a new suite2p options file for your data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

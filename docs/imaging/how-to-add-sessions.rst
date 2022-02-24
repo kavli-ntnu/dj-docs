@@ -5,7 +5,7 @@ Imaging:  Web GUI
 ===========================
 
 1. Copy files to a file server
-2. Open the [Web GIU website](https://datajoint.kavli.org.ntnu.no/) and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
+2. Open the `Web GUI website <https://datajoint.kavli.org.ntnu.no>`_ and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
 
     - Go to *Imaging* -> *BaseFolders* -> *Add BaseFolder*
     
@@ -23,7 +23,7 @@ Imaging:  Web GUI
     
     - **Animal ID in mLIMS:** the animal ID of your furry collaborator as registered in mLIMS. 
     
-    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can [make your own set of options](https://moser-pipelines.readthedocs.io/en/latest/imaging/basics.html#create-a-new-suite2p-options-file-for-your-data) that work best with your data, but for now just choose an existing one and see how that works first.
+    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can :ref:`make your own set of options` that work best with your data, but for now just choose an existing one and see how that works first.
 
     - **Session Note:** optional, add any additional notes relevant to the session
     
@@ -49,7 +49,7 @@ Imaging:  Web GUI
   
   - Can't see your session there? Check if a suite2p folder has been created in the same folder as your raw data. If so, it probably just need more time. If not, contact Simon Ball.
 
-7. [Curate the imaging analysis results](https://moser-pipelines.readthedocs.io/en/latest/imaging/basics.html#imaging-basics-evaluate)
+7. :ref:`Curate the imaging analysis results`
 
 8. Once you are happy with the results, re-add the session BaseFolder to the web GUI. Use **the same information** as when you added the BaseFolder the first time (take care of *Suite2P* options and combined status). There is a convenient way of doing that: Just click the button "Add" behind the session under *Suite2p* -> *Finished Suite2p Jobs* in the web GUI.
 
@@ -57,7 +57,7 @@ Imaging:  Web GUI
  
 10. Lean back and watch things being calculated (web GUI: *Imaging* -> *Miscellanious* -> *Jobs*).
 
-11. Go through the notebooks to make sense of your analysis results or use the [Session Viewer GUI](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/viewer) to inspect the results (the GUI is work in progress, so don't expect too much right now).
+11. Go through the notebooks to make sense of your analysis results or use the :ref:`Imaging session viewer` to inspect the results (the GUI is work in progress, so don't expect too much right now).
 
 
 
@@ -124,6 +124,3 @@ If things fail
 
 - Ask Horst or Simon on Teams or via email. 
 
-
-
-.. _Website: datajoint.kavli.org.ntnu.no
