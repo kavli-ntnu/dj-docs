@@ -27,7 +27,7 @@ imaging = dj.create_virtual_module('imaging', 'group_shared_imaging')
 imaging.schema.spawn_missing_classes()
 dj.ERD(imaging)
 ```
-![](../_static/imaging/Imaging_schema_new.png)
+![](../_static/imaging/Imaging_schema.png)
 
 *Image showing part of the imaging schema.*
 
@@ -86,9 +86,9 @@ dj.Diagram(ephys.Spikes) +2
 ```python
 dj.ERD(Cell)+2
 ```
-![](../_static/imaging/schemas/erd_cell_new.png)
+![](../_static/imaging/schemas/erd_cell.png)
 
-*The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Spikes`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredSpikes`.*
+*The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Events`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredEvents`.*
 
 
 You can also add diagrams together - or subtract - to get a more complex overview that keeps or avoids certain sections of the network
@@ -104,7 +104,7 @@ dj.Diagram(ephys) + dj.Diagram(analysis) - dj.Diagram(analysis.ShuffledScores)
 ```python
 dj.ERD(Recording)+dj.ERD(Cell)+dj.ERD(ImagingAnalysis)
 ```
-![](../_static/imaging/schemas/erd_imaging_analysis_new.png)
+![](../_static/imaging/schemas/erd_imaging_analysis.png)
 
 
 ### Finding the data you need: columns
@@ -126,7 +126,7 @@ ephys.CuratedClustering()
 ```python
 Cell()
 ```
-![](../_static/imaging/cell_table_new.png)
+![](../_static/imaging/cell_table.png)
 
 *The `Cell` table contains five primary keys (black font) and one non-primary key (white font) for each and every cell within the database (at the time of writing: >1200 cells).*
 
@@ -146,7 +146,7 @@ ephys.CuratedClustering.describe()
 ```python
 Cell.describe()
 ```
-![](../_static/imaging/cell_table_description_new.png)
+![](../_static/imaging/cell_table_description.png)
 
 *The `---` separates between primary (above) and non-primary (below) attributes, and can typically be thought of as:* 
 
@@ -168,7 +168,7 @@ ephys.CuratedClustering.heading
 ```python
 Cell.heading
 ```
-![](../_static/imaging/cell_table_heading_new.png)
+![](../_static/imaging/cell_table_heading.png)
 *Unlike `.describe()`, `.heading` lists every single column name for the table in question.*
 
 

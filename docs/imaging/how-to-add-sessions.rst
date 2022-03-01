@@ -23,7 +23,7 @@ Imaging:  Web GUI
     
     - **Animal ID in mLIMS:** the animal ID of your furry collaborator as registered in mLIMS. 
     
-    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can :ref:`make your own set of options` that work best with your data, but for now just choose an existing one and see how that works first.
+    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can make your own set of options (see :ref:`Imaging Basics Add-Suite2p-Options`) that work best with your data, but for now just choose an existing one and see how that works first.
 
     - **Session Note:** optional, add any additional notes relevant to the session
     
@@ -49,7 +49,7 @@ Imaging:  Web GUI
   
   - Can't see your session there? Check if a suite2p folder has been created in the same folder as your raw data. If so, it probably just need more time. If not, contact Simon Ball.
 
-7. :ref:`Curate the imaging analysis results`
+7. Curate the imaging analysis results (see :ref:`Imaging Basics Curate-Suite2p`)
 
 8. Once you are happy with the results, re-add the session BaseFolder to the web GUI. Use **the same information** as when you added the BaseFolder the first time (take care of *Suite2P* options and combined status). There is a convenient way of doing that: Just click the button "Add" behind the session under *Suite2p* -> *Finished Suite2p Jobs* in the web GUI.
 
