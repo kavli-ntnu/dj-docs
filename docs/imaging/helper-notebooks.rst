@@ -4,6 +4,7 @@
 Imaging: Helper notebooks
 ===================================
 
+**Note: a notebook taking you through the NEW imaging pipeline will be added soon. Currently available notebooks are only related to the old pipeline, but they can still be useful to get familiar with the workflow**
 This page documents the jupyter notebooks available under `/Helper_notebooks <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks>`_.
 
 

@@ -17,7 +17,7 @@ Most interactions with the imaging pipeline will be either:
 
 - **Adding data** to the pipeline after recording. Mostly done via the :ref:`Imaging ingestion`
 - **Evaluating cells** identified by Suite2p or other algorithm. :ref:`Imaging Basics Evaluate`
-- **Fetching data** from the pipeline for analysis. :ref:`Common Operations Fetch`
+- **Fetching data** from the pipeline for analysis. See :ref:`Common Operations Fetch` for how this works, and the :ref:`Imaging notebooks` for examples of how to work with your data
 
 Less common processes
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -129,7 +129,7 @@ To create your own:
     * If you already have a suite2p folder in that location, move it to another folder if you want to keep it, or delete it.
     * Click *RUN SUITE2P* (the panel below will show the analysis progress and let you know when it's finished).
     * The analysis output will automatically load into the suite2p GUI where you can evaluate it.
-* When you are happy with your modified options, make this new options file available in the imaging web GUI by uploading it under *Suite2p -> Add Suite2p Options*
+* When you are happy with your modified options, make this new options file available in the imaging web GUI by uploading it under *Imaging -> Suite2p -> Add Suite2p Options*
 * Notify the pipeline to use the new ROIs you've obtained on your data (:ref:`Imaging ingestion change_cell`)
 
 

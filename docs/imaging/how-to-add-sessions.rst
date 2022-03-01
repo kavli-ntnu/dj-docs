@@ -30,7 +30,7 @@ Imaging:  Web GUI
     .. figure:: /_static/imaging/gui_basefolder_example.png
        :alt: Adding a Femtonics base folder via the web gui
 
-4. Click "Submit" and go to *Imaging* -> *BaseFolders* -> *View BaseFolders*
+4. Click "Submit" and refresh the page or go to *Imaging* -> *BaseFolders* -> *View BaseFolders*
 
     - Is there a green tick mark next to the session you just ingested? All is well and you can continue.
     - Is there an orange X instead? Contact Simon Ball
