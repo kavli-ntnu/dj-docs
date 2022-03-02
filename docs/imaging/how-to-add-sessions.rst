@@ -5,30 +5,35 @@ Imaging:  Web GUI
 ===========================
 
 1. Copy files to a file server
-2. Open the imaging `Website`_ and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
+2. Open the `Web GUI website <https://datajoint.kavli.org.ntnu.no>`_ and log in (ask Simon Ball or Horst Obenhaus for log in credentials if this is your first log in)
 
-    - Go to *BaseFolder* -> *Add BaseFolder*
+    - Go to *Imaging* -> *BaseFolders* -> *Add BaseFolder*
     
-3. Fill out the details in the mask on that website. Make sure you get the session logic *combined* right. It determines how sessions and recordings are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). For femtonics recordings this function is not implemented and has to remain on "no" (not combined). :ref:`Imaging ingestion combined`
+3. Fill out the details in the mask on that website. Make sure you get the session logic *combined* right. It determines how sessions and recordings are created in the database. This only has relevance for data acquired with scanimage (miniscope, ...). See :ref:`Imaging ingestion combined`. For femtonics recordings this function is not implemented and has to remain on "no" (not combined).
 
     - **Experimenter:** select your username from the list.
     
     - **File path:** specify the file path to where your raw data is stored.
     
-    - **Combined?:**  See :ref:`Imaging ingestion combined`. For the Femtonics 
+    - **Combined?:**  See :ref:`Imaging ingestion combined`. For the Femtonics this must be "no".
     
-    - **Setup:** Select which microscope type you used (Illuminato = Femtonics).
+    - **System Configuration:** Select which microscope type you used (Illuminato = Femtonics).
     
     - **Scope model:** for miniscope users only, select which model you used.
     
     - **Animal ID in mLIMS:** the animal ID of your furry collaborator as registered in mLIMS. 
     
-    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can make your own set of options that work best with your data, but for now just choose an existing one and see how that works. **Miniscope users:** choose an option that matches the indicator you're using. **Femtonics users:** flavio-develop is a good place to start. 
+    - **Suite2P python options:** this selection determines how Suite2p, which is incorporated into the pipeline, analyses your data. You can make your own set of options (see :ref:`Imaging Basics Add-Suite2p-Options`) that work best with your data, but for now just choose an existing one and see how that works first.
+
+    - **Session Note:** optional, add any additional notes relevant to the session
     
     .. figure:: /_static/imaging/gui_basefolder_example.png
        :alt: Adding a Femtonics base folder via the web gui
 
-4. Wait for the background worker process to run (no user interaction required)
+4. Click "Submit" and refresh the page or go to *Imaging* -> *BaseFolders* -> *View BaseFolders*
+
+    - Is there a green tick mark next to the session you just ingested? All is well and you can continue.
+    - Is there an orange X instead? Contact Simon Ball
 
 5. Check the *Search -> Search Recordings (Imaging)* subpage in the web GUI:
   
@@ -38,17 +43,21 @@ Imaging:  Web GUI
   
   - If the session was an object session, you can use the `Enter object locations Napari Jupyter notebook <https://github.com/kavli-ntnu/dj-moser-imaging/blob/master/Helper_notebooks/Enter%20object%20locations%20Napari.ipynb>`_, which lets you specify details (location, type) of objects in the arena. 
 
-6. Check whether the imaging analysis has run through (only **Suite2P** at the moment). This information can be retrieved from the imaging web GUI (under *Suite2p* -> *Finished Suite2p Jobs*).
+  - If it was e.g. a headfixed wheel session, click the *Wheel* button to associate the correct apparatus to the session
 
-7. Curate the imaging analysis results (Suite2p GUI)
+6. Check whether the imaging analysis has run through (only **Suite2P** at the moment). This information can be retrieved under *Imaging* -> *Suite2p* -> *Finished Suite2p Jobs*.
+  
+  - Can't see your session there? Check if a suite2p folder has been created in the same folder as your raw data. If so, it probably just need more time. If not, contact Simon Ball.
+
+7. Curate the imaging analysis results (see :ref:`Imaging Basics Curate-Suite2p`)
 
 8. Once you are happy with the results, re-add the session BaseFolder to the web GUI. Use **the same information** as when you added the BaseFolder the first time (take care of *Suite2P* options and combined status). There is a convenient way of doing that: Just click the button "Add" behind the session under *Suite2p* -> *Finished Suite2p Jobs* in the web GUI.
 
 9. Datajoint will re-ingest the BaseFolder, but only add information that has been missing before (the imaging analysis (**Suite2P**) output.
  
-10. Lean back and watch things being calculated (web GUI: *Miscellanious* -> *Jobs*).
+10. Lean back and watch things being calculated (web GUI: *Imaging* -> *Miscellanious* -> *Jobs*).
 
-11. Go through the notebooks to make sense of your analysis results or use the [Session Viewer GUI](https://github.com/kavli-ntnu/dj-moser-imaging/tree/master/viewer) to inspect the results (the GUI is work in progress, so don't expect too much right now).
+11. Go through the notebooks to make sense of your analysis results or use the :ref:`Imaging session viewer` to inspect the results (the GUI is work in progress, so don't expect too much right now).
 
 
 
@@ -109,12 +118,9 @@ If you re-ingested the imaging analysis output once and then change something fr
 If things fail
 ^^^^^^^^^^^^^^^^^^^^
 
-- Check the Imaging `Website`_ (*Miscellanious* -> *Jobs*)
+- Check the Imaging `website <https://datajoint.kavli.org.ntnu.no>`_ (*Miscellanious* -> *Jobs*)
 
 - If there was an error in the ``MakeDatasetsRecordings`` table (so during the basic ingest), make sure the computer that runs the ``MakeDatasetsRecordings`` job knows about the file server that the raw data was saved.
 
 - Ask Horst or Simon on Teams or via email. 
 
-
-
-.. _Website: datajoint.kavli.org.ntnu.no
