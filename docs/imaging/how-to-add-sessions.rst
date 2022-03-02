@@ -118,7 +118,7 @@ If you re-ingested the imaging analysis output once and then change something fr
 If things fail
 ^^^^^^^^^^^^^^^^^^^^
 
-- Check the Imaging `Website`_ (*Miscellanious* -> *Jobs*)
+- Check the Imaging `website <https://datajoint.kavli.org.ntnu.no>`_ (*Miscellanious* -> *Jobs*)
 
 - If there was an error in the ``MakeDatasetsRecordings`` table (so during the basic ingest), make sure the computer that runs the ``MakeDatasetsRecordings`` job knows about the file server that the raw data was saved.
 
