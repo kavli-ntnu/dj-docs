@@ -239,7 +239,8 @@ Wiki <https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines
             'secure': True,
             'location': '',
             'protocol': 's3',
-            'secret_key': SECRET_KEY},
+            'secret_key': SECRET_KEY}
+          }
     dj.config['custom'] = {
         'database.prefix': 'group_shared_',
          'mlims.database': 'prod_mlims_data',
