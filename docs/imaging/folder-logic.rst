@@ -164,7 +164,7 @@ The **femtonics** import logic is as follows (*only "combined = no" allowed!*):
 DeepLabCut
 --------------
 
-DLC analysis outputs stored in subfolder of the root directory in the following naming convention: ``<basename>_dlc``
+DLC analysis outputs stored in subfolder of the root directory in the following naming convention: ``dlc_<basename>``
     
 *Example:*
 
@@ -172,7 +172,7 @@ DLC analysis outputs stored in subfolder of the root directory in the following 
    :alt: DLC root session folder
 
     
-Contained within the ``<basename>_dlc`` folder are the DLC outputs, including:
+Contained within the ``dlc_<basename>`` folder are the DLC outputs, including:
 
 + ``.yaml``   : the configuration file (.yaml) used for this DLC analysis
 + ``.h5``      : the tracked body part outputs from DLC analysis
@@ -187,7 +187,7 @@ Contained within the ``<basename>_dlc`` folder are the DLC outputs, including:
 Multiple DLC outputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the ``<basename>_dlc`` folder contains multiple set of DLC outputs - e.g. multiple ``.h5`` and ``.pickle`` files, the DLC output data will be concatenated in the file order.
+If the ``dlc_<basename>`` folder contains multiple set of DLC outputs - e.g. multiple ``.h5`` and ``.pickle`` files, the DLC output data will be concatenated in the file order.
 
 *Example:*
 
