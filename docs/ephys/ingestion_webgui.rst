@@ -71,7 +71,7 @@ The ephys pipelines records the specific implants per subject.
   - Estimate the depth change
 
 
-
+.. _Ephys web-gui ingest:
 Ingesting Sessions
 ------------------
 
@@ -97,7 +97,7 @@ Once a subject implant has been recorded, the Session Ingestion becomes the main
   - The session will be processed by a background worker. Typically, this should only take a few seconds, but if there are many active users, this might take a minute or two.
   
   - Once it has either been ingested, or ingestion has failed for some reason, the session should appear under *Ephys* -> *Sessions* -> *Session Status*
-  
+
   - If the subject has multiple probe implants, then you must provide information on **Probe Association**. This is a specification of which recording data came from which probe. 
 
 .. figure:: /_static/ephys/webgui/add_session_2.PNG

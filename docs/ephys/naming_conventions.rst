@@ -36,20 +36,27 @@ When trying to come up with a name, consider the following:
 Probe names
 ---------------------
 
-The standard probe naming convention is as follows::
+For tetrodes, the standard probe naming convention is as follows::
 
-  <probe_type>_<subject_id>_<probe_number>
+  tetrode_<subject_id>
 
 For example, that might result in::
   
   tetrode_98765
 
 (A tetrode implanted in subject 98765)
-or::
 
-  npx_34567_2
+For Neuropixel probes, it is strongly recommended to use the probe's serial number, or to include the serial number as a
+component of a longer name. Use of the serial number allows the probe-association (see :ref:`Ephys web-gui ingest`) step
+to happen automatically::
+
+  <serial_number>_<subject_id>_<#>
+
+For example::
+
+    123456789_32859_2
   
-(The second Neuropixel probe implanted in subject 34567)
+(The second Neuropixel probe implanted in subject 34567, with serial number 123456789)
 
 
 
