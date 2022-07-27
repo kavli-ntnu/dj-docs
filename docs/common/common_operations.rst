@@ -3,7 +3,12 @@
 ========================================
 Common database operations
 ========================================
-This page will discuss some of the common database operations required to use the Datajoint pipelines. It is not intended to be exhaustive, and for deeper insights, please consult the `Datajoint documentation <https://docs.datajoint.io/python/>`_, and the wealth of MySQL documentation available on the internet.
+This page will discuss some of the common database operations required to use the Datajoint pipelines. It is not intended
+to be exhaustive, and for deeper insights, please consult the Datajoint documentation, and the wealth of MySQL documentation
+available on the internet.
+
+* `Datajoint (Python) <https://docs.datajoint.io/python/>`_
+* `Datajoint Matlab <https://docs.datajoint.io/matlab/>`_
 
 The four operations covered on this page are:
 
@@ -33,10 +38,26 @@ Restricting
 
 Constructing restrictions
 
-* Exact match: ``table1 & "value = 'my_value'"``
-* Greater than: ``table1 & value > other_value"``
-* Less than: ``table1 & value < other_value"``
-* Pattern matching: ``table1 & value LIKE 'partial%'"``
+* Exact match: ``table1 & "my_column = 'my_value'"``
+
+  - When restricting by multiple exact criteria, or by other variables, it can be useful to express restrictions as dicts or structs instead of strings
+
+.. code-block:: python
+   # Exact matches can be expressed as either strings or dictioanries
+   table1 & "my_column_1 = 'my_value'" & "my_column_2 = 'my_other_value'"
+   table1 & {"my_column_1": "my_value", "my_column_2": "my_other_value"}
+
+.. code-block:: matlab
+   % Exact matches can be expressed as either string/character arrays, or as structs, or as cell arrays
+   table1 & "my_column_1 = 'my_value'" & "my_column_2 = 'my_other_value'";
+   s = struct("my_column_1", "my_value", "my_column_2", "my_value");
+   table1 & s;
+   ca = {"my_column_1='my_value'", "my_column_2", "my_other_value"};
+   table1 & ca;
+
+* Greater than: ``table1 & "my_column > other_value"``
+* Less than: ``table1 & "my_column < other_value"``
+* Pattern matching: ``table1 & "my_column LIKE 'partial%'"``
   
   - ``%`` is a wild-card, representing any number of other characters at that location.
   
@@ -53,9 +74,11 @@ Constructing restrictions
 * Restricting by multiple choice
 
   - You can use list comprehension to build your query: ``restriction = ["column_1 = '{}'".format(value) for value in my_list_of_values]``
-  - You can use the sql syntax IN, but only with round brackets: ``restriction = "column_1 IN ('value_1', 'value_2')"``
-  - If using IN with Python string formatting, remember to convert lists and numpy arrays to tuples first: ``restriction = "column_1 IN {}".format(tuple(my_list_of_values))``
-  
+  - You can use the sql syntax IN, but *only* with round brackets: ``restriction = "column_1 IN ('value_1', 'value_2')"``
+  - If using IN with Python string formatting, remember to convert lists and numpy arrays to tuples first, to meet the round-brackets-only requirement: ``restriction = "column_1 IN {}".format(tuple(my_list_of_values))``
+
+* Restricting by other tables, or other queries: ``table1 & table2``; ``table1 & (table2 & restriction)``
+
   
 
 
@@ -63,27 +86,67 @@ Projection
 
 * Discard all secondary columns: ``table1.proj()``
 * Keep specific columns: ``table1.proj("my_column")``
-* Rename column: ``table1.proj(my_new_column="my_old_column")``
+* Rename column:
+.. code-block:: python
+   ``table1.proj(my_new_column="my_old_column")``
+
+.. code-block:: matlab
+   ``table1.proj("my_old_column -> my_new_column");
+
 * Keep everything else: ``table1.proj(..., my_new_column="my_old_column")``
-* Calculation: ``table1.proj(value="sql_syntax()")``
+
+  + Not relevant in Matlab, as everything is kept anyway
+* Calculation:
   
   - Just about any SQL syntax is supported in this way
+.. code-block:: python
+    table1.proj(value="sql_syntax()")
 
 
 Fetching
 
-* Fetch either from existing tables or from queries: ``table1.fetch()`` vs ``(table1 & restriction).fetch()``
-* Fetch any number of rows (zero, one, or many), as a list, with ``fetch()``
-* Fetch **exactly** one row, with ``.fetch1()``
+* Fetch any number of rows (zero, one, or many), from a table or constructed query, with ``fetch()``
+
+.. code-block:: python
+   # If no other arguments are provided, the entire record will be fetched
+   my_data = table1.fetch()
+   my_data = (table1 & restriction).fetch()
+
+.. code-block:: matlab
+   % omitting '*' will fetch the primary key, rather than the entire record
+   my_data = fetch(table1, '*');
+   my_data = fetch(table1 & restriction, '*');
+
+* Fetch **exactly** one row, with ``fetch1()``
+
+.. code-block:: python
+   my_data = (table1 & restriction).fetch1()
+
+.. code-block:: matlab
+   my_data = fetch1(table1 & restriction, '*');
+
 * Specify specific columns by name to avoid spending time transferring data you don't care about: ``table1.fetch("my_column_1", "my_column_2")``
+
+.. code-block:: python
+   my_data = table1.fetch("my_column_1", "my_column_2")
+
+.. code-block:: matlab
+   my_data = fetch(table1, "my_column_1", "my_column_2")
+
 * Decide what format you want data returned in. The default is an array (or set of arrays)
-  
-  - Dictionary: ``table1.fetch(as_dict=True)``
-  - Pandas dataframe: ``table1.fetch(format="frame")``
+
+.. code-block:: python
+   list_of_tuples = table1.fetch()
+   (array_1, array_2) = table1.fetch("my_column_1", "my_column_2")
+   list_of_dict = table1.fetch(as_dict=True)
+   pandas_dataframe = table1.fetch(format="frame")
+   dict = (table1 & restriction).fetch1()
+
+.. code-block:: matlab
+   array_of_structs = fetch(table1, '*');
   
 * If fetching as a series of arrays, you can assign these to multiple names in the same line via list comprehension: ``x, y = table1.fetch("thing1", "thing2")``
 * Control fetching multiple rows with a maximum number (keyword ``limit``) and an order (``order_by="column_name direction"``, where "direction" is either ascending (``ASC``) or descending (``DESC``), e.g. ``order_by="timestamp DESC"``)
-
 
 
 Queries are calculated following standard equation conventions. You can use parentheses and variable assignment to make query expressions easier to read. You can (and should) construct queries beginnning from the most general and working towards the most specific to confirm that the outcome is what you expect it to be. 
@@ -332,11 +395,15 @@ We can shortcut this in several possible ways. One way is to use Python list com
     attr = example.Attribute & ["name = '{}'".format(name) for name in gods]
     attr
 
-Alternatively, we can use another SQL term: IN. Just like the use of ``in`` in Python, it allows us to check if a value is a memeber of a group of values. This one needs a little bit of care, though, because the restriction string is interpreted by SQL standards, and not by Python standards ::
+Alternatively, we can use another SQL term: IN. Just like the use of ``in`` in Python, it allows us to check if a value
+is a member of a group of values. This one needs a little bit of care, though, because the restriction string is interpreted
+by SQL standards, and not by Python standards ::
 
     attr = example.Attribute & "name IN ('bastet', 'ceres', 'apollo')"
 
-The two aspects to be aware of: each string is separately quoted (just as in previous queries), and the list is constructed here with ROUND brackets, not SQUARe - because SQL expects round brackets. If you want to construct this with Python string formatting, that means you need to convert from a list (or numpy array) to a ``tuple`` first ::
+The two aspects to be aware of: each string is separately quoted (just as in previous queries), and the list is constructed
+here with ROUND brackets, not SQUARE - because SQL expects round brackets. If you want to construct this with Python string
+formatting, that means you need to convert from a list (or numpy array) to a ``tuple`` first ::
 
     gods = ["bastet", "ceres", "apollo"]
     attr = example.Attribute & "name IN {}".format(gods)   # This line will cause a QuerySyntaxException
