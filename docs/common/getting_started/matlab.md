@@ -41,17 +41,19 @@ After installing the Datajoint toolbox, there are two further steps
 
 [Clone](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository) the ephys repository from [Github](www.github.com/kavli-ntnu/dj-elphys). 
 
-We recommend using the [Github Desktop papplication](https://desktop.github.com/) app for this, as it is much more user friendly than the command-line interface. 
+We recommend using the [Github Desktop application](https://desktop.github.com/) app for this, as it is much more user friendly than the command-line interface. 
 
 #### Credentials
 
-An example configuration file is provided in the repository's base directory, `dj_local_conf_ntnu.json`. You will need to edit this file to insert your credentials. You can use any text editor to modify the file, e.g. Notepad.
+An example configuration file is provided in the repository's base directory, `dj_local_conf_ntnu.json`. You will need to
+first **rename** this file to `dj_local_conf.json`, and then edit it to insert your credentials, e.g. with Notepad. Renaming 
+the file is to ensure that you do not accidentally commit your credentials back to the Git repository.
 
 You need to edit 4 values in total:
 * your username
 * your password
 * the external storage access key
-* and the external storare secret key
+* and the external storage secret key
 
 Your username is the same as your NTNU username
 ```json
@@ -64,10 +66,6 @@ Your password is NOT the same as your NTNU password. If you have lost your passw
 The external storage credentials are available on the [Kavli Wiki](https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Electrophysiology+Pipeline)
 
 
-Note: `dj_local_conf_ntnu.json` is a file that is tracked by Git, our version control software. _It is recommended that you rename the file containing your credentials to `dj_local_conf.json`, which will always be ignored by Git._
-
-By renaming it as such, you ensure that there is no risk of accidentally committing your changes back to the master repository. If you do _not_ rename it, you will also have to modify the `init.m` script (see following section)
-
 
 #### Working with code
 
@@ -77,7 +75,7 @@ Finally, code initialisation is taken care of by the file `/MATLAB/ephys_pipelin
 
 The MatLab-Datajoint client is similar, but not identical to, the Python client, and some operations are processed a little differently. The main one to be aware of is how to fetch data. 
 
-In Matlab, you fetch data with the top-level commands `fetch and `fetch1`:
+In Matlab, you fetch data with the top-level commands `fetch` and `fetch1`:
 ```matlab
 init;
 keys = fetch(v_analysis.RateMap);
