@@ -6,7 +6,7 @@ Both pipelines are large, complex networks of schemas, tables, and columns. Here
 
 Datajoint includes a Diagram feature, to display the pipeline as a connected network. This can operate either on a _schema_ object, or a table, or some combination of the two. You may also see the keyword "ERD" used in places - this is a more mathematically correct description ("entity relationship diagram"), but it means the same thing, and executes exactly the same Python code to give you a graphical output. 
 
-**Electrophysiology:** view the ephys diagram
+**Electrophysiology:** connect and view the ephys diagram
 
 ```python
 import datajoint as dj
@@ -18,14 +18,14 @@ dj.Diagram(ephys)
 
 *Image showing the entire ephys diagram (note: the ephys pipeline also contains other schemas, such as one for analysis and one for behaviour).*
 
-**Imaging:** view the entire imaging pipeline diagram
+**Imaging:** connect and view the entire imaging pipeline diagram
 
 ```python
 import datajoint as dj
 
-schema = dj.schema(dj.config["custom"]["dj_imaging.database"])
-schema.spawn_missing_classes()
-dj.ERD(schema)
+imaging = dj.create_virtual_module('imaging', 'group_shared_imaging')
+imaging.schema.spawn_missing_classes()
+dj.ERD(imaging)
 ```
 ![](../_static/imaging/Imaging_schema.png)
 
@@ -41,9 +41,9 @@ dj.ERD(schema)
 
     Small tables containing general facts, settings or other data entered by hand or with external helper scripts. 
    
-    E.g. `MiceDevelopProject` contains a list of animals and the additional names they were given for a developmental project.
+    E.g. `RecordingType` contains a list of the types of recordings, e.g. OpenField, Wheel, etc.
 
-    E.g. `BaseFolder` contains the information provided by the user when ingesting data, such as via the [Web GUI](http://2p.neuroballs.net:5000/)
+    E.g. `BaseFolder` contains the information provided by the user when ingesting data, such as via the [Web GUI](https://datajoint.kavli.org.ntnu.no/)
 
 * **Purple (imported):** data generated within the pipeline based on data from outside
 
@@ -63,7 +63,7 @@ dj.ERD(schema)
 
     E.g. `Cell` gathers data from Suite2p, which is very rich. Two part tables are therefore used instead of one, categorising the data into `Cell.Traces` (dF/F trace etc.) and `Cell.Rois` (number of pixels, ellipticity etc.). Their master table `Cell` only contains a `cell_id` for referencing.
 
-    E.g. `Ratemap` contains data on ratemaps, such as the number of fields. But each field within a ratemap also has a number of values associated with it, such as peak rate. These are saved in `Ratemap.Fields`. I.e. unlike the example above, these tables do not have the same size: for each ratemap (one row in `Ratemap`) there are multiple fields (saved as multiple rows in `Ratemap.Fields`).
+    E.g. `TuningMap` contains data equivalent to ratemaps in the ephys pipeline, such as the number of fields in an open field recording. But each field within a tuningmap also has a number of values associated with it, such as peak rate. These are saved in `TuningMap.Fields`. I.e. unlike the example above, these tables do not have the same size: for each tuningmap (one row in `TuningMap`) there are multiple fields (saved as multiple rows in `TuningMap.Fields`).
 
 For more info on these table types, check out the [Datajoint website](https://docs.datajoint.io/python/definition/05-Data-Tiers.html).
 
@@ -88,7 +88,7 @@ dj.ERD(Cell)+2
 ```
 ![](../_static/imaging/schemas/erd_cell.png)
 
-*The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Spikes`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredSpikes`.*
+*The `Cell` table has two part tables, `Cell.Rois` and `Cell.Traces`. The `Cell.Traces` table is used by `Cell.Events`, in which spikes inferred from the traces are stored. These are then filtered in `FilteredEvents`.*
 
 
 You can also add diagrams together - or subtract - to get a more complex overview that keeps or avoids certain sections of the network
@@ -102,7 +102,7 @@ dj.Diagram(ephys) + dj.Diagram(analysis) - dj.Diagram(analysis.ShuffledScores)
 **Imaging:** view only specified parts of the diagram
 
 ```python
-dj.ERD(Session)+dj.ERD(Cell)+dj.ERD(ImagingAnalysis)
+dj.ERD(Recording)+dj.ERD(Cell)+dj.ERD(ImagingAnalysis)
 ```
 ![](../_static/imaging/schemas/erd_imaging_analysis.png)
 
@@ -128,7 +128,7 @@ Cell()
 ```
 ![](../_static/imaging/cell_table.png)
 
-*The `Cell` table contains five primary keys (black font) and one non-primary key (white font) for each and every cell within the database (at the time of writing: >340 000 cells).*
+*The `Cell` table contains five primary keys (black font) and one non-primary key (white font) for each and every cell within the database (at the time of writing: >1200 cells).*
 
 
 

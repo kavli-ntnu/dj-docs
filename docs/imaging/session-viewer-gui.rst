@@ -1,17 +1,16 @@
 .. _Imaging session viewer:
 
 ============================
-Imaging: Session Viewer
+Imaging: Recording Viewer
 ============================
 
-Session Viewer is a desktop application for screening individual sessions in the Imaging pipeline. 
+Recording Viewer is a desktop application for screening individual recordings in the Imaging pipeline. 
 
-**The session viewer has not yet been updated to work with the updated imaging pipeline. For data in the older pipeline, it remains functional**
 
 Installation
 ---------------
 
-Prior to 2021-05-05, the session viewer was installed separately. Subsequent to this date, it is recommended to install the viewer simultaneously with general set up for working with the imaging pipeline. 
+Prior to 2021-05-05, the recording viewer was installed separately. Subsequent to this date, it is recommended to install the viewer simultaneously with general set up for working with the imaging pipeline. 
 
 To install separately, or in another environment, or to update to the latest version, run the following command::
 
@@ -22,22 +21,22 @@ Running
 ---------
 Running the gui relies upon you already having configured your Datajoint credentials and saved them with ``dj.config.save_global()``, see `Getting Started <../common/getting_started/python.html>`_.
 
-To begin the viewer, run the following command in your terminal::
+To start the viewer GUI, run the following command in your terminal::
   
-  (imaging) $ session_viewer
+  (imaging) $ recording_viewer
 
 
 Overview
 ------------
 
-Once started, you can copy/paste a session hash into the text field on the top left and press enter (next to **Session:**). This will load and display this session from the database. Session hash refers to the `session_name` attribute of every session in datajoint. 
+Once started, you can copy/paste a `recording_name` hash into the text field on the top left and press enter (next to **Recording:**). This will load and display this recording from the database. `recording_name` hash refers to the `recording_name` attribute of every recording in datajoint. 
 
 ![Session viewer overview](../_static/imaging/session_viewer/session_viewer_annotated-01.jpg)
 
 .. figure:: /_static/imaging/session_viewer/session_viewer_annotated-01.jpg
-   :alt: Annotated session viewer interface
+   :alt: Annotated recording viewer interface
 
-The main window is separated into a projection view (left), analysis views for experiments run in 2D environments (top right), a signal viewer (middle right), and a speed plot (bottom right). The GUI is able to display head fixed recordings as well (the top right plots will stay black).
+The main window is separated into a projection view (left), analysis views for experiments run in 2D environments (top right), a signal viewer (middle right), and a speed plot (bottom right). The GUI is able to display head fixed recordings as well (then the top right plots will stay black).
 
 Upon loading a new session, projections/tracking/occupancy will be loaded from the database. Whenever the user clicks on a ROI on the left, the results for this ROI will be displayed on the right. Most plots allow zooming via the mouse wheel.
 
@@ -53,7 +52,7 @@ Projection viewer
 
 Signal viewer
 
-- ``S`` Show/hide deconvolved spikes
+- ``S`` Show/hide deconvolved events
 - ``D`` Show/hide fluorescent trace(s)
 
 Plane selection (for multiplane imaging only)
@@ -84,7 +83,7 @@ All results saved under ``Projection`` or ``ProjectionCorr`` in the imaging pipe
 
 **Colormaps**:
 
-- Random: Random colors that are also used for spikes in the path spike view, head direction tuning plot, and for signal and spikes in the signal viewer on the right. 
+- Random: Random colors that are also used for events in the path events view, head direction tuning plot, and for signal and events in the signal viewer on the right. 
 
 - SNR: Signal to noise ratio (deltaF/F trace), loaded from ``SNR``
 
@@ -100,25 +99,25 @@ The brightness and contrast of this figure can be adjusted by modifying the hist
 
 
 
-Path spike plot
+Path event plot
 ^^^^^^^^^^^^^^^^^^^^
 
-Displays the path retrieved from ``Tracking`` and deconvolved spikes from ``FilteredSpikes``. The spike dot size corresponds to their amplitude. By clicking on the drop down menu underneath, several colormaps can be chosen:
+Displays the path retrieved from ``Tracking`` and deconvolved events from ``FilteredEvents``. The event dot size corresponds to their amplitude. By clicking on the drop down menu underneath, several colormaps can be chosen:
 
 .. figure:: /_static/imaging/session_viewer/session_viewer_annotated-02.jpg
-   :alt: Choices of color map for the path/spike plot
+   :alt: Choices of color map for the path/event plot
 
 
-Ratemap / ... plots
+Tuning map / ... plots
 ^^^^^^^^^^^^^^^^^^^^
 
-Displays the 2D ratemap by default (retrieved from ``Ratemap``). By clicking on the drop down menu underneath, several other maps can be chosen:
+Displays the 2D spatial tuning map by default (retrieved from ``TuningMap``). By clicking on the drop down menu underneath, several other maps can be chosen:
 
 .. figure:: /_static/imaging/session_viewer/session_viewer_annotated-03.jpg
    :alt: Choices of data visualisation for the ratemap plot
    
 - Autocorrelation: 2D autocorr (``acorr``) from ``GridScore``.
-- Field map: All fields extracted from current ratemap, retrieved from ``Ratemap.Fields``. Bright dots indicate field centroids (attribute ``field_centroid_x``/``field_centroid_y``), which are overlaid after drawing the fields themselves. 
+- Field map: All fields extracted from current tuning map, retrieved from ``TuningMap.Fields``. Bright dots indicate field centroids (attribute ``field_centroid_x``/``field_centroid_y``), which are overlaid after drawing the fields themselves. 
 -  Occupancy: 2D occupancy retrieved from ``Occupancy``.
 
 
@@ -126,14 +125,14 @@ Displays the 2D ratemap by default (retrieved from ``Ratemap``). By clicking on 
 Head direction tuning
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Results are retrieved from ``AngularOccupancy`` (occupancy in white) and ``AngularRate``. 
+Results are retrieved from ``AngularOccupancy`` (occupancy in white) and ``AngularTuning``. 
 
 
 
 Signal viewer
 ^^^^^^^^^^^^^^^^^^^^
 
-Neuropil corrected traces from ``Cell.Traces`` (attribute ``fcorr``, channel ``primary``) and deconvolved spikes from ``FilteredSpikes``. 
+Neuropil corrected traces from ``Cell.Traces`` (attribute ``fcorr``, channel ``primary``) and deconvolved events from ``FilteredEvents``. 
 
 
 
@@ -147,7 +146,7 @@ This is the ``speed`` attribute retrieved either from ``Tracking.OpenField`` (fo
 Parameter selection
 ^^^^^^^^^^^^^^^^^^^^
 
-By typing ``P``, a parameter selection window can be opened. This displays parameter sets throughout the Imaging pipeline that results for this session depend on. Selecting a different parameter set will auto-reload results and refresh their views in the main window. Only parameter sets that are available (= have results calculated) for this session are shown. By clicking the triangle displayed next to each parameter set, an overview of the different parameter sets and each parameter can be shown. 
+By typing ``P``, a parameter selection window can be opened. This displays parameter sets throughout the Imaging pipeline that results for this recording depend on. Selecting a different parameter set will auto-reload results and refresh their views in the main window. Only parameter sets that are available (= have results calculated) for this recording are shown. By clicking the triangle displayed next to each parameter set, an overview of the different parameter sets and each parameter can be shown. 
 
 
 
