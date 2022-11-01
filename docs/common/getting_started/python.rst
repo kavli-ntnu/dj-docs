@@ -240,7 +240,6 @@ Wiki <https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines
             'location': '',
             'protocol': 's3',
             'secret_key': SECRET_KEY}
-         }
     dj.config['custom'] = {
         'database.prefix': 'group_shared_',
          'mlims.database': 'prod_mlims_data',
@@ -274,7 +273,7 @@ pipelines, but is not necessary for general usage.
     # where all objects exist directly in the global namespace
     import datajoint as dj
 
-    schema = dj.schema(dj.config["custom"]["dj_imaging.database"])
+    schema = dj.schema(dj.config["custom"]["database.prefix"]+"imaging")
     schema.spawn_missing_classes()
 
     Session()
