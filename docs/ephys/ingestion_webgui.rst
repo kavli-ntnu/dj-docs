@@ -72,6 +72,7 @@ The ephys pipelines records the specific implants per subject.
 
 
 .. _Ephys web-gui ingest:
+
 Ingesting Sessions
 ------------------
 
