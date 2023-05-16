@@ -1,6 +1,8 @@
-sphinx==2.3.1
+sphinx<7.0
 sphinx_rtd_theme==0.5.1
+sphinx-code-tabs
 recommonmark==0.6.0
 commonmark==0.9.1
 docutils==0.16                      # docutils 0.17.1 has an issue that breaks lists
 sphinx_last_updated_by_git==0.3.0   # https://github.com/mgeier/sphinx-last-updated-by-git/
+Jinja2<3.1                          # https://github.com/readthedocs/readthedocs.org/issues/9038

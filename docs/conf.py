@@ -41,6 +41,7 @@ extensions = [
     'recommonmark',
     'sphinx.ext.graphviz',
     'sphinx_last_updated_by_git',
+    'sphinx_code_tabs',
 ]
 
 
