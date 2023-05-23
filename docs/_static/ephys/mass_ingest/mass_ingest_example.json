@@ -1,0 +1,115 @@
+{
+  "subject": {
+    "name": 102,
+    "datasource_id": 0
+  },
+  "sessions": [
+    {
+      "location": "N:/my_project/my_recordings/102/2022-03-04_10:11:12",
+      "experimenter": [
+        "user_1",
+        "user_2"
+      ],
+      "room": 2.345,
+      "project": "my_super_project",
+      "notes": "abc",
+      "probe_association": {
+        "probe_1": "npx_102_mec_e7b34ed0b86f",
+        "probe_2": "npx_102_mec_2ffaa634efd8",
+        "probe_3": "npx_102_mec_c25b067cc862"
+      },
+      "tasks": [
+        {
+          "task_type": "OpenField",
+          "arena_apparatus": "150_square",
+          "task_start": "yes",
+          "task_stop": "yes",
+          "notes": true,
+          "light_level": "dim",
+          "objects": [
+            {
+              "object_name": "abc",
+              "coord_x": 27,
+              "coord_y": 34,
+              "note": "abc"
+            }
+          ],
+          "cue_cards": [
+            {
+              "card_name": "abc",
+              "coord_x": 27,
+              "coord_y": 34,
+              "note": "abc"
+            }
+          ],
+          "curtains": [
+            {
+              "start_point": "bottom-left",
+              "direction": "clockwise",
+              "coverage": 25
+            }
+          ]
+        }
+      ],
+      "clustering": [
+        {
+          "curator": "user_1",
+          "curation_time": "yes",
+          "location": "N:/my_project/my_recordings/102/2022-03-04_10:11:12/clustering/1",
+          "notes": "abc"
+        }
+      ]
+    },
+    {
+      "location": "N:/my_project/my_recordings/102/2022-04-05_14:15:16",
+      "experimenter": [
+        "user_1"
+      ],
+      "tasks": [
+        {
+          "task_type": "OpenField",
+          "arena_apparatus": "150_square"
+        }
+      ],
+      "clustering": true
+    },
+    {
+      "location": "N:/my_project/my_recordings/102/2022-04-05_08:09:10",
+      "name": "msc_102_002_c",
+      "experimenter": [
+        "user_1"
+      ],
+      "tasks": [
+        {
+          "task_type": "OpenField",
+          "arena_apparatus": "100_square"
+        }
+      ],
+      "clustering": false
+    }
+  ],
+  "clustering": [
+    {
+      "curator": "simoba",
+      "curation_time": "2023-04-17 10:11:12",
+      "location": "N:/my_project/my_recordings/102/joint_clustering/102_msc_001",
+      "group_name": "102_msc_001",
+      "sessions": [
+        "2023-01-02 10:00:00",
+        "2023-01-02 11:00:00",
+        "2023-01-02 12:00:00"
+      ],
+      "notes": "Some notes about this joint clustering"
+    },
+    {
+      "curator": "simoba",
+      "location": "N:/my_project/my_recordings/102/joint_clustering/102_msc_002",
+      "group_name": "102_msc_002",
+      "sessions": [
+        "2023-01-03 10:00:00",
+        "2023-01-03 11:00:00",
+        "msc_102_002_a"
+      ]
+    }
+  ]
+}

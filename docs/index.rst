@@ -34,6 +34,7 @@ Found a problem, a correction, or a humourous cat picture? Contact Simon Ball.
    ephys/ephys_processing
    ephys/ingestion_webgui
    ephys/multi_sess_units
+   ephys/mass_ingestion
 
 .. toctree::
    :maxdepth: 1
