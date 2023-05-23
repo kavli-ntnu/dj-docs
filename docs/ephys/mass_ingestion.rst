@@ -46,6 +46,106 @@ added to it. Sessions and clustering that are determined to already exist will b
 sessions and clustering` (data already in the database is *not* updated)
 
 
+---------------------------------------
+Composing and validating an input file
+---------------------------------------
+
+You can of course compose an input file by hand. In addition, an automatic tool has been written that can perform some
+of the composition for you.
+
+Exact details of the input file structure are annotated below, see the section on :ref:`Input File Format <Ephys mass-ingestion format>`.
+Several keywords require a value matching a valid value in the database: the file format section details these tables
+exhaustively. To help you identify valid values, a web form has been provided: `auto-compose tool <https://datajoint.kavli.org.ntnu.no/ephys/mass_ingest/compose>`_
+
+You can at any time check whether an input file is valid or not, via the `validation tool provided on the web interface <https://datajoint.kavli.org.ntnu.no/ephys/mass_ingest/validator>`_
+
+Automatic composing
+^^^^^^^^^^^^^^^^^^^
+
+You can generate a pro-forma input file for a location by entering that location into the automatic composition tool at
+(`auto-compose tool <https://datajoint.kavli.org.ntnu.no/ephys/mass_ingest/compose>`_). The tool will evaluate the location
+for probable session directories and return a partial input file for manual checking and completion. The returned input
+file will **not** be sufficiently complete to pass any level of validation without further manual input.
+
+This tool is experimental and subject to several assumptions and limitations:
+
+  * Your data is structured in a certain way (see below)
+  * You are working with Neuropixels data. Support for wireless neurologger is untested; older tetrode systems are explicitly unsupported.
+  * You can only generate an input file for one subject at a time.
+
+Principally, it is assumed that your data structure will look something like:
+
+.. code-block:: bash
+
+    project_share
+      |- recordings
+           |- subject_1
+                |- session_1
+                |- session_2
+                |- session_3
+           |- subject_2
+           |- <...>
+
+You may submit any directory location to the tool, and it will check:
+
+1) Does the location look like a session directory?
+
+    * If yes, return an input file containing one session
+
+2) Does the location look like a directory containing one or more session directories?
+
+    * If yes, return an input file containing one or more sessions
+
+3) Does the location look like it contains data for zero, two, or more, subjects?
+
+    * Multiple subjects not supported, rocessing not possible
+
+4) Structure not understood, processing not possible
+
+More complex structures, or other unexpected phenomena, will cause automatic generation to fail or behave unpredictably.
+
+
+.. _Ephys mass-ingestion validation:
+
+Input file validation
+^^^^^^^^^^^^^^^^^^^^^
+
+The input file is validated at several stages through ingestion. The validation tool can be accessed either within the
+code repository, or via `validation tool <https://datajoint.kavli.org.ntnu.no/ephys/mass_ingest/validator>`_ page.
+
+The input file is validated in several stages
+
+0) Stage 0: Can the provided file be loaded as a valid ``.json`` or ``.yaml`` file?
+1) Stage 1: Are the required keywords present, and do the data they contain match the expected data types? Are any
+   keywords missing or misspelt?
+2) Stage 2: Where data values are required to match values already in the database, do those data values match? Can
+   requested file paths be located and does the backend system have read permission to those locations?
+3) Stage 3: Can the requested data be successfully ingested?
+
+Stages 0-2 are checked by the provided validation tool.
+
+Stage 3 is *not* checked by the provided validation tool: doing so would require functionally duplicating the entire
+pipeline logic. It is therefore possible for an input file to be marked as valid via the validation tool, but still result
+in errors during ingestion.
+
+Validation is provided by the following methods:
+
+* Stage 0: success (or failure) of loading the file through the packages ``json`` and ``pyyaml``
+* Stage 1: success (or failure) of inserting the resulting dictionary into the `input file model <https://github.com/kavli-ntnu/dj-elphys/blob/master/ephys/utilities/mass_ingest/config_model.py>`_ defined with
+  ``pydantic``
+* Stage 2: Checking values against relevant database tables
+
+
+Stage 1 implements strict keyword checking: only keywords explicitly defined in the input file schema are
+permitted. Extra keywords will result in validation errors.
+
+The primary reason for this choice is to avoid *unexpected* behaviour due to mis-spelt keywords. Without strict checking,
+a mis-spelt keyword would result in the value you, as a user, specify being replaced by the default value (if there is one)
+for that field. With strict checking, the mis-spelt keyword is recognised as forbidden, and highlighted to you to fix.
+
+
+
+
 .. _Ephys mass-ingestion format:
 
 ------------------
@@ -71,7 +171,6 @@ consequently does not contain human-readable comments detailing which fields are
 The example files as shown refer to fictional data and as such will not pass :ref:`validation <Ephys mass-ingestion validation>`.
 
 
-The data schema for the input file is defined here [TODO! Link to github repo after mergin].
 
 Components
 ^^^^^^^^^^^^
@@ -740,47 +839,6 @@ In the event that delete-and replace is necessary, the following tables are rele
 * ``ingestion.SessionInsertRequest`` and downstream: all stored data relating to the ingestion of the session
 
 
-.. _Ephys mass-ingestion validation:
-
-----------------------
-Input file validation
-----------------------
-
-The input file is validated at several stages through ingestion. The validation tool can be accessed either within the
-code repository, or via [TODO!] ppage of the web interface.
-
-The input file is validated in several stages
-
-* Stage 0: Can the provided file be loaded as a valid ``.json`` or ``.yaml`` file?
-* Stage 1: Are the required keywords present, and do the data they contain match the expected data types? Are any
-  keywords missing or misspelt?
-* Stage 2: Where data values are required to match values already in the database, do those data values match? Can
-  requested file paths be located and does the backend system have read permission to those locations?
-* Stage 3: Can the requested data be successfully ingested?
-
-Stages 0-2 are checked by the provided validation tool.
-
-Stage 3 is *not* checked by the provided validation tool: doing so would require functionally duplicating the entire
-pipeline logic. It is therefore possible for an input file to be marked as valid via the validation tool, but still result
-in errors during ingestion.
-
-Validation is provided by the following methods:
-
-* Stage 0: success (or failure) of loading the file through the packages ``json`` and ``pyyaml``
-* Stage 1: success (or failure) of inserting the resulting dictionary into the input file model [TODO! link] defined with
-  ``pydantic``
-* Stage 2: Checking values against relevant database tables [TODO! link]
-
-
-Strict checking
-^^^^^^^^^^^^^^^^
-
-Stage 1 implements strict keyword checking: only keywords explicitly defined in the input file schema [TODO! link] are
-permitted. Extra keywords will result in validation errors.
-
-The primary reason for this choice is to avoid *unexpected* behaviour due to mis-spelt keywords. Without strict checking,
-a mis-spelt keyword would result in the value you, as a user, specify being replaced by the default value (if there is one)
-for that field. With strict checking, the mis-spelt keyword is recognised as forbidden, and highlighted to you to fix.
 
 
 .. _Ephys mass-ingestion faq:
