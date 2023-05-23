@@ -1,0 +1,71 @@
+---
+subject:
+  name:
+  datasource_id:
+sessions:
+
+  # Maximal session template
+  # all possible keywords are listed here
+  - location:
+    experimenter:
+      -
+    name:                   # optional, only useful with MultiSession Clustering
+    room:                   # optional
+    project:                # optional
+    notes:                  # optional
+    probe_association:      # Already inferred IF probes are named by serial number -> semi-optional, OR if the animal only has 1 probe
+      probe_1:
+    tasks:
+      - task_type:
+        arena_apparatus:
+        task_start:
+        task_stop:
+        notes:                                # optional, also inheriting
+        light_level:                          # optional
+        objects:                              # optional
+          - object_name:
+            coord_x:
+            coord_y:
+            note:                             # optional
+        cue_cards:                            # optional
+          - card_name:
+            coord_x:
+            coord_y:
+            note:                             # optional
+        curtains:                             # optional
+          - start_point:
+            direction:
+            coverage:
+    clustering:
+      - curator:
+        curation_time:                        # inheriting
+        location:
+        notes:                                # Optional
+
+    # Minimalist example
+    # All optional fields are excluded, including in Task, where their absence is treated as inheriting by default
+  - location:
+    experimenter:
+      -
+    tasks:
+      - task_type:
+        arena_apparatus:
+
+# And multisession_clustering
+clustering:
+  # Most expansive
+  - curator:
+    curation_time:            # Optional, inheriting
+    location:
+    group_name:
+    sessions:
+      -
+    notes:                    # Optional
+
+  # Most minimalist
+  - curator:
+    location:
+    group_name:
+    sessions:
+      -
+

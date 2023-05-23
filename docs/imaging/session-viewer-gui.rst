@@ -109,7 +109,7 @@ Displays the path retrieved from ``Tracking`` and deconvolved events from ``Filt
 
 
 Tuning map / ... plots
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Displays the 2D spatial tuning map by default (retrieved from ``TuningMap``). By clicking on the drop down menu underneath, several other maps can be chosen:
 

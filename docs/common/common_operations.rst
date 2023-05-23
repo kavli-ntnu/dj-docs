@@ -43,11 +43,13 @@ Constructing restrictions
   - When restricting by multiple exact criteria, or by other variables, it can be useful to express restrictions as dicts or structs instead of strings
 
 .. code-block:: python
+
    # Exact matches can be expressed as either strings or dictioanries
    table1 & "my_column_1 = 'my_value'" & "my_column_2 = 'my_other_value'"
    table1 & {"my_column_1": "my_value", "my_column_2": "my_other_value"}
 
 .. code-block:: matlab
+
    % Exact matches can be expressed as either string/character arrays, or as structs, or as cell arrays
    table1 & "my_column_1 = 'my_value'" & "my_column_2 = 'my_other_value'";
    s = struct("my_column_1", "my_value", "my_column_2", "my_value");
@@ -87,10 +89,13 @@ Projection
 * Discard all secondary columns: ``table1.proj()``
 * Keep specific columns: ``table1.proj("my_column")``
 * Rename column:
+
 .. code-block:: python
+
    ``table1.proj(my_new_column="my_old_column")``
 
 .. code-block:: matlab
+
    ``table1.proj("my_old_column -> my_new_column");
 
 * Keep everything else: ``table1.proj(..., my_new_column="my_old_column")``
@@ -99,7 +104,9 @@ Projection
 * Calculation:
   
   - Just about any SQL syntax is supported in this way
+
 .. code-block:: python
+
     table1.proj(value="sql_syntax()")
 
 
@@ -108,11 +115,13 @@ Fetching
 * Fetch any number of rows (zero, one, or many), from a table or constructed query, with ``fetch()``
 
 .. code-block:: python
+
    # If no other arguments are provided, the entire record will be fetched
    my_data = table1.fetch()
    my_data = (table1 & restriction).fetch()
 
 .. code-block:: matlab
+
    % omitting '*' will fetch the primary key, rather than the entire record
    my_data = fetch(table1, '*');
    my_data = fetch(table1 & restriction, '*');
@@ -120,22 +129,27 @@ Fetching
 * Fetch **exactly** one row, with ``fetch1()``
 
 .. code-block:: python
+
    my_data = (table1 & restriction).fetch1()
 
 .. code-block:: matlab
+
    my_data = fetch1(table1 & restriction, '*');
 
 * Specify specific columns by name to avoid spending time transferring data you don't care about: ``table1.fetch("my_column_1", "my_column_2")``
 
 .. code-block:: python
+
    my_data = table1.fetch("my_column_1", "my_column_2")
 
 .. code-block:: matlab
+
    my_data = fetch(table1, "my_column_1", "my_column_2")
 
 * Decide what format you want data returned in. The default is an array (or set of arrays)
 
 .. code-block:: python
+
    list_of_tuples = table1.fetch()
    (array_1, array_2) = table1.fetch("my_column_1", "my_column_2")
    list_of_dict = table1.fetch(as_dict=True)
@@ -143,6 +157,7 @@ Fetching
    dict = (table1 & restriction).fetch1()
 
 .. code-block:: matlab
+
    array_of_structs = fetch(table1, '*');
   
 * If fetching as a series of arrays, you can assign these to multiple names in the same line via list comprehension: ``x, y = table1.fetch("thing1", "thing2")``
@@ -376,6 +391,7 @@ Based on what's written above, we can already construct this query using ``& [..
 
     attr = example.Attribute & ["name = 'bastet'", "name='ceres'", "name='apollo'"]
     attr
+
 
 +-----------+-------------+
 | **name**  | **attribute |
