@@ -25,6 +25,7 @@ At minimum, you will require the following information:
 * How are your data directories structured? For example
 
 .. code-block:: bash
+
     -network_share
         -analysis
         -histology
