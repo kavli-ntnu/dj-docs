@@ -374,11 +374,13 @@ the minimal set of allowable keywords. The third task has a minial set of keywor
 
             # minimal set of keywords
           - task_type: SleepTask
+            arena_apparatus: 150_square
             task_start: 1587
             task_stop: 2110
 
             # Minimal et of keywords with inheritance
           - task_type: OpenField
+            arena_apparatus: 150_square
             task_start: yes                         # Inherit the timestamps of the 3rd task from sessions.txt
             task_stop: yes
             notes: yes
@@ -420,11 +422,13 @@ the minimal set of allowable keywords. The third task has a minial set of keywor
                 },
                 {
                     "task_type": "SleepTask",
+                    "arena_apparatus": "150_square",
                     "task_start": 1587,
                     "task_stop": 2110
                 },
                 {
                     "task_type": "OpenField",
+                    "arena_apparatus": "150_square",
                     "task_start": true,
                     "task_stop": true,
                     "notes": true
@@ -440,7 +444,7 @@ clustering (single-session only)
 
 This clustering section iss given as *part of a Session*. It is intended for use only in cases when clustering (e.g.
 Kilosort) is run over that single session, and not jointly with other sessions. When joint clustering is used, see the
-:ref: `Ephys mass-ingestion format mscluster <multi-session clustering section>`.
+:ref:`Ephys mass-ingestion format mscluster <multi-session clustering section>`.
 
 ``clustering`` takes the form of either a single boolean value, or a list of dictionaries. A list of mixed booleans and
 dictionaries is not permitted. The example below shows two distinct sessions, one with a list of clusterings, and one with

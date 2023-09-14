@@ -69,6 +69,10 @@ documentation <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/m
 -  Install the Jupyter tool in your base environment
 -  ``(base) $ conda install jupyter nb_conda_kernels``
 
+.. note::
+
+    The package ``nb_conda_kernels`` is important if you wish to access other Conda environments as kernels within a single
+
 In general, we recommend using the ``conda`` package manager in
 preference to ``pip`` wherever possible. Mixng the two package managers
 is possible, but not recommended.
