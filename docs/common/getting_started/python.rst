@@ -230,16 +230,16 @@ Wiki <https://www.ntnu.no/wiki/display/kavli/DataJoint%3A+Neuroscience+pipelines
     dj.config["stores"] = {
         'ephys_store': {
             'access_key': ACCESS_KEY,
-            'bucket': 'ephys-store-computed',
-            'endpoint': 's3.stack.it.ntnu.no:443',
+            'bucket': 'ephys',
+            'endpoint': 's3.trd1.stack.it.ntnu.no:443',
             'secure': True,
             'location': '',
             'protocol': 's3',
             'secret_key': SECRET_KEY},
         'imaging_store': {
             'access_key': ACCESS_KEY,
-            'bucket': 'imaging-store-computed',
-            'endpoint': 's3.stack.it.ntnu.no:443',
+            'bucket': 'imaging',
+            'endpoint': 's3.trd1.stack.it.ntnu.no:443',
             'secure': True,
             'location': '',
             'protocol': 's3',
